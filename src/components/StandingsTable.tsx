@@ -69,7 +69,7 @@ const GroupTable: React.FC<{ groupId: string; standings: TeamStanding[] }> = ({
                 )}
                 <span className="standings-row__team-name">
                   {team?.name ?? standing.teamCode}
-                  <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>({team?.rating})</span>
+                  <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{team?.fifaRank})</span>
                 </span>
               </td>
               <td>{standing.played}</td>

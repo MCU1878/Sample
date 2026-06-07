@@ -6,6 +6,7 @@ import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutM
 import { MatchForm } from './components/MatchForm';
 import StandingsTable from './components/StandingsTable';
 import BracketDisplay from './components/BracketDisplay';
+import ThirdPlaceStandings from './components/ThirdPlaceStandings';
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const;
 
@@ -192,10 +193,10 @@ function App() {
           <div>
             <span className="header__badge">FIFA World Cup 2026™ — USA / MEX / CAN</span>
             <h1 className="header__title">
-              Group Stage Simulator
+              World Cup 2026 Simulator
             </h1>
             <p className="header__subtitle">
-              全12グループ・48チームの試合結果を入力し、リアルタイムで順位表と決勝トーナメントをシミュレート
+              グループステージから決勝トーナメントまで、全104試合の結果をリアルタイムに予測・シミュレート
             </p>
           </div>
         </div>
@@ -244,10 +245,10 @@ function App() {
       {/* アクションバー */}
       <div className="action-bar">
         <button className="btn btn--gold" onClick={handleRandomFill}>
-          ⚡ グループステージ自動シミュレート（強さ加味）
+          ⚡ グループステージ予測シミュレート
         </button>
         <button className="btn btn--primary" onClick={handleKnockoutSimulate}>
-          ⚡ ノックアウト全自動シミュレート（強さ加味）
+          ⚡ 決勝トーナメント予測シミュレート
         </button>
         <button className="btn btn--danger" onClick={handleReset}>
           🔄 全てリセット
@@ -300,6 +301,9 @@ function App() {
               <span className="standings-legend__item standings-legend__item--eliminated">● 敗退</span>
             </div>
             <StandingsTable allStandings={allStandings} />
+            
+            {/* 各グループ3位チームの成績比較順位表 */}
+            <ThirdPlaceStandings allStandings={allStandings} />
           </div>
         </div>
       </div>
@@ -312,7 +316,7 @@ function App() {
 
       {/* フッター */}
       <footer className="footer">
-        <p>FIFA World Cup 2026™ Group Stage & Knockout Simulator — Built with React + TypeScript</p>
+        <p>FIFA World Cup 2026™ Simulator — Built with React + TypeScript</p>
       </footer>
     </div>
   );

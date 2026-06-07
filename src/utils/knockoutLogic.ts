@@ -451,13 +451,15 @@ export function simulateKnockoutMatches(matches: KnockoutMatch[]): KnockoutMatch
       // 同点の場合はPK戦で決着
       const t1 = teams[activeMatch.team1];
       const t2 = teams[activeMatch.team2];
-      const r1 = t1?.rating ?? 80;
-      const r2 = t2?.rating ?? 80;
-      const diff = r1 - r2;
+      const r1 = t1?.fifaRank ?? 80;
+      const r2 = t2?.fifaRank ?? 80;
+      // ランキング値は小さいほど強いため、チーム1が強い（r1 < r2）場合は diff が正になるようにする
+      const diff = r2 - r1;
 
       // 基本成功率 0.75。実力差に応じて期待値を微調整 (0.65〜0.85)
-      const prob1 = Math.max(0.65, Math.min(0.85, 0.75 + (diff / 300)));
-      const prob2 = Math.max(0.65, Math.min(0.85, 0.75 - (diff / 300)));
+      // 実力差が60ある場合、成功率が ±0.10 変動する（例: diff / 600）
+      const prob1 = Math.max(0.65, Math.min(0.85, 0.75 + (diff / 600)));
+      const prob2 = Math.max(0.65, Math.min(0.85, 0.75 - (diff / 600)));
 
       // 5回ずつのキックをシミュレート
       let p1Score = 0;

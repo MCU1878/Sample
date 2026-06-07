@@ -5,7 +5,7 @@ export interface Team {
   code: string;
   flag: string; // emoji flag
   iso: string;  // ISO 2-letter code for flag images (flagcdn.com)
-  rating: number; // サッカーの強さレーティング (50〜99)
+  fifaRank: number; // FIFA Men's World Ranking (1〜100+)
 }
 
 export interface Match {

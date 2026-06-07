@@ -142,7 +142,7 @@ const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScor
               <span className="knockout-card__flag-placeholder">🏳️</span>
             )}
             <span>
-              {t1 ? `${t1.name} (${t1.rating})` : (match.team1 ? match.team1 : configLabelToText(match.team1Source))}
+              {t1 ? `${t1.name} (#${t1.fifaRank})` : (match.team1 ? match.team1 : configLabelToText(match.team1Source))}
             </span>
           </div>
           {isActive && (
@@ -183,7 +183,7 @@ const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScor
               <span className="knockout-card__flag-placeholder">🏳️</span>
             )}
             <span>
-              {t2 ? `${t2.name} (${t2.rating})` : (match.team2 ? match.team2 : configLabelToText(match.team2Source))}
+              {t2 ? `${t2.name} (#${t2.fifaRank})` : (match.team2 ? match.team2 : configLabelToText(match.team2Source))}
             </span>
           </div>
           {isActive && (

@@ -219,3 +219,31 @@ export function getRoundOf32Matchups(
 
   return matchups;
 }
+
+/**
+ * 全グループの3位チーム（12チーム）を抽出して成績順にソートする
+ */
+export function getAllThirdPlaceTeams(
+  allStandings: Record<string, TeamStanding[]>
+): (TeamStanding & { group: string })[] {
+  const thirdPlaceTeams: (TeamStanding & { group: string })[] = [];
+
+  for (const [group, standings] of Object.entries(allStandings)) {
+    const third = standings.find((s) => s.rank === 3);
+    if (third) {
+      thirdPlaceTeams.push({ ...third, group });
+    }
+  }
+
+  // 3位チームをソート
+  // ソート: 勝ち点(降順) > 得失点差(降順) > 総得点(降順) > チームコード(昇順)
+  thirdPlaceTeams.sort((a, b) => {
+    if (b.points !== a.points) return b.points - a.points;
+    if (b.goalDifference !== a.goalDifference)
+      return b.goalDifference - a.goalDifference;
+    if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
+    return a.teamCode.localeCompare(b.teamCode);
+  });
+
+  return thirdPlaceTeams;
+}

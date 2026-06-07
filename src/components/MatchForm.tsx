@@ -51,7 +51,7 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
             <div className="match-row__team match-row__team--home">
               <span className="match-row__team-name">
                 {home?.name ?? match.homeTeam}
-                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>({home?.rating})</span>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{home?.fifaRank})</span>
               </span>
               {home?.iso && (
                 <img
@@ -96,7 +96,7 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
               )}
               <span className="match-row__team-name">
                 {away?.name ?? match.awayTeam}
-                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>({away?.rating})</span>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{away?.fifaRank})</span>
               </span>
             </div>
           </div>
