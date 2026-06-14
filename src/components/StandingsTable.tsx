@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { TeamStanding } from '../types';
 import { teams, getFlagUrl } from '../data';
 
