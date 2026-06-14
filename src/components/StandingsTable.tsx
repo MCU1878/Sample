@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { TeamStanding } from '../types';
 import { teams, getFlagUrl } from '../data';
 
 interface StandingsTableProps {
   allStandings: Record<string, TeamStanding[]>;
+  activeGroup: string;
 }
-
-const GROUP_IDS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const;
-
-const TABS = [
-  { id: 'A-C', groups: ['A', 'B', 'C'] },
-  { id: 'D-F', groups: ['D', 'E', 'F'] },
-  { id: 'G-I', groups: ['G', 'H', 'I'] },
-  { id: 'J-L', groups: ['J', 'K', 'L'] },
-  { id: 'ALL', groups: [...GROUP_IDS] },
-];
 
 const COLUMN_HEADERS = ['#', 'Team', 'P', 'W', 'D', 'L', 'GF', 'GA', 'GD', 'Pts'] as const;
 
@@ -43,89 +34,61 @@ function getRankClass(rank: number): string {
   return base;
 }
 
-const GroupTable: React.FC<{ groupId: string; standings: TeamStanding[] }> = ({
-  groupId,
-  standings,
-}) => (
-  <div className="standings-group-card">
-    <div className={`group-badge group-badge--${groupId}`}>
-      Group {groupId}
-    </div>
-    <table className="standings-table">
-      <thead>
-        <tr>
-          {COLUMN_HEADERS.map((header) => (
-            <th key={header}>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {standings.map((standing) => {
-          const team = teams[standing.teamCode];
-          return (
-            <tr key={standing.teamCode} className={getRowClass(standing.rank)}>
-              <td className={getRankClass(standing.rank)}>{standing.rank}</td>
-              <td className="standings-row__team">
-                {team?.iso ? (
-                  <img
-                    src={getFlagUrl(team.iso)}
-                    alt={team.name}
-                    className="standings-row__team-flag-img"
-                    loading="lazy"
-                  />
-                ) : (
-                  <span className="standings-row__team-flag">🏳️</span>
-                )}
-                <span className="standings-row__team-name">
-                  {team?.name ?? standing.teamCode}
-                  <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{team?.fifaRank})</span>
-                </span>
-              </td>
-              <td>{standing.played}</td>
-              <td>{standing.won}</td>
-              <td>{standing.drawn}</td>
-              <td>{standing.lost}</td>
-              <td>{standing.goalsFor}</td>
-              <td>{standing.goalsAgainst}</td>
-              <td className={getGdClass(standing.goalDifference)}>
-                {formatGd(standing.goalDifference)}
-              </td>
-              <td className="standings-row__points">{standing.points}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-);
-
-const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings }) => {
-  const [activeTab, setActiveTab] = useState<string>('A-C');
+const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings, activeGroup }) => {
+  const standings = allStandings[activeGroup] || [];
   
-  const currentTab = TABS.find(t => t.id === activeTab) || TABS[0];
+  if (standings.length === 0) return null;
 
   return (
-    <div>
-      <div className="group-tabs" style={{ marginBottom: '16px' }}>
-        {TABS.map(tab => (
-          <button
-            key={tab.id}
-            className={`group-tab ${activeTab === tab.id ? 'group-tab--active' : ''}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.id === 'ALL' ? 'すべて表示' : tab.id}
-          </button>
-        ))}
-      </div>
-      <div className="standings-grid">
-        {currentTab.groups.map((groupId) => {
-          const standings = allStandings[groupId];
-          if (!standings || standings.length === 0) return null;
-          return <GroupTable key={groupId} groupId={groupId} standings={standings} />;
-        })}
-      </div>
+    <div className="standings-group-card animate-fade-in" style={{ border: 'none', background: 'transparent', padding: 0 }}>
+      <table className="standings-table">
+        <thead>
+          <tr>
+            {COLUMN_HEADERS.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {standings.map((standing) => {
+            const team = teams[standing.teamCode];
+            return (
+              <tr key={standing.teamCode} className={getRowClass(standing.rank)}>
+                <td className={getRankClass(standing.rank)}>{standing.rank}</td>
+                <td className="standings-row__team">
+                  {team?.iso ? (
+                    <img
+                      src={getFlagUrl(team.iso)}
+                      alt={team.name}
+                      className="standings-row__team-flag-img"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span className="standings-row__team-flag">🏳️</span>
+                  )}
+                  <span className="standings-row__team-name">
+                    {team?.name ?? standing.teamCode}
+                    <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{team?.fifaRank})</span>
+                  </span>
+                </td>
+                <td>{standing.played}</td>
+                <td>{standing.won}</td>
+                <td>{standing.drawn}</td>
+                <td>{standing.lost}</td>
+                <td>{standing.goalsFor}</td>
+                <td>{standing.goalsAgainst}</td>
+                <td className={getGdClass(standing.goalDifference)}>
+                  {formatGd(standing.goalDifference)}
+                </td>
+                <td className="standings-row__points">{standing.points}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
 
 export default StandingsTable;
+

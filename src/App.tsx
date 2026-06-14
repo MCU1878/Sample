@@ -1,23 +1,49 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { Match, KnockoutMatch } from './types';
 import { createInitialMatches, groupTeams, simulateMatchScore } from './data';
 import { getAllGroupStandings } from './utils/calculateStandings';
 import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutMatches } from './utils/knockoutLogic';
+import type { ForecastResult } from './utils/forecast';
 import { MatchForm } from './components/MatchForm';
 import StandingsTable from './components/StandingsTable';
 import BracketDisplay from './components/BracketDisplay';
 import ThirdPlaceStandings from './components/ThirdPlaceStandings';
+import ForecastPanel from './components/ForecastPanel';
+
+const FORECAST_ITERATIONS = 10000;
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const;
 
 function App() {
   const [matches, setMatches] = useState<Match[]>(createInitialMatches);
   const [activeGroup, setActiveGroup] = useState<string>('A');
+  const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout'>('groups');
   
   // ノックアウト用のユーザー入力スコア
   const [knockoutUserScores, setKnockoutUserScores] = useState<
     Record<string, { score1: number | null; score2: number | null; pen1: number | null; pen2: number | null }>
   >({});
+
+  // 優勝確率シミュレーション（Web Worker でバックグラウンド実行）
+  const [forecast, setForecast] = useState<ForecastResult | null>(null);
+  const [forecasting, setForecasting] = useState(false);
+  const workerRef = useRef<Worker | null>(null);
+
+  useEffect(() => {
+    const worker = new Worker(new URL('./workers/forecast.worker.ts', import.meta.url), { type: 'module' });
+    worker.onmessage = (e: MessageEvent<ForecastResult>) => {
+      setForecast(e.data);
+      setForecasting(false);
+    };
+    workerRef.current = worker;
+    return () => worker.terminate();
+  }, []);
+
+  const handleForecast = useCallback(() => {
+    if (!workerRef.current) return;
+    setForecasting(true);
+    workerRef.current.postMessage({ matches, iterations: FORECAST_ITERATIONS });
+  }, [matches]);
 
   // グループステージスコア変更ハンドラ
   const handleScoreChange = useCallback(
@@ -182,6 +208,7 @@ function App() {
   const handleReset = useCallback(() => {
     setMatches(createInitialMatches());
     setKnockoutUserScores({});
+    setForecast(null);
   }, []);
 
   return (
@@ -192,12 +219,8 @@ function App() {
           <img src="/emblem.png" alt="FIFA World Cup 2026 Emblem" className="header__emblem" />
           <div>
             <span className="header__badge">FIFA World Cup 2026™ — USA / MEX / CAN</span>
-            <h1 className="header__title">
-              World Cup 2026 Simulator
-            </h1>
-            <p className="header__subtitle">
-              グループステージから決勝トーナメントまで、全104試合の結果をリアルタイムに予測・シミュレート
-            </p>
+            <h1 className="header__title">World Cup 2026 Simulator</h1>
+            <p className="header__subtitle">Tournament Control Center</p>
           </div>
         </div>
       </header>
@@ -205,118 +228,140 @@ function App() {
       {/* ステータスバー */}
       <div className="status-bar">
         <div className="status-bar__item">
-          <span
-            className={`status-bar__dot ${
-              stats.playedMatches > 0
-                ? 'status-bar__dot--active'
-                : 'status-bar__dot--inactive'
-            }`}
-          />
-          <span>
-            グループ戦: {stats.playedMatches} / {stats.totalMatches}
-          </span>
+          <span className={`status-bar__dot ${stats.playedMatches > 0 ? 'status-bar__dot--active' : 'status-bar__dot--inactive'}`} />
+          <span>グループ戦: {stats.playedMatches} / {stats.totalMatches}</span>
         </div>
         <div className="status-bar__item">
-          <span
-            className={`status-bar__dot ${
-              stats.totalGoals > 0
-                ? 'status-bar__dot--active'
-                : 'status-bar__dot--inactive'
-            }`}
-          />
-          <span>グループ総ゴール: {stats.totalGoals}</span>
+          <span className={`status-bar__dot ${stats.totalGoals > 0 ? 'status-bar__dot--active' : 'status-bar__dot--inactive'}`} />
+          <span>総ゴール: {stats.totalGoals}</span>
         </div>
         <div className="status-bar__item">
-          <span
-            className={`status-bar__dot ${
-              stats.playedMatches === stats.totalMatches
-                ? 'status-bar__dot--active'
-                : 'status-bar__dot--pending'
-            }`}
-          />
-          <span>
-            {stats.playedMatches === stats.totalMatches
-              ? 'グループステージ完了'
-              : '進行中'}
-          </span>
+          <span className={`status-bar__dot ${stats.playedMatches === stats.totalMatches ? 'status-bar__dot--active' : 'status-bar__dot--pending'}`} />
+          <span>{stats.playedMatches === stats.totalMatches ? 'グループ完了' : '進行中'}</span>
         </div>
       </div>
 
-      {/* アクションバー */}
-      <div className="action-bar">
-        <button className="btn btn--gold" onClick={handleRandomFill}>
-          ⚡ グループステージ予測シミュレート
+      {/* グローバル フェーズナビゲーション */}
+      <div className="phase-nav">
+        <button 
+          className={`phase-tab ${activePhase === 'groups' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('groups')}
+        >
+          <span className="phase-tab__icon">⚽</span> グループステージ
         </button>
-        <button className="btn btn--primary" onClick={handleKnockoutSimulate}>
-          ⚡ 決勝トーナメント予測シミュレート
+        <button 
+          className={`phase-tab ${activePhase === 'third' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('third')}
+        >
+          <span className="phase-tab__icon">🏅</span> 3位サバイバル
         </button>
-        <button className="btn btn--danger" onClick={handleReset}>
-          🔄 全てリセット
+        <button 
+          className={`phase-tab ${activePhase === 'knockout' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('knockout')}
+        >
+          <span className="phase-tab__icon">🏆</span> 決勝トーナメント
         </button>
       </div>
 
-      {/* メインコンテンツ */}
-      <div className="main-grid">
-        {/* 左カラム: 試合入力フォーム */}
-        <div className="card animate-fade-in">
-          <div className="card__header">
-            <div className="card__icon card__icon--blue">⚽</div>
-            <h2 className="card__title">試合結果入力</h2>
-          </div>
-          <div className="card__body">
-            {/* グループタブ */}
-            <div className="group-tabs">
-              {GROUPS.map((group) => (
-                <button
-                  key={group}
-                  className={`group-tab ${
-                    activeGroup === group ? 'group-tab--active' : ''
-                  }`}
-                  onClick={() => setActiveGroup(group)}
-                >
-                  {group}
-                </button>
-              ))}
+      {/* メインフェーズ コンテンツ */}
+      <div className="phase-content">
+        {activePhase === 'groups' && (
+          <div className="cockpit-grid animate-fade-in">
+            {/* 左カラム: サイドバーナビゲーション */}
+            <div className="cockpit-sidebar">
+              <h3 className="cockpit-sidebar__title">SELECT GROUP</h3>
+              <div className="cockpit-sidebar__list">
+                {GROUPS.map((group) => (
+                  <button
+                    key={group}
+                    className={`cockpit-group-btn ${activeGroup === group ? 'cockpit-group-btn--active' : ''}`}
+                    onClick={() => setActiveGroup(group)}
+                  >
+                    Group {group}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* 試合フォーム */}
-            <MatchForm
-              matches={matches}
-              activeGroup={activeGroup}
-              onScoreChange={handleScoreChange}
-            />
-          </div>
-        </div>
+            {/* メインカラム: 順位表と試合入力の統合ビュー */}
+            <div className="cockpit-main">
+              <div className="card mb-xl">
+                <div className="card__header">
+                  <div className="card__icon card__icon--gold">🏆</div>
+                  <h2 className="card__title">Group {activeGroup} Live Standings</h2>
+                </div>
+                <div className="card__body" style={{ padding: 0 }}>
+                  <StandingsTable allStandings={allStandings} activeGroup={activeGroup} />
+                </div>
+              </div>
 
-        {/* 右カラム: 順位表 */}
-        <div className="card animate-fade-in stagger-2">
-          <div className="card__header">
-            <div className="card__icon card__icon--gold">🏆</div>
-            <h2 className="card__title">グループ順位表（全12グループ）</h2>
-          </div>
-          <div className="card__body">
-            <div className="standings-legend">
-              <span className="standings-legend__item standings-legend__item--qualified">● 自動進出（1位・2位）</span>
-              <span className="standings-legend__item standings-legend__item--third">● 3位（上位8チーム進出）</span>
-              <span className="standings-legend__item standings-legend__item--eliminated">● 敗退</span>
+              <div className="card">
+                <div className="card__header">
+                  <div className="card__icon card__icon--blue">⚽</div>
+                  <h2 className="card__title">Match Results Input</h2>
+                </div>
+                <div className="card__body">
+                  <MatchForm
+                    matches={matches}
+                    activeGroup={activeGroup}
+                    onScoreChange={handleScoreChange}
+                  />
+                </div>
+              </div>
             </div>
-            <StandingsTable allStandings={allStandings} />
-            
-            {/* 各グループ3位チームの成績比較順位表 */}
-            <ThirdPlaceStandings allStandings={allStandings} />
           </div>
+        )}
+
+        {activePhase === 'third' && (
+          <div className="card animate-fade-in third-place-view">
+            <div className="card__header">
+              <div className="card__icon card__icon--gold">🏅</div>
+              <h2 className="card__title">3位チーム サバイバル（上位8チームが進出）</h2>
+            </div>
+            <div className="card__body">
+              <div className="standings-legend mb-md">
+                <span className="standings-legend__item standings-legend__item--qualified">● 決勝T進出ボーダーライン上</span>
+                <span className="standings-legend__item standings-legend__item--eliminated">● 敗退圏内</span>
+              </div>
+              <ThirdPlaceStandings allStandings={allStandings} />
+            </div>
+          </div>
+        )}
+
+        {activePhase === 'knockout' && (
+          <div className="knockout-view animate-fade-in">
+            <ForecastPanel result={forecast} loading={forecasting} />
+            <div className="card mt-xl full-width-card">
+              <BracketDisplay
+                knockoutMatches={knockoutMatches}
+                onScoreChange={handleKnockoutScoreChange}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* フローティング アクションドック */}
+      <div className="floating-dock">
+        <div className="floating-dock__inner">
+          <button className="btn btn--gold btn--glass" onClick={handleRandomFill}>
+            ⚡ グループ予測
+          </button>
+          <button className="btn btn--primary btn--glass" onClick={handleKnockoutSimulate}>
+            🏆 トーナメント予測
+          </button>
+          <button className="btn btn--cyan btn--glass" onClick={handleForecast} disabled={forecasting}>
+            {forecasting ? '⏳ 計算中…' : '📊 確率予測'}
+          </button>
+          <div className="floating-dock__divider"></div>
+          <button className="btn btn--danger btn--glass" onClick={handleReset}>
+            🔄 リセット
+          </button>
         </div>
       </div>
 
-      {/* ベスト32以上のトーナメントブラケット */}
-      <BracketDisplay
-        knockoutMatches={knockoutMatches}
-        onScoreChange={handleKnockoutScoreChange}
-      />
-
-      {/* フッター */}
       <footer className="footer">
-        <p>FIFA World Cup 2026™ Simulator — Built with React + TypeScript</p>
+        <p>FIFA World Cup 2026™ Simulator — Tournament Control Center</p>
       </footer>
     </div>
   );
