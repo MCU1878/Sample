@@ -5,9 +5,10 @@ interface MatchFormProps {
   matches: Match[];
   activeGroup: string;
   onScoreChange: (matchId: string, side: 'home' | 'away', score: number | null) => void;
+  isSyncing?: boolean;
 }
 
-export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onScoreChange }) => {
+export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onScoreChange, isSyncing = false }) => {
   const groupMatches = matches.filter((match) => match.group === activeGroup);
 
   const handleScoreChange = (
@@ -66,21 +67,29 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
             {/* スコア入力 */}
             <input
               type="number"
-              className="match-row__score-input"
-              min={0}
-              max={99}
+              className={`match-row__score-input ${match.syncStatus ? 'is-live' : ''}`}
+              min="0"
+              max="99"
               value={match.homeScore ?? ''}
               onChange={(e) => handleScoreChange(match.id, 'home', e)}
+              disabled={!!match.syncStatus || isSyncing}
               aria-label={`${home?.name ?? match.homeTeam} のスコア`}
             />
-            <span className="match-row__vs">VS</span>
+            <span className="match-row__vs">
+              {match.syncStatus ? (
+                <span className={`live-badge ${match.syncStatus === 'finished' ? 'live-badge--finished' : ''}`} title="API Synced">
+                  {match.syncStatus === 'finished' ? 'FT' : 'LIVE'}
+                </span>
+              ) : 'VS'}
+            </span>
             <input
               type="number"
-              className="match-row__score-input"
-              min={0}
-              max={99}
+              className={`match-row__score-input ${match.syncStatus ? 'is-live' : ''}`}
+              min="0"
+              max="99"
               value={match.awayScore ?? ''}
               onChange={(e) => handleScoreChange(match.id, 'away', e)}
+              disabled={!!match.syncStatus || isSyncing}
               aria-label={`${away?.name ?? match.awayTeam} のスコア`}
             />
 

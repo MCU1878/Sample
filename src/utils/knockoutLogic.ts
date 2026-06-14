@@ -1,7 +1,9 @@
 import type { TeamStanding, KnockoutMatch, KnockoutRound } from '../types';
 import { getBestThirdPlaceTeams } from './calculateStandings';
-import { teams, simulateMatchScore } from '../data';
+// Empty line or just remove it
 import { allocateThirdPlaceByAnnexC } from '../data/thirdPlaceAllocation';
+import { createTeamAgent, simulateMatchRich, calculateTournamentFatigue } from './matchEngine';
+import { initRatings } from './ratingModel';
 
 // ノックアウトステージの各試合の静的構造定義
 interface KnockoutConfig {
@@ -266,6 +268,7 @@ export function initializeKnockoutMatches(
       winnerSlot: config.winnerSlot,
       loserGoesTo: config.loserGoesTo,
       loserSlot: config.loserSlot,
+      climate: 'temperate', // ノックアウトステージは一旦すべて温暖気候として扱う
     };
   });
 }
@@ -276,7 +279,7 @@ export function initializeKnockoutMatches(
 export function updateKnockoutProgression(
   matches: KnockoutMatch[],
   matchId: string,
-  updates: Partial<Pick<KnockoutMatch, 'score1' | 'score2' | 'pen1' | 'pen2'>>
+  updates: Partial<Pick<KnockoutMatch, 'score1' | 'score2' | 'pen1' | 'pen2' | 'matchLog'>>
 ): KnockoutMatch[] {
   // まず変更を対象の試合に適用
   let updated = matches.map((m) => {
@@ -366,6 +369,10 @@ export function updateKnockoutProgression(
  */
 export function simulateKnockoutMatches(matches: KnockoutMatch[]): KnockoutMatch[] {
   let currentMatches = [...matches];
+  const ratings = initRatings();
+  
+  // チームコード -> 現在の大会疲労
+  const fatigueMap: Record<string, number> = {};
 
   // 試合番号順（Match 73から104）にシミュレートを処理
   const sorted = [...currentMatches].sort((a, b) => a.matchNumber - b.matchNumber);
@@ -375,52 +382,34 @@ export function simulateKnockoutMatches(matches: KnockoutMatch[]): KnockoutMatch
     if (!activeMatch || !activeMatch.team1 || !activeMatch.team2) continue;
 
     // スコアがすでに入力されている場合はそのまま
-    if (activeMatch.score1 !== null && activeMatch.score2 !== null) continue;
-
-    // 強さを加味したスコア生成
-    const { homeScore: s1, awayScore: s2 } = simulateMatchScore(activeMatch.team1, activeMatch.team2);
-
-    let p1: number | null = null;
-    let p2: number | null = null;
-
-    if (s1 === s2) {
-      // 同点の場合はPK戦で決着
-      const t1 = teams[activeMatch.team1];
-      const t2 = teams[activeMatch.team2];
-      const r1 = t1?.fifaRank ?? 80;
-      const r2 = t2?.fifaRank ?? 80;
-      // ランキング値は小さいほど強いため、チーム1が強い（r1 < r2）場合は diff が正になるようにする
-      const diff = r2 - r1;
-
-      // 基本成功率 0.75。実力差に応じて期待値を微調整 (0.65〜0.85)
-      // 実力差が60ある場合、成功率が ±0.10 変動する（例: diff / 600）
-      const prob1 = Math.max(0.65, Math.min(0.85, 0.75 + (diff / 600)));
-      const prob2 = Math.max(0.65, Math.min(0.85, 0.75 - (diff / 600)));
-
-      // 5回ずつのキックをシミュレート
-      let p1Score = 0;
-      let p2Score = 0;
-      for (let i = 0; i < 5; i++) {
-        if (Math.random() < prob1) p1Score++;
-        if (Math.random() < prob2) p2Score++;
-      }
-
-      // 同点ならサドンデス
-      while (p1Score === p2Score) {
-        if (Math.random() < prob1) p1Score++;
-        if (Math.random() < prob2) p2Score++;
-      }
-
-      p1 = p1Score;
-      p2 = p2Score;
+    if (activeMatch.score1 !== null && activeMatch.score2 !== null) {
+      // 引き続き疲労計算だけは行うためにAgent化して扱うなら（今回は省略）
+      continue;
     }
 
+    // Retrieve or initialize tournament fatigue
+    const hFatigue = fatigueMap[activeMatch.team1] || 0;
+    const aFatigue = fatigueMap[activeMatch.team2] || 0;
+
+    // Create agents
+    const homeAgent = createTeamAgent(activeMatch.team1, ratings, hFatigue);
+    const awayAgent = createTeamAgent(activeMatch.team2, ratings, aFatigue);
+
+    // Run rich simulation (with extra time & penalties)
+    const log = simulateMatchRich(homeAgent, awayAgent, { isKnockout: true, climate: activeMatch.climate });
+
+    // Update match with scores
     currentMatches = updateKnockoutProgression(currentMatches, activeMatch.id, {
-      score1: s1,
-      score2: s2,
-      pen1: p1,
-      pen2: p2,
+      score1: log.homeScore,
+      score2: log.awayScore,
+      pen1: log.homePenScore,
+      pen2: log.awayPenScore,
+      matchLog: log,
     });
+
+    // Accumulate fatigue for the next match
+    fatigueMap[activeMatch.team1] = calculateTournamentFatigue(hFatigue, log.homeEndStamina, log.isExtraTime);
+    fatigueMap[activeMatch.team2] = calculateTournamentFatigue(aFatigue, log.awayEndStamina, log.isExtraTime);
   }
 
   return currentMatches;

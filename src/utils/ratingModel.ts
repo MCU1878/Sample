@@ -35,10 +35,10 @@ export type RatingMap = Record<string, TeamRating>;
 export const MU0 = Math.log(1.35);
 // FIFAランク差をレーティング差へ変換するスケール（強豪vs弱小で λ が現実的な範囲に収まるよう調整）
 const STRENGTH_SCALE = 1.0;
-// 事前分布の分散（sd=0.5 相当。大会前の不確かさ）
-const PRIOR_VAR = 0.25;
+// 事前分布の分散（大会前の不確かさ。1試合での学習率（更新幅）を抑えるため小さめに設定）
+const PRIOR_VAR = 0.04;
 // 各試合ごとに加えるプロセスノイズ（強さは時間で多少変動しうる、という仮定。学習が硬直しない程度）
-const PROCESS_NOISE = 0.01;
+const PROCESS_NOISE = 0.002;
 
 // FIFAランク(1〜100+) → 0〜1 の質スコア（1=最強）
 function qualityFromRank(rank: number): number {
