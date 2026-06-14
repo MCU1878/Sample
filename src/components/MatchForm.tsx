@@ -1,5 +1,7 @@
-import type { Match } from '../types';
+import React, { useState } from 'react';
+import type { Match, MatchLog } from '../types';
 import { teams, getFlagUrl } from '../data';
+import { MatchLogModal } from './MatchLogModal';
 
 interface MatchFormProps {
   matches: Match[];
@@ -10,6 +12,7 @@ interface MatchFormProps {
 
 export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onScoreChange, isSyncing = false }) => {
   const groupMatches = matches.filter((match) => match.group === activeGroup);
+  const [selectedLog, setSelectedLog] = useState<MatchLog | null>(null);
 
   const handleScoreChange = (
     matchId: string,
@@ -36,6 +39,7 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
         const home = teams[match.homeTeam];
         const away = teams[match.awayTeam];
         const complete = isMatchComplete(match);
+        const hasLog = !!match.matchLog;
 
         return (
           <div
@@ -108,9 +112,24 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
                 <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{away?.fifaRank})</span>
               </span>
             </div>
+
+            {hasLog && (
+              <button 
+                className="match-row__log-btn" 
+                onClick={() => setSelectedLog(match.matchLog!)}
+                title="View Match Details"
+                aria-label="View Match Details"
+              >
+                📊
+              </button>
+            )}
           </div>
         );
       })}
+
+      {selectedLog && (
+        <MatchLogModal log={selectedLog} onClose={() => setSelectedLog(null)} />
+      )}
     </div>
   );
 };

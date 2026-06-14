@@ -5,10 +5,21 @@
 // 試合を分単位のイベント（得点・勢いの振れ・疲労蓄積・退場）で生成する。
 // =============================================================================
 
-import type { TeamAgent, MatchEvent, MatchLog } from '../types';
+import type { TeamAgent, MatchEvent, MatchLog, PlayerMatchRating } from '../types';
 import { teams } from '../data';
 import type { RatingMap } from './ratingModel';
 import { initRatings } from './ratingModel';
+import playersDataRaw from '../data/players.json';
+import type { Player } from '../types';
+
+const playersData = playersDataRaw as Record<string, Player[]>;
+
+function pickPlayerByPosition(roster: Player[] | undefined, pos: string, rng: Rng) {
+  if (!roster || roster.length === 0) return null;
+  const players = roster.filter(p => p.position === pos);
+  if (players.length > 0) return players[Math.floor(rng() * players.length)];
+  return roster[Math.floor(rng() * roster.length)];
+}
 
 // ===== Constants =====
 
@@ -97,6 +108,7 @@ export function createTeamAgent(
     yellowCards: 0,
     tournamentFatigue,
     staminaMultiplier,
+    roster: playersData[code] || [],
   };
 }
 
@@ -135,11 +147,15 @@ function resolveMinute(
   const awayEffDef = getEffectiveDefense(away);
   const homeGoalProb = GOAL_BASE_RATE * (homeEffAtk / Math.max(0.1, awayEffDef));
   if (rng() < clamp(homeGoalProb, 0, 0.15)) {
+    const scorer = pickPlayerByPosition(home.roster, 'FW', rng) || pickPlayerByPosition(home.roster, 'MF', rng);
+    const assister = rng() < 0.7 ? pickPlayerByPosition(home.roster, 'MF', rng) : undefined;
     events.push({
       minute,
       type: 'GOAL',
       team: home.code,
-      description: generateGoalDescription(home.code, minute, home.momentum),
+      playerId: scorer?.id,
+      assistId: assister?.id,
+      description: `GOAL! ${teams[home.code]?.name} 得点: ${scorer ? scorer.name : '選手'}${assister ? ' (A: ' + assister.name + ')' : ''}`,
     });
   }
 
@@ -147,11 +163,15 @@ function resolveMinute(
   const homeEffDef = getEffectiveDefense(home);
   const awayGoalProb = GOAL_BASE_RATE * (awayEffAtk / Math.max(0.1, homeEffDef));
   if (rng() < clamp(awayGoalProb, 0, 0.15)) {
+    const scorer = pickPlayerByPosition(away.roster, 'FW', rng) || pickPlayerByPosition(away.roster, 'MF', rng);
+    const assister = rng() < 0.7 ? pickPlayerByPosition(away.roster, 'MF', rng) : undefined;
     events.push({
       minute,
       type: 'GOAL',
       team: away.code,
-      description: generateGoalDescription(away.code, minute, away.momentum),
+      playerId: scorer?.id,
+      assistId: assister?.id,
+      description: `GOAL! ${teams[away.code]?.name} 得点: ${scorer ? scorer.name : '選手'}${assister ? ' (A: ' + assister.name + ')' : ''}`,
     });
   }
 
@@ -159,11 +179,13 @@ function resolveMinute(
   for (const agent of [home, away]) {
     const frustrationFactor = 1.0 + Math.max(0, -agent.momentum) * 0.5;
     if (rng() < YELLOW_CARD_BASE_RATE * frustrationFactor) {
+      const carded = pickPlayerByPosition(agent.roster, 'DF', rng) || pickPlayerByPosition(agent.roster, 'MF', rng);
       events.push({
         minute,
         type: 'YELLOW_CARD',
         team: agent.code,
-        description: `${getTeamName(agent.code)} の選手にイエローカード`,
+        playerId: carded?.id,
+        description: `イエローカード: ${carded ? carded.name : '選手'} (${teams[agent.code]?.name})`,
       });
     }
   }
@@ -493,6 +515,42 @@ export function simulateMatchRich(
       : `試合終了！ ${homeScore.value}-${awayScore.value} で引き分け`,
   });
 
+  // --- FotMob-style Stats Generation ---
+  const homeQuality = homeAgent.attackPower * homeAgent.defensePower;
+  const awayQuality = awayAgent.attackPower * awayAgent.defensePower;
+  let homePoss = 50 + (homeQuality - awayQuality) * 15 + (rng() - 0.5) * 10;
+  homePoss = clamp(homePoss, 25, 75);
+  
+  const hShots = homeScore.value + Math.floor(rng() * 10) + Math.floor(homeQuality * 3);
+  const aShots = awayScore.value + Math.floor(rng() * 10) + Math.floor(awayQuality * 3);
+  const hShotsOnTarget = homeScore.value + Math.floor(rng() * Math.max(0, hShots - homeScore.value) * 0.6);
+  const aShotsOnTarget = awayScore.value + Math.floor(rng() * Math.max(0, aShots - awayScore.value) * 0.6);
+  const hxG = homeScore.value * 0.6 + hShotsOnTarget * 0.12 + rng() * 0.5;
+  const axG = awayScore.value * 0.6 + aShotsOnTarget * 0.12 + rng() * 0.5;
+  const hFouls = homeAgent.yellowCards * 3 + homeAgent.redCards * 5 + Math.floor(rng() * 10) + 5;
+  const aFouls = awayAgent.yellowCards * 3 + awayAgent.redCards * 5 + Math.floor(rng() * 10) + 5;
+
+  const homeStats = {
+    possession: Math.round(homePoss),
+    shots: hShots,
+    shotsOnTarget: hShotsOnTarget,
+    expectedGoals: Number(hxG.toFixed(2)),
+    fouls: hFouls,
+    yellowCards: homeAgent.yellowCards,
+    redCards: homeAgent.redCards,
+  };
+  const awayStats = {
+    possession: 100 - Math.round(homePoss),
+    shots: aShots,
+    shotsOnTarget: aShotsOnTarget,
+    expectedGoals: Number(axG.toFixed(2)),
+    fouls: aFouls,
+    yellowCards: awayAgent.yellowCards,
+    redCards: awayAgent.redCards,
+  };
+
+  const playerRatings = generatePlayerRatings(homeAgent.code, awayAgent.code, winner || 'DRAW', events, rng);
+
   return {
     homeTeam: homeAgent.code,
     awayTeam: awayAgent.code,
@@ -506,7 +564,50 @@ export function simulateMatchRich(
     isPenaltyShootout,
     homeEndStamina: homeAgent.stamina,
     awayEndStamina: awayAgent.stamina,
+    playerRatings,
+    homeStats,
+    awayStats,
   };
+}
+
+export function generatePlayerRatings(
+  homeCode: string,
+  awayCode: string,
+  winner: string | 'DRAW',
+  events: MatchEvent[],
+  rng: () => number = Math.random
+): PlayerMatchRating[] {
+  const ratings: PlayerMatchRating[] = [];
+  
+  const processTeam = (code: string, isWinner: boolean, isDraw: boolean) => {
+    const roster = playersData[code];
+    if (!roster) return;
+    
+    roster.forEach(player => {
+      let r = 6.0 + (rng() * 1.0 - 0.5); // 5.5 to 6.5
+      if (isWinner) r += 0.5 + rng() * 0.5;
+      else if (isDraw) r += rng() * 0.5;
+      else r -= 0.5;
+      
+      const goals = events.filter(e => e.type === 'GOAL' && e.playerId === player.id).length;
+      const assists = events.filter(e => e.type === 'GOAL' && e.assistId === player.id).length;
+      r += goals * (1.0 + rng() * 0.5);
+      r += assists * (0.5 + rng() * 0.5);
+      
+      const yellows = events.filter(e => e.type === 'YELLOW_CARD' && e.playerId === player.id).length;
+      const reds = events.filter(e => e.type === 'RED_CARD' && e.playerId === player.id).length;
+      r -= yellows * 0.5;
+      r -= reds * 1.5;
+      
+      r = Math.min(10.0, Math.max(3.0, r));
+      ratings.push({ playerId: player.id, rating: +(r.toFixed(1)) });
+    });
+  };
+
+  processTeam(homeCode, winner === homeCode, winner === 'DRAW');
+  processTeam(awayCode, winner === awayCode, winner === 'DRAW');
+  
+  return ratings;
 }
 
 // ===== Tournament Fatigue =====
@@ -548,41 +649,4 @@ function getTeamName(code: string): string {
   return teams[code]?.name ?? code;
 }
 
-function generateGoalDescription(teamCode: string, minute: number, momentum: number): string {
-  const name = getTeamName(teamCode);
 
-  // 異なるバリエーションの実況テキスト
-  const earlyGoals = [
-    `${name}が電光石火の先制ゴール！`,
-    `${name}が開始早々にネットを揺らす！`,
-    `${name}が素早い展開から先制！`,
-  ];
-  const lateGoals = [
-    `${name}が土壇場でゴール！劇的な展開！`,
-    `${name}がアディショナルタイムに意地の一撃！`,
-    `${name}が終了間際に値千金のゴール！`,
-  ];
-  const momentumGoals = [
-    `${name}が怒涛の攻撃から追加点！勢いが止まらない！`,
-    `${name}が流れに乗ってさらにゴール！`,
-    `${name}が猛攻！ゴール！`,
-  ];
-  const normalGoals = [
-    `${name}がゴール！`,
-    `${name}が見事なシュートでゴール！`,
-    `${name}がチャンスを確実に決めた！`,
-    `${name}が得点！巧みな崩しから`,
-    `${name}の美しいゴール！`,
-  ];
-
-  if (minute <= 10) {
-    return earlyGoals[Math.floor(Math.random() * earlyGoals.length)];
-  }
-  if (minute >= 85) {
-    return lateGoals[Math.floor(Math.random() * lateGoals.length)];
-  }
-  if (momentum > 0.5) {
-    return momentumGoals[Math.floor(Math.random() * momentumGoals.length)];
-  }
-  return normalGoals[Math.floor(Math.random() * normalGoals.length)];
-}

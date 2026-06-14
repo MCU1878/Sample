@@ -1,0 +1,6338 @@
+{
+  "MEX": [
+    {
+      "id": "MEX-1",
+      "name": "Raúl Rangel",
+      "position": "GK"
+    },
+    {
+      "id": "MEX-2",
+      "name": "Carlos Acevedo",
+      "position": "GK"
+    },
+    {
+      "id": "MEX-3",
+      "name": "Guillermo Ochoa",
+      "position": "GK"
+    },
+    {
+      "id": "MEX-4",
+      "name": "Jorge Sánchez",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-5",
+      "name": "César Montes",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-6",
+      "name": "Edson Álvarez",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-7",
+      "name": "Johan Vásquez",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-8",
+      "name": "Israel Reyes",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-9",
+      "name": "Mateo Chávez",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-10",
+      "name": "Jesús Gallardo",
+      "position": "DF"
+    },
+    {
+      "id": "MEX-11",
+      "name": "Érik Lira",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-12",
+      "name": "Luis Romo",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-13",
+      "name": "Álvaro Fidalgo",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-14",
+      "name": "Orbelín Pineda",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-15",
+      "name": "Obed Vargas",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-16",
+      "name": "Gilberto Mora",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-17",
+      "name": "Luis Chávez",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-18",
+      "name": "Roberto Alvarado",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-19",
+      "name": "Brian Gutiérrez",
+      "position": "MF"
+    },
+    {
+      "id": "MEX-20",
+      "name": "Raúl Jiménez",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-21",
+      "name": "Alexis Vega",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-22",
+      "name": "Santiago Giménez",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-23",
+      "name": "Armando González",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-24",
+      "name": "Julián Quiñones",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-25",
+      "name": "César Huerta",
+      "position": "FW"
+    },
+    {
+      "id": "MEX-26",
+      "name": "Guillermo Martínez",
+      "position": "FW"
+    }
+  ],
+  "KOR": [
+    {
+      "id": "KOR-1",
+      "name": "Kim Seung-gyu",
+      "position": "GK"
+    },
+    {
+      "id": "KOR-2",
+      "name": "Song Bum-keun",
+      "position": "GK"
+    },
+    {
+      "id": "KOR-3",
+      "name": "Jo Hyeon-woo",
+      "position": "GK"
+    },
+    {
+      "id": "KOR-4",
+      "name": "Lee Han-beom",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-5",
+      "name": "Lee Gi-hyuk",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-6",
+      "name": "Kim Min-jae",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-7",
+      "name": "Kim Tae-hyeon",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-8",
+      "name": "Lee Tae-seok",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-9",
+      "name": "Cho Wi-je",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-10",
+      "name": "Kim Moon-hwan",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-11",
+      "name": "Park Jin-seob",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-12",
+      "name": "Seol Young-woo",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-13",
+      "name": "Jens Castrop",
+      "position": "DF"
+    },
+    {
+      "id": "KOR-14",
+      "name": "Hwang In-beom",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-15",
+      "name": "Paik Seung-ho",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-16",
+      "name": "Lee Jae-sung",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-17",
+      "name": "Hwang Hee-chan",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-18",
+      "name": "Bae Jun-ho",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-19",
+      "name": "Lee Kang-in",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-20",
+      "name": "Yang Hyun-jun",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-21",
+      "name": "Kim Jin-gyu",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-22",
+      "name": "Eom Ji-sung",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-23",
+      "name": "Lee Dong-gyeong",
+      "position": "MF"
+    },
+    {
+      "id": "KOR-24",
+      "name": "Son Heung-min",
+      "position": "FW"
+    },
+    {
+      "id": "KOR-25",
+      "name": "Cho Gue-sung",
+      "position": "FW"
+    },
+    {
+      "id": "KOR-26",
+      "name": "Oh Hyeon-gyu",
+      "position": "FW"
+    }
+  ],
+  "RSA": [
+    {
+      "id": "RSA-1",
+      "name": "Ronwen Williams",
+      "position": "GK"
+    },
+    {
+      "id": "RSA-2",
+      "name": "Sipho Chaine",
+      "position": "GK"
+    },
+    {
+      "id": "RSA-3",
+      "name": "Ricardo Goss",
+      "position": "GK"
+    },
+    {
+      "id": "RSA-4",
+      "name": "Thabang Matuludi",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-5",
+      "name": "Khulumani Ndamane",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-6",
+      "name": "Aubrey Modiba",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-7",
+      "name": "Mbekezeli Mbokazi",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-8",
+      "name": "Samukele Kabini",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-9",
+      "name": "Nkosinathi Sibisi",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-10",
+      "name": "Khuliso Mudau",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-11",
+      "name": "Ime Okon",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-12",
+      "name": "Olwethu Makhanya",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-13",
+      "name": "Kamogelo Sebelebele",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-14",
+      "name": "Bradley Cross",
+      "position": "DF"
+    },
+    {
+      "id": "RSA-15",
+      "name": "Teboho Mokoena",
+      "position": "MF"
+    },
+    {
+      "id": "RSA-16",
+      "name": "Thalente Mbatha",
+      "position": "MF"
+    },
+    {
+      "id": "RSA-17",
+      "name": "Yaya Sithole",
+      "position": "MF"
+    },
+    {
+      "id": "RSA-18",
+      "name": "Jayden Adams",
+      "position": "MF"
+    },
+    {
+      "id": "RSA-19",
+      "name": "Oswin Appollis",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-20",
+      "name": "Tshepang Moremi",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-21",
+      "name": "Lyle Foster",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-22",
+      "name": "Relebohile Mofokeng",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-23",
+      "name": "Themba Zwane",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-24",
+      "name": "Thapelo Maseko",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-25",
+      "name": "Iqraam Rayners",
+      "position": "FW"
+    },
+    {
+      "id": "RSA-26",
+      "name": "Evidence Makgopa",
+      "position": "FW"
+    }
+  ],
+  "CZE": [
+    {
+      "id": "CZE-1",
+      "name": "Matj Ková",
+      "position": "GK"
+    },
+    {
+      "id": "CZE-2",
+      "name": "Jindich Stank",
+      "position": "GK"
+    },
+    {
+      "id": "CZE-3",
+      "name": "Luká Horníek",
+      "position": "GK"
+    },
+    {
+      "id": "CZE-4",
+      "name": "David Zima",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-5",
+      "name": "Tomá Hole",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-6",
+      "name": "Robin Hraná",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-7",
+      "name": "Vladimír Coufal",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-8",
+      "name": "tpán Chaloupek",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-9",
+      "name": "Ladislav Krejí",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-10",
+      "name": "David Jurásek",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-11",
+      "name": "Jaroslav Zelený",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-12",
+      "name": "David Doudra",
+      "position": "DF"
+    },
+    {
+      "id": "CZE-13",
+      "name": "Vladimír Darida",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-14",
+      "name": "Luká erv",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-15",
+      "name": "Pavel ulc",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-16",
+      "name": "Luká Provod",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-17",
+      "name": "Michal Sadílek",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-18",
+      "name": "Tomá Souek",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-19",
+      "name": "Alexandr Sojka",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-20",
+      "name": "Hugo Sochrek",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-21",
+      "name": "Denis Viinský",
+      "position": "MF"
+    },
+    {
+      "id": "CZE-22",
+      "name": "Adam Hloek",
+      "position": "FW"
+    },
+    {
+      "id": "CZE-23",
+      "name": "Patrik Schick",
+      "position": "FW"
+    },
+    {
+      "id": "CZE-24",
+      "name": "Jan Kuchta",
+      "position": "FW"
+    },
+    {
+      "id": "CZE-25",
+      "name": "Mojmír Chytil",
+      "position": "FW"
+    },
+    {
+      "id": "CZE-26",
+      "name": "Tomá Chorý",
+      "position": "FW"
+    }
+  ],
+  "CAN": [
+    {
+      "id": "CAN-1",
+      "name": "Dayne St Clair",
+      "position": "GK"
+    },
+    {
+      "id": "CAN-2",
+      "name": "Maxime Crépeau",
+      "position": "GK"
+    },
+    {
+      "id": "CAN-3",
+      "name": "Owen Goodman",
+      "position": "GK"
+    },
+    {
+      "id": "CAN-4",
+      "name": "Alistair Johnston",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-5",
+      "name": "Alfie Jones",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-6",
+      "name": "Luc de Fougerolles",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-7",
+      "name": "Joel Waterman",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-8",
+      "name": "Derek Cornelius",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-9",
+      "name": "Moïse Bombito",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-10",
+      "name": "Alphonso Davies",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-11",
+      "name": "Richie Laryea",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-12",
+      "name": "Niko Sigur",
+      "position": "DF"
+    },
+    {
+      "id": "CAN-13",
+      "name": "Mathieu Choinière",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-14",
+      "name": "Stephen Eustáquio",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-15",
+      "name": "Ismaël Koné",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-16",
+      "name": "Liam Millar",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-17",
+      "name": "Jacob Shaffelburg",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-18",
+      "name": "Tajon Buchanan",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-19",
+      "name": "Ali Ahmed",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-20",
+      "name": "Jonathan Osorio",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-21",
+      "name": "Nathan Saliba",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-22",
+      "name": "Jayden Nelson",
+      "position": "MF"
+    },
+    {
+      "id": "CAN-23",
+      "name": "Cyle Larin",
+      "position": "FW"
+    },
+    {
+      "id": "CAN-24",
+      "name": "Jonathan David",
+      "position": "FW"
+    },
+    {
+      "id": "CAN-25",
+      "name": "Tani Oluwaseyi",
+      "position": "FW"
+    },
+    {
+      "id": "CAN-26",
+      "name": "Promise David",
+      "position": "FW"
+    }
+  ],
+  "SUI": [
+    {
+      "id": "SUI-1",
+      "name": "Gregor Kobel",
+      "position": "GK"
+    },
+    {
+      "id": "SUI-2",
+      "name": "Yvon Mvogo",
+      "position": "GK"
+    },
+    {
+      "id": "SUI-3",
+      "name": "Marvin Keller",
+      "position": "GK"
+    },
+    {
+      "id": "SUI-4",
+      "name": "Miro Muheim",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-5",
+      "name": "Silvan Widmer",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-6",
+      "name": "Nico Elvedi",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-7",
+      "name": "Manuel Akanji",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-8",
+      "name": "Ricardo Rodriguez",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-9",
+      "name": "Eray Cömert",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-10",
+      "name": "Aurèle Amenda",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-11",
+      "name": "Luca Jaquez",
+      "position": "DF"
+    },
+    {
+      "id": "SUI-12",
+      "name": "Denis Zakaria",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-13",
+      "name": "Remo Freuler",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-14",
+      "name": "Johan Manzambi",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-15",
+      "name": "Granit Xhaka",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-16",
+      "name": "Ardon Jashari",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-17",
+      "name": "Djibril Sow",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-18",
+      "name": "Christian Fassnacht",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-19",
+      "name": "Michel Aebischer",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-20",
+      "name": "Fabian Rieder",
+      "position": "MF"
+    },
+    {
+      "id": "SUI-21",
+      "name": "Breel Embolo",
+      "position": "FW"
+    },
+    {
+      "id": "SUI-22",
+      "name": "Dan Ndoye",
+      "position": "FW"
+    },
+    {
+      "id": "SUI-23",
+      "name": "Rubén Vargas",
+      "position": "FW"
+    },
+    {
+      "id": "SUI-24",
+      "name": "Noah Okafor",
+      "position": "FW"
+    },
+    {
+      "id": "SUI-25",
+      "name": "Zeki Amdouni",
+      "position": "FW"
+    },
+    {
+      "id": "SUI-26",
+      "name": "Cedric Itten",
+      "position": "FW"
+    }
+  ],
+  "QAT": [
+    {
+      "id": "QAT-1",
+      "name": "Mahmud Abunada",
+      "position": "GK"
+    },
+    {
+      "id": "QAT-2",
+      "name": "Salah Zakaria",
+      "position": "GK"
+    },
+    {
+      "id": "QAT-3",
+      "name": "Meshaal Barsham",
+      "position": "GK"
+    },
+    {
+      "id": "QAT-4",
+      "name": "Pedro Miguel",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-5",
+      "name": "Lucas Mendes",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-6",
+      "name": "Issa Laye",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-7",
+      "name": "Ayoub Al-Oui",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-8",
+      "name": "Homam Ahmed",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-9",
+      "name": "Boualem Khoukhi",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-10",
+      "name": "Sultan Al-Brake",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-11",
+      "name": "Al-Hashmi Al-Hussain",
+      "position": "DF"
+    },
+    {
+      "id": "QAT-12",
+      "name": "Jassem Gaber",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-13",
+      "name": "Abdulaziz Hatem",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-14",
+      "name": "Karim Boudiaf",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-15",
+      "name": "Ahmed Fathy",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-16",
+      "name": "Assim Madibo",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-17",
+      "name": "Mohamed Manai",
+      "position": "MF"
+    },
+    {
+      "id": "QAT-18",
+      "name": "Ahmed Alaaeldin",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-19",
+      "name": "Edmilson Junior",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-20",
+      "name": "Mohammed Muntari",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-21",
+      "name": "Hassan Al-Haydos",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-22",
+      "name": "Akram Afif",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-23",
+      "name": "Yusuf Abdurisag",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-24",
+      "name": "Ahmed Al-Ganehi",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-25",
+      "name": "Almoez Ali",
+      "position": "FW"
+    },
+    {
+      "id": "QAT-26",
+      "name": "Tahsin Jamshid",
+      "position": "FW"
+    }
+  ],
+  "BIH": [
+    {
+      "id": "BIH-1",
+      "name": "Nikola Vasilj",
+      "position": "GK"
+    },
+    {
+      "id": "BIH-2",
+      "name": "Mladen Jurkas",
+      "position": "GK"
+    },
+    {
+      "id": "BIH-3",
+      "name": "Martin Zlomisli",
+      "position": "GK"
+    },
+    {
+      "id": "BIH-4",
+      "name": "Nihad Mujaki",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-5",
+      "name": "Dennis Hadikaduni",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-6",
+      "name": "Tarik Muharemovi",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-7",
+      "name": "Sead Kolainac",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-8",
+      "name": "Amar Dedi",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-9",
+      "name": "Nikola Kati",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-10",
+      "name": "Stjepan Radelji",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-11",
+      "name": "Arjan Mali",
+      "position": "DF"
+    },
+    {
+      "id": "BIH-12",
+      "name": "Benjamin Tahirovi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-13",
+      "name": "Armin Gigovi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-14",
+      "name": "Ivan Bai",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-15",
+      "name": "Ivan unji",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-16",
+      "name": "Amar Memi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-17",
+      "name": "Amir Hadiahmetovi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-18",
+      "name": "Denis Burni",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-19",
+      "name": "Kerim Alajbegovi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-20",
+      "name": "Esmir Bajraktarevi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-21",
+      "name": "Ermin Mahmi",
+      "position": "MF"
+    },
+    {
+      "id": "BIH-22",
+      "name": "Samed Badar",
+      "position": "FW"
+    },
+    {
+      "id": "BIH-23",
+      "name": "Ermedin Demirovi",
+      "position": "FW"
+    },
+    {
+      "id": "BIH-24",
+      "name": "Edin Deko",
+      "position": "FW"
+    },
+    {
+      "id": "BIH-25",
+      "name": "Haris Tabakovi",
+      "position": "FW"
+    },
+    {
+      "id": "BIH-26",
+      "name": "Jovo Luki",
+      "position": "FW"
+    }
+  ],
+  "BRA": [
+    {
+      "id": "BRA-1",
+      "name": "Alisson",
+      "position": "GK"
+    },
+    {
+      "id": "BRA-2",
+      "name": "Weverton",
+      "position": "GK"
+    },
+    {
+      "id": "BRA-3",
+      "name": "Ederson",
+      "position": "GK"
+    },
+    {
+      "id": "BRA-4",
+      "name": "Gabriel Magalhães",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-5",
+      "name": "Marquinhos",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-6",
+      "name": "Alex Sandro",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-7",
+      "name": "Danilo",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-8",
+      "name": "Bremer",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-9",
+      "name": "Léo Pereira",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-10",
+      "name": "Douglas Santos",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-11",
+      "name": "Roger Ibañez",
+      "position": "DF"
+    },
+    {
+      "id": "BRA-12",
+      "name": "Éderson",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-13",
+      "name": "Casemiro",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-14",
+      "name": "Bruno Guimarães",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-15",
+      "name": "Fabinho",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-16",
+      "name": "Danilo Santos",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-17",
+      "name": "Lucas Paquetá",
+      "position": "MF"
+    },
+    {
+      "id": "BRA-18",
+      "name": "Vinícius Júnior",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-19",
+      "name": "Matheus Cunha",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-20",
+      "name": "Neymar",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-21",
+      "name": "Raphinha",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-22",
+      "name": "Endrick",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-23",
+      "name": "Luiz Henrique",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-24",
+      "name": "Gabriel Martinelli",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-25",
+      "name": "Igor Thiago",
+      "position": "FW"
+    },
+    {
+      "id": "BRA-26",
+      "name": "Rayan",
+      "position": "FW"
+    }
+  ],
+  "MAR": [
+    {
+      "id": "MAR-1",
+      "name": "Yassine Bounou",
+      "position": "GK"
+    },
+    {
+      "id": "MAR-2",
+      "name": "Munir Mohamedi",
+      "position": "GK"
+    },
+    {
+      "id": "MAR-3",
+      "name": "Ahmed Reda Tagnaouti",
+      "position": "GK"
+    },
+    {
+      "id": "MAR-4",
+      "name": "Achraf Hakimi",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-5",
+      "name": "Noussair Mazraoui",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-6",
+      "name": "Marwane Saâdane",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-7",
+      "name": "Zakaria El Ouahdi",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-8",
+      "name": "Issa Diop",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-9",
+      "name": "Chadi Riad",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-10",
+      "name": "Youssef Belammari",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-11",
+      "name": "Redouane Halhal",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-12",
+      "name": "Anass Salah-Eddine",
+      "position": "DF"
+    },
+    {
+      "id": "MAR-13",
+      "name": "Sofyan Amrabat",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-14",
+      "name": "Ayyoub Bouaddi",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-15",
+      "name": "Chemsdine Talbi",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-16",
+      "name": "Azzedine Ounahi",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-17",
+      "name": "Ismael Saibari",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-18",
+      "name": "Samir El Mourabet",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-19",
+      "name": "Gessime Yassine",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-20",
+      "name": "Bilal El Khannouss",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-21",
+      "name": "Neil El Aynaoui",
+      "position": "MF"
+    },
+    {
+      "id": "MAR-22",
+      "name": "Soufiane Rahimi",
+      "position": "FW"
+    },
+    {
+      "id": "MAR-23",
+      "name": "Brahim Díaz",
+      "position": "FW"
+    },
+    {
+      "id": "MAR-24",
+      "name": "Amine Sbaï",
+      "position": "FW"
+    },
+    {
+      "id": "MAR-25",
+      "name": "Ayoub El Kaabi",
+      "position": "FW"
+    },
+    {
+      "id": "MAR-26",
+      "name": "Ayoube Amaimouni",
+      "position": "FW"
+    }
+  ],
+  "SCO": [
+    {
+      "id": "SCO-1",
+      "name": "Angus Gunn",
+      "position": "GK"
+    },
+    {
+      "id": "SCO-2",
+      "name": "Liam Kelly",
+      "position": "GK"
+    },
+    {
+      "id": "SCO-3",
+      "name": "Craig Gordon",
+      "position": "GK"
+    },
+    {
+      "id": "SCO-4",
+      "name": "Aaron Hickey",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-5",
+      "name": "Andy Robertson",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-6",
+      "name": "Grant Hanley",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-7",
+      "name": "Kieran Tierney",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-8",
+      "name": "Jack Hendry",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-9",
+      "name": "John Souttar",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-10",
+      "name": "Dominic Hyam",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-11",
+      "name": "Nathan Patterson",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-12",
+      "name": "Anthony Ralston",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-13",
+      "name": "Scott McKenna",
+      "position": "DF"
+    },
+    {
+      "id": "SCO-14",
+      "name": "Scott McTominay",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-15",
+      "name": "John McGinn",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-16",
+      "name": "Tyler Fletcher",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-17",
+      "name": "Ryan Christie",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-18",
+      "name": "Ben Gannon-Doak",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-19",
+      "name": "Lewis Ferguson",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-20",
+      "name": "Kenny McLean",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-21",
+      "name": "Findlay Curtis",
+      "position": "MF"
+    },
+    {
+      "id": "SCO-22",
+      "name": "Lyndon Dykes",
+      "position": "FW"
+    },
+    {
+      "id": "SCO-23",
+      "name": "Ché Adams",
+      "position": "FW"
+    },
+    {
+      "id": "SCO-24",
+      "name": "Ross Stewart",
+      "position": "FW"
+    },
+    {
+      "id": "SCO-25",
+      "name": "George Hirst",
+      "position": "FW"
+    },
+    {
+      "id": "SCO-26",
+      "name": "Lawrence Shankland",
+      "position": "FW"
+    }
+  ],
+  "HAI": [
+    {
+      "id": "HAI-1",
+      "name": "Johny Placide",
+      "position": "GK"
+    },
+    {
+      "id": "HAI-2",
+      "name": "Alexandre Pierre",
+      "position": "GK"
+    },
+    {
+      "id": "HAI-3",
+      "name": "Josué Duverger",
+      "position": "GK"
+    },
+    {
+      "id": "HAI-4",
+      "name": "Carlens Arcus",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-5",
+      "name": "Keeto Thermoncy",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-6",
+      "name": "Ricardo Adé",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-7",
+      "name": "Hannes Delcroix",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-8",
+      "name": "Martin Expérience",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-9",
+      "name": "Duke Lacroix",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-10",
+      "name": "Garven Metusala",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-11",
+      "name": "Jean-Kévin Duverne",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-12",
+      "name": "Wilguens Paugain",
+      "position": "DF"
+    },
+    {
+      "id": "HAI-13",
+      "name": "Carl Sainté",
+      "position": "MF"
+    },
+    {
+      "id": "HAI-14",
+      "name": "Jean-Ricner Bellegarde",
+      "position": "MF"
+    },
+    {
+      "id": "HAI-15",
+      "name": "Danley Jean Jacques",
+      "position": "MF"
+    },
+    {
+      "id": "HAI-16",
+      "name": "Dominique Simon",
+      "position": "MF"
+    },
+    {
+      "id": "HAI-17",
+      "name": "Woodensky Pierre",
+      "position": "MF"
+    },
+    {
+      "id": "HAI-18",
+      "name": "Derrick Etienne Jr",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-19",
+      "name": "Duckens Nazon",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-20",
+      "name": "Louicius Deedson",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-21",
+      "name": "Ruben Providence",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-22",
+      "name": "Lenny Joseph",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-23",
+      "name": "Wilson Isidor",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-24",
+      "name": "Yassin Fortuné",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-25",
+      "name": "Frantzdy Pierrot",
+      "position": "FW"
+    },
+    {
+      "id": "HAI-26",
+      "name": "Josué Casimir",
+      "position": "FW"
+    }
+  ],
+  "USA": [
+    {
+      "id": "USA-1",
+      "name": "Matt Turner",
+      "position": "GK"
+    },
+    {
+      "id": "USA-2",
+      "name": "Matt Freese",
+      "position": "GK"
+    },
+    {
+      "id": "USA-3",
+      "name": "Chris Brady",
+      "position": "GK"
+    },
+    {
+      "id": "USA-4",
+      "name": "Sergiño Dest",
+      "position": "DF"
+    },
+    {
+      "id": "USA-5",
+      "name": "Chris Richards",
+      "position": "DF"
+    },
+    {
+      "id": "USA-6",
+      "name": "Antonee Robinson",
+      "position": "DF"
+    },
+    {
+      "id": "USA-7",
+      "name": "Auston Trusty",
+      "position": "DF"
+    },
+    {
+      "id": "USA-8",
+      "name": "Miles Robinson",
+      "position": "DF"
+    },
+    {
+      "id": "USA-9",
+      "name": "Tim Ream",
+      "position": "DF"
+    },
+    {
+      "id": "USA-10",
+      "name": "Alex Freeman",
+      "position": "DF"
+    },
+    {
+      "id": "USA-11",
+      "name": "Max Arfsten",
+      "position": "DF"
+    },
+    {
+      "id": "USA-12",
+      "name": "Mark McKenzie",
+      "position": "DF"
+    },
+    {
+      "id": "USA-13",
+      "name": "Joe Scally",
+      "position": "DF"
+    },
+    {
+      "id": "USA-14",
+      "name": "Tyler Adams",
+      "position": "MF"
+    },
+    {
+      "id": "USA-15",
+      "name": "Giovanni Reyna",
+      "position": "MF"
+    },
+    {
+      "id": "USA-16",
+      "name": "Weston McKennie",
+      "position": "MF"
+    },
+    {
+      "id": "USA-17",
+      "name": "Sebastian Berhalter",
+      "position": "MF"
+    },
+    {
+      "id": "USA-18",
+      "name": "Cristian Roldan",
+      "position": "MF"
+    },
+    {
+      "id": "USA-19",
+      "name": "Malik Tillman",
+      "position": "MF"
+    },
+    {
+      "id": "USA-20",
+      "name": "Ricardo Pepi",
+      "position": "FW"
+    },
+    {
+      "id": "USA-21",
+      "name": "Christian Pulisic",
+      "position": "FW"
+    },
+    {
+      "id": "USA-22",
+      "name": "Brenden Aaronson",
+      "position": "FW"
+    },
+    {
+      "id": "USA-23",
+      "name": "Haji Wright",
+      "position": "FW"
+    },
+    {
+      "id": "USA-24",
+      "name": "Folarin Balogun",
+      "position": "FW"
+    },
+    {
+      "id": "USA-25",
+      "name": "Timothy Weah",
+      "position": "FW"
+    },
+    {
+      "id": "USA-26",
+      "name": "Alejandro Zendejas",
+      "position": "FW"
+    }
+  ],
+  "AUS": [
+    {
+      "id": "AUS-1",
+      "name": "Mathew Ryan",
+      "position": "GK"
+    },
+    {
+      "id": "AUS-2",
+      "name": "Paul Izzo",
+      "position": "GK"
+    },
+    {
+      "id": "AUS-3",
+      "name": "Patrick Beach",
+      "position": "GK"
+    },
+    {
+      "id": "AUS-4",
+      "name": "Milo Degenek",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-5",
+      "name": "Alessandro Circati",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-6",
+      "name": "Jacob Italiano",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-7",
+      "name": "Jordan Bos",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-8",
+      "name": "Jason Geria",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-9",
+      "name": "Kai Trewin",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-10",
+      "name": "Aziz Behich",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-11",
+      "name": "Harry Souttar",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-12",
+      "name": "Cameron Burgess",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-13",
+      "name": "Lucas Herrington",
+      "position": "DF"
+    },
+    {
+      "id": "AUS-14",
+      "name": "Connor Metcalfe",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-15",
+      "name": "Ajdin Hrusti",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-16",
+      "name": "Aiden ONeill",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-17",
+      "name": "Cammy Devlin",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-18",
+      "name": "Jackson Irvine",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-19",
+      "name": "Paul Okon-Engstler",
+      "position": "MF"
+    },
+    {
+      "id": "AUS-20",
+      "name": "Mathew Leckie",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-21",
+      "name": "Mohamed Touré",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-22",
+      "name": "Awer Mabil",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-23",
+      "name": "Nestory Irankunda",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-24",
+      "name": "Cristian Volpato",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-25",
+      "name": "Nishan Velupillay",
+      "position": "FW"
+    },
+    {
+      "id": "AUS-26",
+      "name": "Tete Yengi",
+      "position": "FW"
+    }
+  ],
+  "PAR": [
+    {
+      "id": "PAR-1",
+      "name": "Gatito Fernández",
+      "position": "GK"
+    },
+    {
+      "id": "PAR-2",
+      "name": "Orlando Gill",
+      "position": "GK"
+    },
+    {
+      "id": "PAR-3",
+      "name": "Gastón Olveira",
+      "position": "GK"
+    },
+    {
+      "id": "PAR-4",
+      "name": "Gustavo Velázquez",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-5",
+      "name": "Omar Alderete",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-6",
+      "name": "Juan José Cáceres",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-7",
+      "name": "Fabián Balbuena",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-8",
+      "name": "Júnior Alonso",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-9",
+      "name": "José Canale",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-10",
+      "name": "Gustavo Gómez",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-11",
+      "name": "Alexandro Maidana",
+      "position": "DF"
+    },
+    {
+      "id": "PAR-12",
+      "name": "Ramón Sosa",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-13",
+      "name": "Diego Gómez",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-14",
+      "name": "Miguel Almirón",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-15",
+      "name": "Maurício",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-16",
+      "name": "Andrés Cubas",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-17",
+      "name": "Damián Bobadilla",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-18",
+      "name": "Kaku",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-19",
+      "name": "Braian Ojeda",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-20",
+      "name": "Matías Galarza",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-21",
+      "name": "Gustavo Caballero",
+      "position": "MF"
+    },
+    {
+      "id": "PAR-22",
+      "name": "Antonio Sanabria",
+      "position": "FW"
+    },
+    {
+      "id": "PAR-23",
+      "name": "Álex Arce",
+      "position": "FW"
+    },
+    {
+      "id": "PAR-24",
+      "name": "Julio Enciso",
+      "position": "FW"
+    },
+    {
+      "id": "PAR-25",
+      "name": "Gabriel Ávalos",
+      "position": "FW"
+    },
+    {
+      "id": "PAR-26",
+      "name": "Isidro Pitta",
+      "position": "FW"
+    }
+  ],
+  "TUR": [
+    {
+      "id": "TUR-1",
+      "name": "TUR Player 1",
+      "position": "GK"
+    },
+    {
+      "id": "TUR-2",
+      "name": "TUR Player 2",
+      "position": "GK"
+    },
+    {
+      "id": "TUR-3",
+      "name": "TUR Player 3",
+      "position": "GK"
+    },
+    {
+      "id": "TUR-4",
+      "name": "TUR Player 4",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-5",
+      "name": "TUR Player 5",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-6",
+      "name": "TUR Player 6",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-7",
+      "name": "TUR Player 7",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-8",
+      "name": "TUR Player 8",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-9",
+      "name": "TUR Player 9",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-10",
+      "name": "TUR Player 10",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-11",
+      "name": "TUR Player 11",
+      "position": "DF"
+    },
+    {
+      "id": "TUR-12",
+      "name": "TUR Player 12",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-13",
+      "name": "TUR Player 13",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-14",
+      "name": "TUR Player 14",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-15",
+      "name": "TUR Player 15",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-16",
+      "name": "TUR Player 16",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-17",
+      "name": "TUR Player 17",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-18",
+      "name": "TUR Player 18",
+      "position": "MF"
+    },
+    {
+      "id": "TUR-19",
+      "name": "TUR Player 19",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-20",
+      "name": "TUR Player 20",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-21",
+      "name": "TUR Player 21",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-22",
+      "name": "TUR Player 22",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-23",
+      "name": "TUR Player 23",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-24",
+      "name": "TUR Player 24",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-25",
+      "name": "TUR Player 25",
+      "position": "FW"
+    },
+    {
+      "id": "TUR-26",
+      "name": "TUR Player 26",
+      "position": "FW"
+    }
+  ],
+  "GER": [
+    {
+      "id": "GER-1",
+      "name": "Manuel Neuer",
+      "position": "GK"
+    },
+    {
+      "id": "GER-2",
+      "name": "Oliver Baumann",
+      "position": "GK"
+    },
+    {
+      "id": "GER-3",
+      "name": "Alexander Nübel",
+      "position": "GK"
+    },
+    {
+      "id": "GER-4",
+      "name": "Antonio Rüdiger",
+      "position": "DF"
+    },
+    {
+      "id": "GER-5",
+      "name": "Waldemar Anton",
+      "position": "DF"
+    },
+    {
+      "id": "GER-6",
+      "name": "Jonathan Tah",
+      "position": "DF"
+    },
+    {
+      "id": "GER-7",
+      "name": "Pascal Groß",
+      "position": "DF"
+    },
+    {
+      "id": "GER-8",
+      "name": "Nico Schlotterbeck",
+      "position": "DF"
+    },
+    {
+      "id": "GER-9",
+      "name": "Nathaniel Brown",
+      "position": "DF"
+    },
+    {
+      "id": "GER-10",
+      "name": "David Raum",
+      "position": "DF"
+    },
+    {
+      "id": "GER-11",
+      "name": "Malick Thiaw",
+      "position": "DF"
+    },
+    {
+      "id": "GER-12",
+      "name": "Aleksandar Pavlovi",
+      "position": "MF"
+    },
+    {
+      "id": "GER-13",
+      "name": "Joshua Kimmich",
+      "position": "MF"
+    },
+    {
+      "id": "GER-14",
+      "name": "Leon Goretzka",
+      "position": "MF"
+    },
+    {
+      "id": "GER-15",
+      "name": "Jamie Leweling",
+      "position": "MF"
+    },
+    {
+      "id": "GER-16",
+      "name": "Jamal Musiala",
+      "position": "MF"
+    },
+    {
+      "id": "GER-17",
+      "name": "Angelo Stiller",
+      "position": "MF"
+    },
+    {
+      "id": "GER-18",
+      "name": "Florian Wirtz",
+      "position": "MF"
+    },
+    {
+      "id": "GER-19",
+      "name": "Leroy Sané",
+      "position": "MF"
+    },
+    {
+      "id": "GER-20",
+      "name": "Nadiem Amiri",
+      "position": "MF"
+    },
+    {
+      "id": "GER-21",
+      "name": "Felix Nmecha",
+      "position": "MF"
+    },
+    {
+      "id": "GER-22",
+      "name": "Assan Ouédraogo",
+      "position": "MF"
+    },
+    {
+      "id": "GER-23",
+      "name": "Kai Havertz",
+      "position": "FW"
+    },
+    {
+      "id": "GER-24",
+      "name": "Nick Woltemade",
+      "position": "FW"
+    },
+    {
+      "id": "GER-25",
+      "name": "Maximilian Beier",
+      "position": "FW"
+    },
+    {
+      "id": "GER-26",
+      "name": "Deniz Undav",
+      "position": "FW"
+    }
+  ],
+  "ECU": [
+    {
+      "id": "ECU-1",
+      "name": "Hernán Galíndez",
+      "position": "GK"
+    },
+    {
+      "id": "ECU-2",
+      "name": "Moisés Ramírez",
+      "position": "GK"
+    },
+    {
+      "id": "ECU-3",
+      "name": "Gonzalo Valle",
+      "position": "GK"
+    },
+    {
+      "id": "ECU-4",
+      "name": "Félix Torres",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-5",
+      "name": "Piero Hincapié",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-6",
+      "name": "Joel Ordóñez",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-7",
+      "name": "Willian Pacho",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-8",
+      "name": "Pervis Estupiñán",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-9",
+      "name": "Ángelo Preciado",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-10",
+      "name": "Jackson Porozo",
+      "position": "DF"
+    },
+    {
+      "id": "ECU-11",
+      "name": "Jordy Alcívar",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-12",
+      "name": "Anthony Valencia",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-13",
+      "name": "John Yeboah",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-14",
+      "name": "Kendry Páez",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-15",
+      "name": "Alan Minda",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-16",
+      "name": "Pedro Vite",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-17",
+      "name": "Denil Castillo",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-18",
+      "name": "Gonzalo Plata",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-19",
+      "name": "Alan Franco",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-20",
+      "name": "Moisés Caicedo",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-21",
+      "name": "Yaimar Medina",
+      "position": "MF"
+    },
+    {
+      "id": "ECU-22",
+      "name": "Kevin Rodríguez",
+      "position": "FW"
+    },
+    {
+      "id": "ECU-23",
+      "name": "Enner Valencia",
+      "position": "FW"
+    },
+    {
+      "id": "ECU-24",
+      "name": "Jordy Caicedo",
+      "position": "FW"
+    },
+    {
+      "id": "ECU-25",
+      "name": "Nilson Angulo",
+      "position": "FW"
+    },
+    {
+      "id": "ECU-26",
+      "name": "Jeremy Arévalo",
+      "position": "FW"
+    }
+  ],
+  "CIV": [
+    {
+      "id": "CIV-1",
+      "name": "Yahia Fofana",
+      "position": "GK"
+    },
+    {
+      "id": "CIV-2",
+      "name": "Mohamed Koné",
+      "position": "GK"
+    },
+    {
+      "id": "CIV-3",
+      "name": "Alban Lafont",
+      "position": "GK"
+    },
+    {
+      "id": "CIV-4",
+      "name": "Ousmane Diomande",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-5",
+      "name": "Ghislain Konan",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-6",
+      "name": "Wilfried Singo",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-7",
+      "name": "Odilon Kossounou",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-8",
+      "name": "Christopher Opéri",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-9",
+      "name": "Guéla Doué",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-10",
+      "name": "Emmanuel Agbadou",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-11",
+      "name": "Evan Ndicka",
+      "position": "DF"
+    },
+    {
+      "id": "CIV-12",
+      "name": "Jean Michaël Seri",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-13",
+      "name": "Seko Fofana",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-14",
+      "name": "Franck Kessié",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-15",
+      "name": "Ibrahim Sangaré",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-16",
+      "name": "Parfait Guiagon",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-17",
+      "name": "Christ Inao Oulaï",
+      "position": "MF"
+    },
+    {
+      "id": "CIV-18",
+      "name": "Ange-Yoan Bonny",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-19",
+      "name": "Simon Adingra",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-20",
+      "name": "Yan Diomande",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-21",
+      "name": "Elye Wahi",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-22",
+      "name": "Oumar Diakité",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-23",
+      "name": "Amad Diallo",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-24",
+      "name": "Nicolas Pépé",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-25",
+      "name": "Evann Guessand",
+      "position": "FW"
+    },
+    {
+      "id": "CIV-26",
+      "name": "Bazoumana Touré",
+      "position": "FW"
+    }
+  ],
+  "CUW": [
+    {
+      "id": "CUW-1",
+      "name": "Eloy Room",
+      "position": "GK"
+    },
+    {
+      "id": "CUW-2",
+      "name": "Tyrick Bodak",
+      "position": "GK"
+    },
+    {
+      "id": "CUW-3",
+      "name": "Trevor Doornbusch",
+      "position": "GK"
+    },
+    {
+      "id": "CUW-4",
+      "name": "Shurandy Sambo",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-5",
+      "name": "Juriën Gaari",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-6",
+      "name": "Roshon van Eijma",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-7",
+      "name": "Sherel Floranus",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-8",
+      "name": "Armando Obispo",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-9",
+      "name": "Joshua Brenet",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-10",
+      "name": "Riechedly Bazoer",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-11",
+      "name": "Deveron Fonville",
+      "position": "DF"
+    },
+    {
+      "id": "CUW-12",
+      "name": "Godfried Roemeratoe",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-13",
+      "name": "Juninho Bacuna",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-14",
+      "name": "Livano Comenencia",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-15",
+      "name": "Leandro Bacuna",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-16",
+      "name": "Tyrese Noslin",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-17",
+      "name": "Arjany Martha",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-18",
+      "name": "Kevin Felida",
+      "position": "MF"
+    },
+    {
+      "id": "CUW-19",
+      "name": "Jürgen Locadia",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-20",
+      "name": "Jeremy Antonisse",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-21",
+      "name": "Sontje Hansen",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-22",
+      "name": "Kenji Gorré",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-23",
+      "name": "Jearl Margaritha",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-24",
+      "name": "Brandley Kuwas",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-25",
+      "name": "Gervane Kastaneer",
+      "position": "FW"
+    },
+    {
+      "id": "CUW-26",
+      "name": "Tahith Chong",
+      "position": "FW"
+    }
+  ],
+  "NED": [
+    {
+      "id": "NED-1",
+      "name": "Bart Verbruggen",
+      "position": "GK"
+    },
+    {
+      "id": "NED-2",
+      "name": "Robin Roefs",
+      "position": "GK"
+    },
+    {
+      "id": "NED-3",
+      "name": "Mark Flekken",
+      "position": "GK"
+    },
+    {
+      "id": "NED-4",
+      "name": "Lutsharel Geertruida",
+      "position": "DF"
+    },
+    {
+      "id": "NED-5",
+      "name": "Virgil van Dijk",
+      "position": "DF"
+    },
+    {
+      "id": "NED-6",
+      "name": "Nathan Aké",
+      "position": "DF"
+    },
+    {
+      "id": "NED-7",
+      "name": "Jan Paul van Hecke",
+      "position": "DF"
+    },
+    {
+      "id": "NED-8",
+      "name": "Mats Wieffer",
+      "position": "DF"
+    },
+    {
+      "id": "NED-9",
+      "name": "Micky van de Ven",
+      "position": "DF"
+    },
+    {
+      "id": "NED-10",
+      "name": "Denzel Dumfries",
+      "position": "DF"
+    },
+    {
+      "id": "NED-11",
+      "name": "Jorrel Hato",
+      "position": "DF"
+    },
+    {
+      "id": "NED-12",
+      "name": "Marten de Roon",
+      "position": "MF"
+    },
+    {
+      "id": "NED-13",
+      "name": "Justin Kluivert",
+      "position": "MF"
+    },
+    {
+      "id": "NED-14",
+      "name": "Ryan Gravenberch",
+      "position": "MF"
+    },
+    {
+      "id": "NED-15",
+      "name": "Tijjani Reijnders",
+      "position": "MF"
+    },
+    {
+      "id": "NED-16",
+      "name": "Guus Til",
+      "position": "MF"
+    },
+    {
+      "id": "NED-17",
+      "name": "Teun Koopmeiners",
+      "position": "MF"
+    },
+    {
+      "id": "NED-18",
+      "name": "Frenkie de Jong",
+      "position": "MF"
+    },
+    {
+      "id": "NED-19",
+      "name": "Quinten Timber",
+      "position": "MF"
+    },
+    {
+      "id": "NED-20",
+      "name": "Wout Weghorst",
+      "position": "FW"
+    },
+    {
+      "id": "NED-21",
+      "name": "Memphis Depay",
+      "position": "FW"
+    },
+    {
+      "id": "NED-22",
+      "name": "Cody Gakpo",
+      "position": "FW"
+    },
+    {
+      "id": "NED-23",
+      "name": "Noa Lang",
+      "position": "FW"
+    },
+    {
+      "id": "NED-24",
+      "name": "Donyell Malen",
+      "position": "FW"
+    },
+    {
+      "id": "NED-25",
+      "name": "Brian Brobbey",
+      "position": "FW"
+    },
+    {
+      "id": "NED-26",
+      "name": "Crysencio Summerville",
+      "position": "FW"
+    }
+  ],
+  "JPN": [
+    {
+      "id": "JPN-1",
+      "name": "Zion Suzuki",
+      "position": "GK"
+    },
+    {
+      "id": "JPN-2",
+      "name": "Keisuke sako",
+      "position": "GK"
+    },
+    {
+      "id": "JPN-3",
+      "name": "Tomoki Hayakawa",
+      "position": "GK"
+    },
+    {
+      "id": "JPN-4",
+      "name": "Yukinari Sugawara",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-5",
+      "name": "Shgo Taniguchi",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-6",
+      "name": "K Itakura",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-7",
+      "name": "Yto Nagatomo",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-8",
+      "name": "Tsuyoshi Watanabe",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-9",
+      "name": "Ayumu Seko",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-10",
+      "name": "Hiroki It",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-11",
+      "name": "Takehiro Tomiyasu",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-12",
+      "name": "Junnosuke Suzuki",
+      "position": "DF"
+    },
+    {
+      "id": "JPN-13",
+      "name": "Ao Tanaka",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-14",
+      "name": "Takefusa Kubo",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-15",
+      "name": "Ritsu Dan",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-16",
+      "name": "Keito Nakamura",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-17",
+      "name": "Junya It",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-18",
+      "name": "Daichi Kamada",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-19",
+      "name": "Kaish Sano",
+      "position": "MF"
+    },
+    {
+      "id": "JPN-20",
+      "name": "Shto Machino",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-21",
+      "name": "Keisuke Got",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-22",
+      "name": "Daizen Maeda",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-23",
+      "name": "Yuito Suzuki",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-24",
+      "name": "Ayase Ueda",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-25",
+      "name": "Kki Ogawa",
+      "position": "FW"
+    },
+    {
+      "id": "JPN-26",
+      "name": "Kento Shiogai",
+      "position": "FW"
+    }
+  ],
+  "TUN": [
+    {
+      "id": "TUN-1",
+      "name": "Mouhib Chamakh",
+      "position": "GK"
+    },
+    {
+      "id": "TUN-2",
+      "name": "Aymen Dahmen",
+      "position": "GK"
+    },
+    {
+      "id": "TUN-3",
+      "name": "Sabri Ben Hessen",
+      "position": "GK"
+    },
+    {
+      "id": "TUN-4",
+      "name": "Ali Abdi",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-5",
+      "name": "Montassar Talbi",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-6",
+      "name": "Omar Rekik",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-7",
+      "name": "Adem Arous",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-8",
+      "name": "Dylan Bronn",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-9",
+      "name": "Mortadha Ben Ouanes",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-10",
+      "name": "Yan Valery",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-11",
+      "name": "Mohamed Amine Ben Hamida",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-12",
+      "name": "Moutaz Neffati",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-13",
+      "name": "Raed Chikhaoui",
+      "position": "DF"
+    },
+    {
+      "id": "TUN-14",
+      "name": "Hannibal Mejbri",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-15",
+      "name": "Ismaël Gharbi",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-16",
+      "name": "Rani Khedira",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-17",
+      "name": "Hadj Mahmoud",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-18",
+      "name": "Ellyes Skhiri",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-19",
+      "name": "Anis Ben Slimane",
+      "position": "MF"
+    },
+    {
+      "id": "TUN-20",
+      "name": "Elias Achouri",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-21",
+      "name": "Elias Saad",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-22",
+      "name": "Hazem Mastouri",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-23",
+      "name": "Khalil Ayari",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-24",
+      "name": "Rayan Elloumi",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-25",
+      "name": "Firas Chaouat",
+      "position": "FW"
+    },
+    {
+      "id": "TUN-26",
+      "name": "Sebastian Tounekti",
+      "position": "FW"
+    }
+  ],
+  "SWE": [
+    {
+      "id": "SWE-1",
+      "name": "SWE Player 1",
+      "position": "GK"
+    },
+    {
+      "id": "SWE-2",
+      "name": "SWE Player 2",
+      "position": "GK"
+    },
+    {
+      "id": "SWE-3",
+      "name": "SWE Player 3",
+      "position": "GK"
+    },
+    {
+      "id": "SWE-4",
+      "name": "SWE Player 4",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-5",
+      "name": "SWE Player 5",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-6",
+      "name": "SWE Player 6",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-7",
+      "name": "SWE Player 7",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-8",
+      "name": "SWE Player 8",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-9",
+      "name": "SWE Player 9",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-10",
+      "name": "SWE Player 10",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-11",
+      "name": "SWE Player 11",
+      "position": "DF"
+    },
+    {
+      "id": "SWE-12",
+      "name": "SWE Player 12",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-13",
+      "name": "SWE Player 13",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-14",
+      "name": "SWE Player 14",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-15",
+      "name": "SWE Player 15",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-16",
+      "name": "SWE Player 16",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-17",
+      "name": "SWE Player 17",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-18",
+      "name": "SWE Player 18",
+      "position": "MF"
+    },
+    {
+      "id": "SWE-19",
+      "name": "SWE Player 19",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-20",
+      "name": "SWE Player 20",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-21",
+      "name": "SWE Player 21",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-22",
+      "name": "SWE Player 22",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-23",
+      "name": "SWE Player 23",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-24",
+      "name": "SWE Player 24",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-25",
+      "name": "SWE Player 25",
+      "position": "FW"
+    },
+    {
+      "id": "SWE-26",
+      "name": "SWE Player 26",
+      "position": "FW"
+    }
+  ],
+  "BEL": [
+    {
+      "id": "BEL-1",
+      "name": "Thibaut Courtois",
+      "position": "GK"
+    },
+    {
+      "id": "BEL-2",
+      "name": "Senne Lammens",
+      "position": "GK"
+    },
+    {
+      "id": "BEL-3",
+      "name": "Mike Penders",
+      "position": "GK"
+    },
+    {
+      "id": "BEL-4",
+      "name": "Zeno Debast",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-5",
+      "name": "Arthur Theate",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-6",
+      "name": "Brandon Mechele",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-7",
+      "name": "Maxim De Cuyper",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-8",
+      "name": "Thomas Meunier",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-9",
+      "name": "Koni De Winter",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-10",
+      "name": "Joaquin Seys",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-11",
+      "name": "Timothy Castagne",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-12",
+      "name": "Nathan Ngoy",
+      "position": "DF"
+    },
+    {
+      "id": "BEL-13",
+      "name": "Axel Witsel",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-14",
+      "name": "Kevin De Bruyne",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-15",
+      "name": "Youri Tielemans",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-16",
+      "name": "Diego Moreira",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-17",
+      "name": "Hans Vanaken",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-18",
+      "name": "Nicolas Raskin",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-19",
+      "name": "Amadou Onana",
+      "position": "MF"
+    },
+    {
+      "id": "BEL-20",
+      "name": "Romelu Lukaku",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-21",
+      "name": "Leandro Trossard",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-22",
+      "name": "Jérémy Doku",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-23",
+      "name": "Dodi Lukébakio",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-24",
+      "name": "Charles De Ketelaere",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-25",
+      "name": "Alexis Saelemaekers",
+      "position": "FW"
+    },
+    {
+      "id": "BEL-26",
+      "name": "Matias Fernandez-Pardo",
+      "position": "FW"
+    }
+  ],
+  "IRN": [
+    {
+      "id": "IRN-1",
+      "name": "Alireza Beiranvand",
+      "position": "GK"
+    },
+    {
+      "id": "IRN-2",
+      "name": "Payam Niazmand",
+      "position": "GK"
+    },
+    {
+      "id": "IRN-3",
+      "name": "Hossein Hosseini",
+      "position": "GK"
+    },
+    {
+      "id": "IRN-4",
+      "name": "Saleh Hardani",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-5",
+      "name": "Ehsan Hajsafi",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-6",
+      "name": "Shojae Khalilzadeh",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-7",
+      "name": "Milad Mohammadi",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-8",
+      "name": "Hossein Kanaanizadegan",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-9",
+      "name": "Aria Yousefi",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-10",
+      "name": "Ali Nemati",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-11",
+      "name": "Ramin Rezaeian",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-12",
+      "name": "Danial Eiri",
+      "position": "DF"
+    },
+    {
+      "id": "IRN-13",
+      "name": "Saeid Ezatolahi",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-14",
+      "name": "Alireza Jahanbakhsh",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-15",
+      "name": "Mohammad Mohebi",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-16",
+      "name": "Saman Ghoddos",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-17",
+      "name": "Rouzbeh Cheshmi",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-18",
+      "name": "Mahdi Torabi",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-19",
+      "name": "Mohammad Ghorbani",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-20",
+      "name": "Amirmohammad Razzaghinia",
+      "position": "MF"
+    },
+    {
+      "id": "IRN-21",
+      "name": "Mehdi Taremi",
+      "position": "FW"
+    },
+    {
+      "id": "IRN-22",
+      "name": "Mehdi Ghayedi",
+      "position": "FW"
+    },
+    {
+      "id": "IRN-23",
+      "name": "Ali Alipour",
+      "position": "FW"
+    },
+    {
+      "id": "IRN-24",
+      "name": "Amirhossein Hosseinzadeh",
+      "position": "FW"
+    },
+    {
+      "id": "IRN-25",
+      "name": "Shahriyar Moghanlou",
+      "position": "FW"
+    },
+    {
+      "id": "IRN-26",
+      "name": "Dennis Eckert",
+      "position": "FW"
+    }
+  ],
+  "EGY": [
+    {
+      "id": "EGY-1",
+      "name": "EGY Player 1",
+      "position": "GK"
+    },
+    {
+      "id": "EGY-2",
+      "name": "EGY Player 2",
+      "position": "GK"
+    },
+    {
+      "id": "EGY-3",
+      "name": "EGY Player 3",
+      "position": "GK"
+    },
+    {
+      "id": "EGY-4",
+      "name": "EGY Player 4",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-5",
+      "name": "EGY Player 5",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-6",
+      "name": "EGY Player 6",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-7",
+      "name": "EGY Player 7",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-8",
+      "name": "EGY Player 8",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-9",
+      "name": "EGY Player 9",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-10",
+      "name": "EGY Player 10",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-11",
+      "name": "EGY Player 11",
+      "position": "DF"
+    },
+    {
+      "id": "EGY-12",
+      "name": "EGY Player 12",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-13",
+      "name": "EGY Player 13",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-14",
+      "name": "EGY Player 14",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-15",
+      "name": "EGY Player 15",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-16",
+      "name": "EGY Player 16",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-17",
+      "name": "EGY Player 17",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-18",
+      "name": "EGY Player 18",
+      "position": "MF"
+    },
+    {
+      "id": "EGY-19",
+      "name": "EGY Player 19",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-20",
+      "name": "EGY Player 20",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-21",
+      "name": "EGY Player 21",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-22",
+      "name": "EGY Player 22",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-23",
+      "name": "EGY Player 23",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-24",
+      "name": "EGY Player 24",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-25",
+      "name": "EGY Player 25",
+      "position": "FW"
+    },
+    {
+      "id": "EGY-26",
+      "name": "EGY Player 26",
+      "position": "FW"
+    }
+  ],
+  "NZL": [
+    {
+      "id": "NZL-1",
+      "name": "NZL Player 1",
+      "position": "GK"
+    },
+    {
+      "id": "NZL-2",
+      "name": "NZL Player 2",
+      "position": "GK"
+    },
+    {
+      "id": "NZL-3",
+      "name": "NZL Player 3",
+      "position": "GK"
+    },
+    {
+      "id": "NZL-4",
+      "name": "NZL Player 4",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-5",
+      "name": "NZL Player 5",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-6",
+      "name": "NZL Player 6",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-7",
+      "name": "NZL Player 7",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-8",
+      "name": "NZL Player 8",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-9",
+      "name": "NZL Player 9",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-10",
+      "name": "NZL Player 10",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-11",
+      "name": "NZL Player 11",
+      "position": "DF"
+    },
+    {
+      "id": "NZL-12",
+      "name": "NZL Player 12",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-13",
+      "name": "NZL Player 13",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-14",
+      "name": "NZL Player 14",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-15",
+      "name": "NZL Player 15",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-16",
+      "name": "NZL Player 16",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-17",
+      "name": "NZL Player 17",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-18",
+      "name": "NZL Player 18",
+      "position": "MF"
+    },
+    {
+      "id": "NZL-19",
+      "name": "NZL Player 19",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-20",
+      "name": "NZL Player 20",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-21",
+      "name": "NZL Player 21",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-22",
+      "name": "NZL Player 22",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-23",
+      "name": "NZL Player 23",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-24",
+      "name": "NZL Player 24",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-25",
+      "name": "NZL Player 25",
+      "position": "FW"
+    },
+    {
+      "id": "NZL-26",
+      "name": "NZL Player 26",
+      "position": "FW"
+    }
+  ],
+  "ESP": [
+    {
+      "id": "ESP-1",
+      "name": "David Raya",
+      "position": "GK"
+    },
+    {
+      "id": "ESP-2",
+      "name": "Joan Garcia",
+      "position": "GK"
+    },
+    {
+      "id": "ESP-3",
+      "name": "Unai Simón",
+      "position": "GK"
+    },
+    {
+      "id": "ESP-4",
+      "name": "Marc Pubill",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-5",
+      "name": "Álex Grimaldo",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-6",
+      "name": "Eric García",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-7",
+      "name": "Marcos Llorente",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-8",
+      "name": "Pedro Porro",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-9",
+      "name": "Aymeric Laporte",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-10",
+      "name": "Pau Cubarsí",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-11",
+      "name": "Marc Cucurella",
+      "position": "DF"
+    },
+    {
+      "id": "ESP-12",
+      "name": "Mikel Merino",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-13",
+      "name": "Fabián Ruiz",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-14",
+      "name": "Gavi",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-15",
+      "name": "Dani Olmo",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-16",
+      "name": "Yéremy Pino",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-17",
+      "name": "Álex Baena",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-18",
+      "name": "Rodri",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-19",
+      "name": "Martín Zubimendi",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-20",
+      "name": "Pedri",
+      "position": "MF"
+    },
+    {
+      "id": "ESP-21",
+      "name": "Ferran Torres",
+      "position": "FW"
+    },
+    {
+      "id": "ESP-22",
+      "name": "Nico Williams",
+      "position": "FW"
+    },
+    {
+      "id": "ESP-23",
+      "name": "Lamine Yamal",
+      "position": "FW"
+    },
+    {
+      "id": "ESP-24",
+      "name": "Mikel Oyarzabal",
+      "position": "FW"
+    },
+    {
+      "id": "ESP-25",
+      "name": "Víctor Muñoz",
+      "position": "FW"
+    },
+    {
+      "id": "ESP-26",
+      "name": "Borja Iglesias",
+      "position": "FW"
+    }
+  ],
+  "URU": [
+    {
+      "id": "URU-1",
+      "name": "Sergio Rochet",
+      "position": "GK"
+    },
+    {
+      "id": "URU-2",
+      "name": "Santiago Mele",
+      "position": "GK"
+    },
+    {
+      "id": "URU-3",
+      "name": "Fernando Muslera",
+      "position": "GK"
+    },
+    {
+      "id": "URU-4",
+      "name": "José María Giménez",
+      "position": "DF"
+    },
+    {
+      "id": "URU-5",
+      "name": "Sebastián Cáceres",
+      "position": "DF"
+    },
+    {
+      "id": "URU-6",
+      "name": "Ronald Araújo",
+      "position": "DF"
+    },
+    {
+      "id": "URU-7",
+      "name": "Guillermo Varela",
+      "position": "DF"
+    },
+    {
+      "id": "URU-8",
+      "name": "Mathías Olivera",
+      "position": "DF"
+    },
+    {
+      "id": "URU-9",
+      "name": "Matías Viña",
+      "position": "DF"
+    },
+    {
+      "id": "URU-10",
+      "name": "Joaquín Piquerez",
+      "position": "DF"
+    },
+    {
+      "id": "URU-11",
+      "name": "Santiago Bueno",
+      "position": "DF"
+    },
+    {
+      "id": "URU-12",
+      "name": "Manuel Ugarte",
+      "position": "MF"
+    },
+    {
+      "id": "URU-13",
+      "name": "Rodrigo Bentancur",
+      "position": "MF"
+    },
+    {
+      "id": "URU-14",
+      "name": "Nicolás de la Cruz",
+      "position": "MF"
+    },
+    {
+      "id": "URU-15",
+      "name": "Federico Valverde",
+      "position": "MF"
+    },
+    {
+      "id": "URU-16",
+      "name": "Giorgian de Arrascaeta",
+      "position": "MF"
+    },
+    {
+      "id": "URU-17",
+      "name": "Facundo Pellistri",
+      "position": "MF"
+    },
+    {
+      "id": "URU-18",
+      "name": "Agustín Canobbio",
+      "position": "MF"
+    },
+    {
+      "id": "URU-19",
+      "name": "Emiliano Martínez",
+      "position": "MF"
+    },
+    {
+      "id": "URU-20",
+      "name": "Brian Rodríguez",
+      "position": "MF"
+    },
+    {
+      "id": "URU-21",
+      "name": "Maximiliano Araújo",
+      "position": "MF"
+    },
+    {
+      "id": "URU-22",
+      "name": "Juan Manuel Sanabria",
+      "position": "MF"
+    },
+    {
+      "id": "URU-23",
+      "name": "Rodrigo Zalazar",
+      "position": "MF"
+    },
+    {
+      "id": "URU-24",
+      "name": "Darwin Núñez",
+      "position": "FW"
+    },
+    {
+      "id": "URU-25",
+      "name": "Rodrigo Aguirre",
+      "position": "FW"
+    },
+    {
+      "id": "URU-26",
+      "name": "Federico Viñas",
+      "position": "FW"
+    }
+  ],
+  "KSA": [
+    {
+      "id": "KSA-1",
+      "name": "Nawaf Al-Aqidi",
+      "position": "GK"
+    },
+    {
+      "id": "KSA-2",
+      "name": "Mohammed Al-Owais",
+      "position": "GK"
+    },
+    {
+      "id": "KSA-3",
+      "name": "Ahmed Al-Kassar",
+      "position": "GK"
+    },
+    {
+      "id": "KSA-4",
+      "name": "Ali Majrashi",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-5",
+      "name": "Ali Lajami",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-6",
+      "name": "Abdulelah Al-Amri",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-7",
+      "name": "Hassan Al-Tambakti",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-8",
+      "name": "Saud Abdulhamid",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-9",
+      "name": "Nawaf Boushal",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-10",
+      "name": "Hassan Kadesh",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-11",
+      "name": "Moteb Al-Harbi",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-12",
+      "name": "Jehad Thakri",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-13",
+      "name": "Mohammed Abu Al-Shamat",
+      "position": "DF"
+    },
+    {
+      "id": "KSA-14",
+      "name": "Nasser Al-Dawsari",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-15",
+      "name": "Musab Al-Juwayr",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-16",
+      "name": "Ayman Yahya",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-17",
+      "name": "Salem Al-Dawsari",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-18",
+      "name": "Abdullah Al-Khaibari",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-19",
+      "name": "Ziyad Al-Johani",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-20",
+      "name": "Alaa Al-Hejji",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-21",
+      "name": "Sultan Mandash",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-22",
+      "name": "Mohamed Kanno",
+      "position": "MF"
+    },
+    {
+      "id": "KSA-23",
+      "name": "Firas Al-Buraikan",
+      "position": "FW"
+    },
+    {
+      "id": "KSA-24",
+      "name": "Saleh Al-Shehri",
+      "position": "FW"
+    },
+    {
+      "id": "KSA-25",
+      "name": "Khalid Al-Ghannam",
+      "position": "FW"
+    },
+    {
+      "id": "KSA-26",
+      "name": "Abdullah Al-Hamdan",
+      "position": "FW"
+    }
+  ],
+  "CPV": [
+    {
+      "id": "CPV-1",
+      "name": "Vozinha",
+      "position": "GK"
+    },
+    {
+      "id": "CPV-2",
+      "name": "Márcio Rosa",
+      "position": "GK"
+    },
+    {
+      "id": "CPV-3",
+      "name": "CJ dos Santos",
+      "position": "GK"
+    },
+    {
+      "id": "CPV-4",
+      "name": "Stopira",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-5",
+      "name": "Diney",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-6",
+      "name": "Pico",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-7",
+      "name": "Logan Costa",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-8",
+      "name": "Sidny Lopes Cabral",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-9",
+      "name": "Steven Moreira",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-10",
+      "name": "Wagner Pina",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-11",
+      "name": "Kelvin Pires",
+      "position": "DF"
+    },
+    {
+      "id": "CPV-12",
+      "name": "Kevin Pina",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-13",
+      "name": "Jovane Cabral",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-14",
+      "name": "João Paulo",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-15",
+      "name": "Jamiro Monteiro",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-16",
+      "name": "Garry Rodrigues",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-17",
+      "name": "Deroy Duarte",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-18",
+      "name": "Laros Duarte",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-19",
+      "name": "Yannick Semedo",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-20",
+      "name": "Telmo Arcanjo",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-21",
+      "name": "Hélio Varela",
+      "position": "MF"
+    },
+    {
+      "id": "CPV-22",
+      "name": "Benchimol",
+      "position": "FW"
+    },
+    {
+      "id": "CPV-23",
+      "name": "Willy Semedo",
+      "position": "FW"
+    },
+    {
+      "id": "CPV-24",
+      "name": "Dailon Livramento",
+      "position": "FW"
+    },
+    {
+      "id": "CPV-25",
+      "name": "Ryan Mendes",
+      "position": "FW"
+    },
+    {
+      "id": "CPV-26",
+      "name": "Nuno da Costa",
+      "position": "FW"
+    }
+  ],
+  "FRA": [
+    {
+      "id": "FRA-1",
+      "name": "Brice Samba",
+      "position": "GK"
+    },
+    {
+      "id": "FRA-2",
+      "name": "Mike Maignan",
+      "position": "GK"
+    },
+    {
+      "id": "FRA-3",
+      "name": "Robin Risser",
+      "position": "GK"
+    },
+    {
+      "id": "FRA-4",
+      "name": "Malo Gusto",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-5",
+      "name": "Lucas Digne",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-6",
+      "name": "Dayot Upamecano",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-7",
+      "name": "Jules Koundé",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-8",
+      "name": "Ibrahima Konaté",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-9",
+      "name": "William Saliba",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-10",
+      "name": "Théo Hernandez",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-11",
+      "name": "Lucas Hernandez",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-12",
+      "name": "Maxence Lacroix",
+      "position": "DF"
+    },
+    {
+      "id": "FRA-13",
+      "name": "Manu Koné",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-14",
+      "name": "Aurélien Tchouaméni",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-15",
+      "name": "NGolo Kanté",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-16",
+      "name": "Adrien Rabiot",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-17",
+      "name": "Warren Zaïre-Emery",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-18",
+      "name": "Rayan Cherki",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-19",
+      "name": "Maghnes Akliouche",
+      "position": "MF"
+    },
+    {
+      "id": "FRA-20",
+      "name": "Ousmane Dembélé",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-21",
+      "name": "Marcus Thuram",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-22",
+      "name": "Kylian Mbappé",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-23",
+      "name": "Michael Olise",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-24",
+      "name": "Bradley Barcola",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-25",
+      "name": "Désiré Doué",
+      "position": "FW"
+    },
+    {
+      "id": "FRA-26",
+      "name": "Jean-Philippe Mateta",
+      "position": "FW"
+    }
+  ],
+  "SEN": [
+    {
+      "id": "SEN-1",
+      "name": "Yehvann Diouf",
+      "position": "GK"
+    },
+    {
+      "id": "SEN-2",
+      "name": "Édouard Mendy",
+      "position": "GK"
+    },
+    {
+      "id": "SEN-3",
+      "name": "Mory Diaw",
+      "position": "GK"
+    },
+    {
+      "id": "SEN-4",
+      "name": "Mamadou Sarr",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-5",
+      "name": "Kalidou Koulibaly",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-6",
+      "name": "Abdoulaye Seck",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-7",
+      "name": "Ismail Jakobs",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-8",
+      "name": "Krépin Diatta",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-9",
+      "name": "Moussa Niakhaté",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-10",
+      "name": "Antoine Mendy",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-11",
+      "name": "El Hadji Malick Diouf",
+      "position": "DF"
+    },
+    {
+      "id": "SEN-12",
+      "name": "Idrissa Gueye",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-13",
+      "name": "Pathé Ciss",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-14",
+      "name": "Lamine Camara",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-15",
+      "name": "Pape Matar Sarr",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-16",
+      "name": "Habib Diarra",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-17",
+      "name": "Bara Sapoko Ndiaye",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-18",
+      "name": "Pape Gueye",
+      "position": "MF"
+    },
+    {
+      "id": "SEN-19",
+      "name": "Assane Diao",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-20",
+      "name": "Bamba Dieng",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-21",
+      "name": "Sadio Mané",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-22",
+      "name": "Nicolas Jackson",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-23",
+      "name": "Cherif Ndiaye",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-24",
+      "name": "Iliman Ndiaye",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-25",
+      "name": "Ismaïla Sarr",
+      "position": "FW"
+    },
+    {
+      "id": "SEN-26",
+      "name": "Ibrahim Mbaye",
+      "position": "FW"
+    }
+  ],
+  "NOR": [
+    {
+      "id": "NOR-1",
+      "name": "Ørjan Nyland",
+      "position": "GK"
+    },
+    {
+      "id": "NOR-2",
+      "name": "Sander Tangvik",
+      "position": "GK"
+    },
+    {
+      "id": "NOR-3",
+      "name": "Egil Selvik",
+      "position": "GK"
+    },
+    {
+      "id": "NOR-4",
+      "name": "Kristoffer Vassbakk Ajer",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-5",
+      "name": "Leo Østigård",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-6",
+      "name": "David Møller Wolfe",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-7",
+      "name": "Fredrik André Bjørkan",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-8",
+      "name": "Marcus Holmgren Pedersen",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-9",
+      "name": "Torbjørn Heggem",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-10",
+      "name": "Sondre Langås",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-11",
+      "name": "Henrik Falchener",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-12",
+      "name": "Julian Ryerson",
+      "position": "DF"
+    },
+    {
+      "id": "NOR-13",
+      "name": "Morten Thorsby",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-14",
+      "name": "Patrick Berg",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-15",
+      "name": "Sander Berge",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-16",
+      "name": "Martin Ødegaard",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-17",
+      "name": "Fredrik Aursnes",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-18",
+      "name": "Kristian Thorstvedt",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-19",
+      "name": "Thelo Aasgaard",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-20",
+      "name": "Antonio Nusa",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-21",
+      "name": "Andreas Schjelderup",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-22",
+      "name": "Oscar Bobb",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-23",
+      "name": "Jens Petter Hauge",
+      "position": "MF"
+    },
+    {
+      "id": "NOR-24",
+      "name": "Alexander Sørloth",
+      "position": "FW"
+    },
+    {
+      "id": "NOR-25",
+      "name": "Erling Haaland",
+      "position": "FW"
+    },
+    {
+      "id": "NOR-26",
+      "name": "Jørgen Strand Larsen",
+      "position": "FW"
+    }
+  ],
+  "IRQ": [
+    {
+      "id": "IRQ-1",
+      "name": "Fahad Talib",
+      "position": "GK"
+    },
+    {
+      "id": "IRQ-2",
+      "name": "Jalal Hassan",
+      "position": "GK"
+    },
+    {
+      "id": "IRQ-3",
+      "name": "Ahmed Basil",
+      "position": "GK"
+    },
+    {
+      "id": "IRQ-4",
+      "name": "Rebin Sulaka",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-5",
+      "name": "Hussein Ali",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-6",
+      "name": "Zaid Tahseen",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-7",
+      "name": "Akam Hashim",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-8",
+      "name": "Manaf Younis",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-9",
+      "name": "Ahmed Maknzi",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-10",
+      "name": "Merchas Doski",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-11",
+      "name": "Mustafa Saadoon",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-12",
+      "name": "Frans Putros",
+      "position": "DF"
+    },
+    {
+      "id": "IRQ-13",
+      "name": "Youssef Amyn",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-14",
+      "name": "Ibrahim Bayesh",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-15",
+      "name": "Ahmed Qasem",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-16",
+      "name": "Zidane Iqbal",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-17",
+      "name": "Amir Al-Ammari",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-18",
+      "name": "Ali Jasim",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-19",
+      "name": "Kevin Yakob",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-20",
+      "name": "Aimar Sher",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-21",
+      "name": "Marko Farji",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-22",
+      "name": "Zaid Ismail",
+      "position": "MF"
+    },
+    {
+      "id": "IRQ-23",
+      "name": "Ali Al-Hamadi",
+      "position": "FW"
+    },
+    {
+      "id": "IRQ-24",
+      "name": "Mohanad Ali",
+      "position": "FW"
+    },
+    {
+      "id": "IRQ-25",
+      "name": "Ali Yousif",
+      "position": "FW"
+    },
+    {
+      "id": "IRQ-26",
+      "name": "Aymen Hussein",
+      "position": "FW"
+    }
+  ],
+  "ARG": [
+    {
+      "id": "ARG-1",
+      "name": "Juan Musso",
+      "position": "GK"
+    },
+    {
+      "id": "ARG-2",
+      "name": "Gerónimo Rulli",
+      "position": "GK"
+    },
+    {
+      "id": "ARG-3",
+      "name": "Emiliano Martínez",
+      "position": "GK"
+    },
+    {
+      "id": "ARG-4",
+      "name": "Marcos Senesi",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-5",
+      "name": "Nicolás Tagliafico",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-6",
+      "name": "Valentín Barco",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-7",
+      "name": "Gonzalo Montiel",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-8",
+      "name": "Lisandro Martínez",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-9",
+      "name": "Cristian Romero",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-10",
+      "name": "Nicolás Otamendi",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-11",
+      "name": "Facundo Medina",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-12",
+      "name": "Nahuel Molina",
+      "position": "DF"
+    },
+    {
+      "id": "ARG-13",
+      "name": "Leandro Paredes",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-14",
+      "name": "Rodrigo De Paul",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-15",
+      "name": "Giovani Lo Celso",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-16",
+      "name": "Exequiel Palacios",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-17",
+      "name": "Thiago Almada",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-18",
+      "name": "Nico Paz",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-19",
+      "name": "Alexis Mac Allister",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-20",
+      "name": "Enzo Fernández",
+      "position": "MF"
+    },
+    {
+      "id": "ARG-21",
+      "name": "Julián Alvarez",
+      "position": "FW"
+    },
+    {
+      "id": "ARG-22",
+      "name": "Lionel Messi",
+      "position": "FW"
+    },
+    {
+      "id": "ARG-23",
+      "name": "Nicolás González",
+      "position": "FW"
+    },
+    {
+      "id": "ARG-24",
+      "name": "Giuliano Simeone",
+      "position": "FW"
+    },
+    {
+      "id": "ARG-25",
+      "name": "José Manuel López",
+      "position": "FW"
+    },
+    {
+      "id": "ARG-26",
+      "name": "Lautaro Martínez",
+      "position": "FW"
+    }
+  ],
+  "AUT": [
+    {
+      "id": "AUT-1",
+      "name": "Alexander Schlager",
+      "position": "GK"
+    },
+    {
+      "id": "AUT-2",
+      "name": "Florian Wiegele",
+      "position": "GK"
+    },
+    {
+      "id": "AUT-3",
+      "name": "Patrick Pentz",
+      "position": "GK"
+    },
+    {
+      "id": "AUT-4",
+      "name": "David Affengruber",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-5",
+      "name": "Kevin Danso",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-6",
+      "name": "Stefan Posch",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-7",
+      "name": "David Alaba",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-8",
+      "name": "Philipp Lienhart",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-9",
+      "name": "Phillipp Mwene",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-10",
+      "name": "Alexander Prass",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-11",
+      "name": "Marco Friedl",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-12",
+      "name": "Michael Svoboda",
+      "position": "DF"
+    },
+    {
+      "id": "AUT-13",
+      "name": "Xaver Schlager",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-14",
+      "name": "Nicolas Seiwald",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-15",
+      "name": "Marcel Sabitzer",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-16",
+      "name": "Florian Grillitsch",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-17",
+      "name": "Carney Chukwuemeka",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-18",
+      "name": "Romano Schmid",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-19",
+      "name": "Dejan Ljubii",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-20",
+      "name": "Konrad Laimer",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-21",
+      "name": "Patrick Wimmer",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-22",
+      "name": "Paul Wanner",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-23",
+      "name": "Alessandro Schöpf",
+      "position": "MF"
+    },
+    {
+      "id": "AUT-24",
+      "name": "Marko Arnautovi",
+      "position": "FW"
+    },
+    {
+      "id": "AUT-25",
+      "name": "Michael Gregoritsch",
+      "position": "FW"
+    },
+    {
+      "id": "AUT-26",
+      "name": "Saa Kalajdi",
+      "position": "FW"
+    }
+  ],
+  "ALG": [
+    {
+      "id": "ALG-1",
+      "name": "ALG Player 1",
+      "position": "GK"
+    },
+    {
+      "id": "ALG-2",
+      "name": "ALG Player 2",
+      "position": "GK"
+    },
+    {
+      "id": "ALG-3",
+      "name": "ALG Player 3",
+      "position": "GK"
+    },
+    {
+      "id": "ALG-4",
+      "name": "ALG Player 4",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-5",
+      "name": "ALG Player 5",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-6",
+      "name": "ALG Player 6",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-7",
+      "name": "ALG Player 7",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-8",
+      "name": "ALG Player 8",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-9",
+      "name": "ALG Player 9",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-10",
+      "name": "ALG Player 10",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-11",
+      "name": "ALG Player 11",
+      "position": "DF"
+    },
+    {
+      "id": "ALG-12",
+      "name": "ALG Player 12",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-13",
+      "name": "ALG Player 13",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-14",
+      "name": "ALG Player 14",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-15",
+      "name": "ALG Player 15",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-16",
+      "name": "ALG Player 16",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-17",
+      "name": "ALG Player 17",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-18",
+      "name": "ALG Player 18",
+      "position": "MF"
+    },
+    {
+      "id": "ALG-19",
+      "name": "ALG Player 19",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-20",
+      "name": "ALG Player 20",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-21",
+      "name": "ALG Player 21",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-22",
+      "name": "ALG Player 22",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-23",
+      "name": "ALG Player 23",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-24",
+      "name": "ALG Player 24",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-25",
+      "name": "ALG Player 25",
+      "position": "FW"
+    },
+    {
+      "id": "ALG-26",
+      "name": "ALG Player 26",
+      "position": "FW"
+    }
+  ],
+  "JOR": [
+    {
+      "id": "JOR-1",
+      "name": "Yazeed Abulaila",
+      "position": "GK"
+    },
+    {
+      "id": "JOR-2",
+      "name": "Nour Bani Attiah",
+      "position": "GK"
+    },
+    {
+      "id": "JOR-3",
+      "name": "Abdallah Al-Fakhouri",
+      "position": "GK"
+    },
+    {
+      "id": "JOR-4",
+      "name": "Abdallah Nasib",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-5",
+      "name": "Husam Abu Dahab",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-6",
+      "name": "Yazan Al-Arab",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-7",
+      "name": "Mohammad Abualnadi",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-8",
+      "name": "Salim Obaid",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-9",
+      "name": "Mohammad Taha",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-10",
+      "name": "Saed Al-Rosan",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-11",
+      "name": "Ihsan Haddad",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-12",
+      "name": "Anas Badawi",
+      "position": "DF"
+    },
+    {
+      "id": "JOR-13",
+      "name": "Mohammad Abu Hashish",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-14",
+      "name": "Amer Jamous",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-15",
+      "name": "Noor Al-Rawabdeh",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-16",
+      "name": "Rajaei Ayed",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-17",
+      "name": "Ibrahim Sadeh",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-18",
+      "name": "Mohannad Abu Taha",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-19",
+      "name": "Nizar Al-Rashdan",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-20",
+      "name": "Mohammad Al-Dawoud",
+      "position": "MF"
+    },
+    {
+      "id": "JOR-21",
+      "name": "Mohammad Abu Zrayq",
+      "position": "FW"
+    },
+    {
+      "id": "JOR-22",
+      "name": "Ali Olwan",
+      "position": "FW"
+    },
+    {
+      "id": "JOR-23",
+      "name": "Musa Al-Taamari",
+      "position": "FW"
+    },
+    {
+      "id": "JOR-24",
+      "name": "Odeh Al-Fakhouri",
+      "position": "FW"
+    },
+    {
+      "id": "JOR-25",
+      "name": "Mahmoud Al-Mardi",
+      "position": "FW"
+    },
+    {
+      "id": "JOR-26",
+      "name": "Ali Azaizeh",
+      "position": "FW"
+    }
+  ],
+  "POR": [
+    {
+      "id": "POR-1",
+      "name": "Diogo Costa",
+      "position": "GK"
+    },
+    {
+      "id": "POR-2",
+      "name": "José Sá",
+      "position": "GK"
+    },
+    {
+      "id": "POR-3",
+      "name": "Rui Silva",
+      "position": "GK"
+    },
+    {
+      "id": "POR-4",
+      "name": "Nélson Semedo",
+      "position": "DF"
+    },
+    {
+      "id": "POR-5",
+      "name": "Rúben Dias",
+      "position": "DF"
+    },
+    {
+      "id": "POR-6",
+      "name": "Tomás Araújo",
+      "position": "DF"
+    },
+    {
+      "id": "POR-7",
+      "name": "Diogo Dalot",
+      "position": "DF"
+    },
+    {
+      "id": "POR-8",
+      "name": "Renato Veiga",
+      "position": "DF"
+    },
+    {
+      "id": "POR-9",
+      "name": "Gonçalo Inácio",
+      "position": "DF"
+    },
+    {
+      "id": "POR-10",
+      "name": "João Cancelo",
+      "position": "DF"
+    },
+    {
+      "id": "POR-11",
+      "name": "Nuno Mendes",
+      "position": "DF"
+    },
+    {
+      "id": "POR-12",
+      "name": "Matheus Nunes",
+      "position": "MF"
+    },
+    {
+      "id": "POR-13",
+      "name": "Bruno Fernandes",
+      "position": "MF"
+    },
+    {
+      "id": "POR-14",
+      "name": "Bernardo Silva",
+      "position": "MF"
+    },
+    {
+      "id": "POR-15",
+      "name": "João Neves",
+      "position": "MF"
+    },
+    {
+      "id": "POR-16",
+      "name": "Rúben Neves",
+      "position": "MF"
+    },
+    {
+      "id": "POR-17",
+      "name": "Vitinha",
+      "position": "MF"
+    },
+    {
+      "id": "POR-18",
+      "name": "Samú Costa",
+      "position": "MF"
+    },
+    {
+      "id": "POR-19",
+      "name": "Cristiano Ronaldo",
+      "position": "FW"
+    },
+    {
+      "id": "POR-20",
+      "name": "Gonçalo Ramos",
+      "position": "FW"
+    },
+    {
+      "id": "POR-21",
+      "name": "João Félix",
+      "position": "FW"
+    },
+    {
+      "id": "POR-22",
+      "name": "Francisco Trincão",
+      "position": "FW"
+    },
+    {
+      "id": "POR-23",
+      "name": "Rafael Leão",
+      "position": "FW"
+    },
+    {
+      "id": "POR-24",
+      "name": "Pedro Neto",
+      "position": "FW"
+    },
+    {
+      "id": "POR-25",
+      "name": "Gonçalo Guedes",
+      "position": "FW"
+    },
+    {
+      "id": "POR-26",
+      "name": "Francisco Conceição",
+      "position": "FW"
+    }
+  ],
+  "COL": [
+    {
+      "id": "COL-1",
+      "name": "David Ospina",
+      "position": "GK"
+    },
+    {
+      "id": "COL-2",
+      "name": "Camilo Vargas",
+      "position": "GK"
+    },
+    {
+      "id": "COL-3",
+      "name": "Álvaro Montero",
+      "position": "GK"
+    },
+    {
+      "id": "COL-4",
+      "name": "Daniel Muñoz",
+      "position": "DF"
+    },
+    {
+      "id": "COL-5",
+      "name": "Jhon Lucumí",
+      "position": "DF"
+    },
+    {
+      "id": "COL-6",
+      "name": "Santiago Arias",
+      "position": "DF"
+    },
+    {
+      "id": "COL-7",
+      "name": "Yerry Mina",
+      "position": "DF"
+    },
+    {
+      "id": "COL-8",
+      "name": "Johan Mojica",
+      "position": "DF"
+    },
+    {
+      "id": "COL-9",
+      "name": "Willer Ditta",
+      "position": "DF"
+    },
+    {
+      "id": "COL-10",
+      "name": "Deiver Machado",
+      "position": "DF"
+    },
+    {
+      "id": "COL-11",
+      "name": "Davinson Sánchez",
+      "position": "DF"
+    },
+    {
+      "id": "COL-12",
+      "name": "Kevin Castaño",
+      "position": "MF"
+    },
+    {
+      "id": "COL-13",
+      "name": "Richard Ríos",
+      "position": "MF"
+    },
+    {
+      "id": "COL-14",
+      "name": "Jorge Carrascal",
+      "position": "MF"
+    },
+    {
+      "id": "COL-15",
+      "name": "James Rodríguez",
+      "position": "MF"
+    },
+    {
+      "id": "COL-16",
+      "name": "Jhon Arias",
+      "position": "MF"
+    },
+    {
+      "id": "COL-17",
+      "name": "Gustavo Puerta",
+      "position": "MF"
+    },
+    {
+      "id": "COL-18",
+      "name": "Juan Portilla",
+      "position": "MF"
+    },
+    {
+      "id": "COL-19",
+      "name": "Jefferson Lerma",
+      "position": "MF"
+    },
+    {
+      "id": "COL-20",
+      "name": "Juan Fernando Quintero",
+      "position": "MF"
+    },
+    {
+      "id": "COL-21",
+      "name": "Jaminton Campaz",
+      "position": "MF"
+    },
+    {
+      "id": "COL-22",
+      "name": "Luis Díaz",
+      "position": "FW"
+    },
+    {
+      "id": "COL-23",
+      "name": "Jhon Córdoba",
+      "position": "FW"
+    },
+    {
+      "id": "COL-24",
+      "name": "Cucho Hernández",
+      "position": "FW"
+    },
+    {
+      "id": "COL-25",
+      "name": "Luis Suárez",
+      "position": "FW"
+    },
+    {
+      "id": "COL-26",
+      "name": "Andrés Gómez",
+      "position": "FW"
+    }
+  ],
+  "UZB": [
+    {
+      "id": "UZB-1",
+      "name": "Utkir Yusupov",
+      "position": "GK"
+    },
+    {
+      "id": "UZB-2",
+      "name": "Abduvohid Nematov",
+      "position": "GK"
+    },
+    {
+      "id": "UZB-3",
+      "name": "Botirali Ergashev",
+      "position": "GK"
+    },
+    {
+      "id": "UZB-4",
+      "name": "Abdukodir Khusanov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-5",
+      "name": "Khojiakbar Alijonov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-6",
+      "name": "Farrukh Sayfiev",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-7",
+      "name": "Rustam Ashurmatov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-8",
+      "name": "Sherzod Nasrullaev",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-9",
+      "name": "Umar Eshmurodov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-10",
+      "name": "Abdulla Abdullaev",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-11",
+      "name": "Bekhruz Karimov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-12",
+      "name": "Avazbek Ulmasaliev",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-13",
+      "name": "Jakhongir Urozov",
+      "position": "DF"
+    },
+    {
+      "id": "UZB-14",
+      "name": "Akmal Mozgovoy",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-15",
+      "name": "Otabek Shukurov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-16",
+      "name": "Jamshid Iskanderov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-17",
+      "name": "Odiljon Hamrobekov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-18",
+      "name": "Jaloliddin Masharipov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-19",
+      "name": "Oston Urunov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-20",
+      "name": "Dostonbek Khamdamov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-21",
+      "name": "Azizjon Ganiev",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-22",
+      "name": "Abbosbek Fayzullaev",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-23",
+      "name": "Sherzod Esanov",
+      "position": "MF"
+    },
+    {
+      "id": "UZB-24",
+      "name": "Eldor Shomurodov",
+      "position": "FW"
+    },
+    {
+      "id": "UZB-25",
+      "name": "Azizbek Amonov",
+      "position": "FW"
+    },
+    {
+      "id": "UZB-26",
+      "name": "Igor Sergeev",
+      "position": "FW"
+    }
+  ],
+  "COD": [
+    {
+      "id": "COD-1",
+      "name": "Lionel Mpasi",
+      "position": "GK"
+    },
+    {
+      "id": "COD-2",
+      "name": "Timothy Fayulu",
+      "position": "GK"
+    },
+    {
+      "id": "COD-3",
+      "name": "Matthieu Epolo",
+      "position": "GK"
+    },
+    {
+      "id": "COD-4",
+      "name": "Aaron Wan-Bissaka",
+      "position": "DF"
+    },
+    {
+      "id": "COD-5",
+      "name": "Steve Kapuadi",
+      "position": "DF"
+    },
+    {
+      "id": "COD-6",
+      "name": "Axel Tuanzebe",
+      "position": "DF"
+    },
+    {
+      "id": "COD-7",
+      "name": "Dylan Batubinsika",
+      "position": "DF"
+    },
+    {
+      "id": "COD-8",
+      "name": "Joris Kayembe",
+      "position": "DF"
+    },
+    {
+      "id": "COD-9",
+      "name": "Chancel Mbemba",
+      "position": "DF"
+    },
+    {
+      "id": "COD-10",
+      "name": "Gédéon Kalulu",
+      "position": "DF"
+    },
+    {
+      "id": "COD-11",
+      "name": "Arthur Masuaku",
+      "position": "DF"
+    },
+    {
+      "id": "COD-12",
+      "name": "Ngalayel Mukau",
+      "position": "MF"
+    },
+    {
+      "id": "COD-13",
+      "name": "Nathanaël Mbuku",
+      "position": "MF"
+    },
+    {
+      "id": "COD-14",
+      "name": "Samuel Moutoussamy",
+      "position": "MF"
+    },
+    {
+      "id": "COD-15",
+      "name": "Brian Cipenga",
+      "position": "MF"
+    },
+    {
+      "id": "COD-16",
+      "name": "Théo Bongonda",
+      "position": "MF"
+    },
+    {
+      "id": "COD-17",
+      "name": "Gaël Kakuta",
+      "position": "MF"
+    },
+    {
+      "id": "COD-18",
+      "name": "Noah Sadiki",
+      "position": "MF"
+    },
+    {
+      "id": "COD-19",
+      "name": "Aaron Tshibola",
+      "position": "MF"
+    },
+    {
+      "id": "COD-20",
+      "name": "Charles Pickel",
+      "position": "MF"
+    },
+    {
+      "id": "COD-21",
+      "name": "Edo Kayembe",
+      "position": "MF"
+    },
+    {
+      "id": "COD-22",
+      "name": "Meschak Elia",
+      "position": "FW"
+    },
+    {
+      "id": "COD-23",
+      "name": "Cédric Bakambu",
+      "position": "FW"
+    },
+    {
+      "id": "COD-24",
+      "name": "Fiston Mayele",
+      "position": "FW"
+    },
+    {
+      "id": "COD-25",
+      "name": "Yoane Wissa",
+      "position": "FW"
+    },
+    {
+      "id": "COD-26",
+      "name": "Simon Banza",
+      "position": "FW"
+    }
+  ],
+  "ENG": [
+    {
+      "id": "ENG-1",
+      "name": "Jordan Pickford",
+      "position": "GK"
+    },
+    {
+      "id": "ENG-2",
+      "name": "Dean Henderson",
+      "position": "GK"
+    },
+    {
+      "id": "ENG-3",
+      "name": "James Trafford",
+      "position": "GK"
+    },
+    {
+      "id": "ENG-4",
+      "name": "Ezri Konsa",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-5",
+      "name": "Nico OReilly",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-6",
+      "name": "John Stones",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-7",
+      "name": "Marc Guéhi",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-8",
+      "name": "Tino Livramento",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-9",
+      "name": "Dan Burn",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-10",
+      "name": "Reece James",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-11",
+      "name": "Djed Spence",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-12",
+      "name": "Jarell Quansah",
+      "position": "DF"
+    },
+    {
+      "id": "ENG-13",
+      "name": "Declan Rice",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-14",
+      "name": "Elliot Anderson",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-15",
+      "name": "Jude Bellingham",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-16",
+      "name": "Jordan Henderson",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-17",
+      "name": "Kobbie Mainoo",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-18",
+      "name": "Morgan Rogers",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-19",
+      "name": "Eberechi Eze",
+      "position": "MF"
+    },
+    {
+      "id": "ENG-20",
+      "name": "Bukayo Saka",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-21",
+      "name": "Harry Kane",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-22",
+      "name": "Marcus Rashford",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-23",
+      "name": "Anthony Gordon",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-24",
+      "name": "Ollie Watkins",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-25",
+      "name": "Noni Madueke",
+      "position": "FW"
+    },
+    {
+      "id": "ENG-26",
+      "name": "Ivan Toney",
+      "position": "FW"
+    }
+  ],
+  "CRO": [
+    {
+      "id": "CRO-1",
+      "name": "Dominik Livakovi",
+      "position": "GK"
+    },
+    {
+      "id": "CRO-2",
+      "name": "Ivor Pandur",
+      "position": "GK"
+    },
+    {
+      "id": "CRO-3",
+      "name": "Dominik Kotarski",
+      "position": "GK"
+    },
+    {
+      "id": "CRO-4",
+      "name": "Josip Stanii",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-5",
+      "name": "Marin Pongrai",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-6",
+      "name": "Joko Gvardiol",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-7",
+      "name": "Duje aleta-Car",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-8",
+      "name": "Josip utalo",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-9",
+      "name": "Luka Vukovi",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-10",
+      "name": "Martin Erli",
+      "position": "DF"
+    },
+    {
+      "id": "CRO-11",
+      "name": "Nikola Moro",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-12",
+      "name": "Mateo Kovai",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-13",
+      "name": "Luka Modri",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-14",
+      "name": "Nikola Vlai",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-15",
+      "name": "Mario Paali",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-16",
+      "name": "Martin Baturina",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-17",
+      "name": "Petar Sui",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-18",
+      "name": "Kristijan Jaki",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-19",
+      "name": "Toni Fruk",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-20",
+      "name": "Luka Sui",
+      "position": "MF"
+    },
+    {
+      "id": "CRO-21",
+      "name": "Andrej Kramari",
+      "position": "FW"
+    },
+    {
+      "id": "CRO-22",
+      "name": "Ante Budimir",
+      "position": "FW"
+    },
+    {
+      "id": "CRO-23",
+      "name": "Ivan Perii",
+      "position": "FW"
+    },
+    {
+      "id": "CRO-24",
+      "name": "Igor Matanovi",
+      "position": "FW"
+    },
+    {
+      "id": "CRO-25",
+      "name": "Marco Paali",
+      "position": "FW"
+    },
+    {
+      "id": "CRO-26",
+      "name": "Petar Musa",
+      "position": "FW"
+    }
+  ],
+  "PAN": [
+    {
+      "id": "PAN-1",
+      "name": "Luis Mejía",
+      "position": "GK"
+    },
+    {
+      "id": "PAN-2",
+      "name": "César Samudio",
+      "position": "GK"
+    },
+    {
+      "id": "PAN-3",
+      "name": "Orlando Mosquera",
+      "position": "GK"
+    },
+    {
+      "id": "PAN-4",
+      "name": "César Blackman",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-5",
+      "name": "José Córdoba",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-6",
+      "name": "Fidel Escobar",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-7",
+      "name": "Edgardo Fariña",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-8",
+      "name": "Jiovany Ramos",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-9",
+      "name": "Eric Davis",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-10",
+      "name": "Andrés Andrade",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-11",
+      "name": "Amir Murillo",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-12",
+      "name": "Roderick Miller",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-13",
+      "name": "Jorge Gutiérrez",
+      "position": "DF"
+    },
+    {
+      "id": "PAN-14",
+      "name": "Cristian Martínez",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-15",
+      "name": "José Luis Rodríguez",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-16",
+      "name": "Adalberto Carrasquilla",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-17",
+      "name": "Ismael Díaz",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-18",
+      "name": "Yoel Bárcenas",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-19",
+      "name": "Carlos Harvey",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-20",
+      "name": "Alberto Quintero",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-21",
+      "name": "Aníbal Godoy",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-22",
+      "name": "César Yanis",
+      "position": "MF"
+    },
+    {
+      "id": "PAN-23",
+      "name": "Tomás Rodríguez",
+      "position": "FW"
+    },
+    {
+      "id": "PAN-24",
+      "name": "José Fajardo",
+      "position": "FW"
+    },
+    {
+      "id": "PAN-25",
+      "name": "Cecilio Waterman",
+      "position": "FW"
+    },
+    {
+      "id": "PAN-26",
+      "name": "Azarias Londoño",
+      "position": "FW"
+    }
+  ],
+  "GHA": [
+    {
+      "id": "GHA-1",
+      "name": "Lawrence Ati-Zigi",
+      "position": "GK"
+    },
+    {
+      "id": "GHA-2",
+      "name": "Joseph Anang",
+      "position": "GK"
+    },
+    {
+      "id": "GHA-3",
+      "name": "Benjamin Asare",
+      "position": "GK"
+    },
+    {
+      "id": "GHA-4",
+      "name": "Alidu Seidu",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-5",
+      "name": "Jonas Adjetey",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-6",
+      "name": "Abdul Mumin",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-7",
+      "name": "Gideon Mensah",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-8",
+      "name": "Abdul Rahman Baba",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-9",
+      "name": "Jerome Opoku",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-10",
+      "name": "Kojo Peprah Oppong",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-11",
+      "name": "Derrick Luckassen",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-12",
+      "name": "Marvin Senaya",
+      "position": "DF"
+    },
+    {
+      "id": "GHA-13",
+      "name": "Caleb Yirenkyi",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-14",
+      "name": "Thomas Partey",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-15",
+      "name": "Abdul Fatawu",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-16",
+      "name": "Kwasi Sibo",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-17",
+      "name": "Antoine Semenyo",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-18",
+      "name": "Elisha Owusu",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-19",
+      "name": "Augustine Boakye",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-20",
+      "name": "Kamaldeen Sulemana",
+      "position": "MF"
+    },
+    {
+      "id": "GHA-21",
+      "name": "Jordan Ayew",
+      "position": "FW"
+    },
+    {
+      "id": "GHA-22",
+      "name": "Brandon Thomas-Asante",
+      "position": "FW"
+    },
+    {
+      "id": "GHA-23",
+      "name": "Christopher Bonsu Baah",
+      "position": "FW"
+    },
+    {
+      "id": "GHA-24",
+      "name": "Iñaki Williams",
+      "position": "FW"
+    },
+    {
+      "id": "GHA-25",
+      "name": "Ernest Nuamah",
+      "position": "FW"
+    },
+    {
+      "id": "GHA-26",
+      "name": "Prince Kwabena Adu",
+      "position": "FW"
+    }
+  ]
+}

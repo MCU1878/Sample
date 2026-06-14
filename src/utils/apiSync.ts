@@ -5,15 +5,60 @@
 // アプリケーションの Match[] 状態にマージする。
 // =============================================================================
 
-import type { Match } from '../types';
+import type { Match, MatchLog, MatchEvent, Player } from '../types';
+import playersDataRaw from '../data/players.json';
+import { teams } from '../data';
+import { generatePlayerRatings } from './matchEngine';
+
+const playersData = playersDataRaw as Record<string, Player[]>;
 
 interface ApiMatch {
   home_team_name_en: string;
   away_team_name_en: string;
   home_score: string | null;
   away_score: string | null;
+  home_scorers: string | null;
+  away_scorers: string | null;
   finished: string; // "TRUE" or "FALSE"
   time_elapsed: string;
+}
+
+function parseScorers(scorersStr: string | null, teamCode: string): MatchEvent[] {
+  if (!scorersStr || scorersStr === "null" || scorersStr === "") return [];
+  const cleanStr = scorersStr.replace(/^\{/, '').replace(/\}$/, '');
+  if (!cleanStr) return [];
+  
+  // Use regex to split by comma outside of quotes if necessary, but API format is usually `{"Name 12'","Name 34'"}`
+  // Let's just match everything that looks like `"something"` or `“something”`
+  const matches = cleanStr.match(/["“](.*?)["”]/g) || cleanStr.split(',');
+  
+  const events: MatchEvent[] = [];
+  const roster = playersData[teamCode] || [];
+
+  for (const matchStr of matches) {
+    const text = matchStr.replace(/^["“]/, '').replace(/["”]$/, '').trim();
+    if (!text) continue;
+
+    const m = text.match(/(.+?)\s+(\d+)'(?:(?:\+\d+')?)(?:\(OG\))?/);
+    if (m) {
+      const name = m[1].trim();
+      const minuteStr = m[2];
+      const isOG = text.includes('(OG)');
+
+      const nameParts = name.split(' ');
+      const lastName = nameParts[nameParts.length - 1];
+      const player = roster.find(p => p.name.includes(lastName) || name.includes(p.name));
+
+      events.push({
+        minute: parseInt(minuteStr, 10),
+        type: 'GOAL',
+        team: teamCode,
+        playerId: isOG ? undefined : player?.id,
+        description: `GOAL! ${teams[teamCode]?.name} 得点: ${name}${isOG ? ' (オウンゴール)' : ''}`,
+      });
+    }
+  }
+  return events;
 }
 
 const apiNameToCode: Record<string, string> = {
@@ -65,11 +110,51 @@ export async function fetchLiveMatches(): Promise<(currentMatches: Match[]) => M
         
         if (!isNotStarted) {
           const isFinished = liveData.finished === "TRUE" || liveData.time_elapsed === 'finished';
+          const homeScore = parseInt(liveData.home_score, 10);
+          const awayScore = parseInt(liveData.away_score || "0", 10);
+
+          let matchLog: MatchLog | undefined;
+          if (isFinished) {
+            const homeEvents = parseScorers(liveData.home_scorers, match.homeTeam);
+            const awayEvents = parseScorers(liveData.away_scorers, match.awayTeam);
+            const events = [...homeEvents, ...awayEvents].sort((a, b) => a.minute - b.minute);
+            
+            // Generate pseudo-stats to populate the UI
+            const hPoss = Math.max(30, Math.min(70, 50 + (homeScore - awayScore) * 3));
+            const aPoss = 100 - hPoss;
+            const hShots = homeScore * 3 + Math.floor(Math.random() * 5);
+            const aShots = awayScore * 3 + Math.floor(Math.random() * 5);
+
+            matchLog = {
+              homeTeam: match.homeTeam,
+              awayTeam: match.awayTeam,
+              homeScore,
+              awayScore,
+              homePenScore: 0,
+              awayPenScore: 0,
+              isExtraTime: false,
+              isPenaltyShootout: false,
+              winner: homeScore > awayScore ? match.homeTeam : awayScore > homeScore ? match.awayTeam : 'DRAW',
+              events,
+              homeStats: { possession: hPoss, expectedGoals: +(homeScore*0.8).toFixed(1), shots: hShots, shotsOnTarget: homeScore + Math.floor(Math.random()*3), fouls: 10 + Math.floor(Math.random()*5), yellowCards: Math.floor(Math.random()*3), redCards: 0 },
+              awayStats: { possession: aPoss, expectedGoals: +(awayScore*0.8).toFixed(1), shots: aShots, shotsOnTarget: awayScore + Math.floor(Math.random()*3), fouls: 10 + Math.floor(Math.random()*5), yellowCards: Math.floor(Math.random()*3), redCards: 0 },
+              homeEndStamina: 0.7,
+              awayEndStamina: 0.7,
+              playerRatings: generatePlayerRatings(
+                match.homeTeam,
+                match.awayTeam,
+                homeScore > awayScore ? match.homeTeam : awayScore > homeScore ? match.awayTeam : 'DRAW',
+                events
+              )
+            };
+          }
+
           return {
             ...match,
-            homeScore: parseInt(liveData.home_score, 10),
-            awayScore: parseInt(liveData.away_score || "0", 10),
+            homeScore,
+            awayScore,
             syncStatus: isFinished ? 'finished' : 'live',
+            matchLog: matchLog || match.matchLog,
           };
         }
       }

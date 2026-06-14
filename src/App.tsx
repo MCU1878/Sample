@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import type { Match, KnockoutMatch } from './types';
+import type { Match, KnockoutMatch, MatchLog } from './types';
 import { createInitialMatches, groupTeams } from './data';
 import { getAllGroupStandings } from './utils/calculateStandings';
 import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutMatches } from './utils/knockoutLogic';
@@ -11,6 +11,8 @@ import StandingsTable from './components/StandingsTable';
 import BracketDisplay from './components/BracketDisplay';
 import ThirdPlaceStandings from './components/ThirdPlaceStandings';
 import ForecastPanel from './components/ForecastPanel';
+import { MatchLogModal } from './components/MatchLogModal';
+import { Leaderboard } from './components/Leaderboard';
 
 const FORECAST_ITERATIONS = 10000;
 
@@ -20,6 +22,8 @@ function App() {
   const [matches, setMatches] = useState<Match[]>(createInitialMatches);
   const [activeGroup, setActiveGroup] = useState<string>('A');
   const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout'>('groups');
+  const [selectedMatchLog, setSelectedMatchLog] = useState<MatchLog | null>(null);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
   
   // ノックアウト用のユーザー入力スコア
   const [knockoutUserScores, setKnockoutUserScores] = useState<
@@ -155,6 +159,11 @@ function App() {
     return { totalMatches, playedMatches, totalGoals };
   }, [matches]);
 
+  const allMatchLogs = useMemo(() => [
+    ...matches.map(m => m.matchLog).filter((l): l is MatchLog => !!l),
+    ...knockoutMatches.map(m => m.matchLog).filter((l): l is MatchLog => !!l)
+  ], [matches, knockoutMatches]);
+
   // 強さを加味した結果入力（グループステージ）
   const handleRandomFill = useCallback(() => {
     setMatches((prev) =>
@@ -165,6 +174,7 @@ function App() {
           ...match,
           homeScore: log.homeScore,
           awayScore: log.awayScore,
+          matchLog: log,
         };
       })
     );
@@ -183,6 +193,7 @@ function App() {
           ...match,
           homeScore: log.homeScore,
           awayScore: log.awayScore,
+          matchLog: log,
         };
       });
       setMatches(currentMatches);
@@ -285,6 +296,9 @@ function App() {
         <div className="status-bar__item">
           <span className={`status-bar__dot ${stats.playedMatches === stats.totalMatches ? 'status-bar__dot--active' : 'status-bar__dot--pending'}`} />
           <span>{stats.playedMatches === stats.totalMatches ? 'グループ完了' : '進行中'}</span>
+        </div>
+        <div className="status-bar__item">
+          <button className="btn-link" onClick={() => setShowLeaderboard(true)}>🏆 リーダーボード</button>
         </div>
       </div>
 
@@ -410,6 +424,20 @@ function App() {
       <footer className="footer">
         <p>FIFA World Cup 2026™ Simulator — Tournament Control Center</p>
       </footer>
+
+      {selectedMatchLog && (
+        <MatchLogModal 
+          log={selectedMatchLog} 
+          onClose={() => setSelectedMatchLog(null)} 
+        />
+      )}
+
+      {showLeaderboard && (
+        <Leaderboard 
+          logs={allMatchLogs}
+          onClose={() => setShowLeaderboard(false)}
+        />
+      )}
     </div>
   );
 }
