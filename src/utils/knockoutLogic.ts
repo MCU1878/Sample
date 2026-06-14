@@ -1,6 +1,7 @@
 import type { TeamStanding, KnockoutMatch, KnockoutRound } from '../types';
 import { getBestThirdPlaceTeams } from './calculateStandings';
 import { teams, simulateMatchScore } from '../data';
+import { allocateThirdPlaceByAnnexC } from '../data/thirdPlaceAllocation';
 
 // ノックアウトステージの各試合の静的構造定義
 interface KnockoutConfig {
@@ -17,258 +18,187 @@ interface KnockoutConfig {
   loserSlot: 'team1' | 'team2' | null;
 }
 
+// ▼ 公式トーナメント表（FIFA WC2026 / 付属書C）に厳密準拠した配線。
+//   id は R32-1..16 / R16-1..8 / QF-1..4 / SF-1,2 / THIRD / FINAL を維持しつつ、
+//   matchNumber 73〜104・対戦カード・勝ち上がり先(winnerGoesTo) を公式通りに設定する。
+//   3位スロットの team2Source '3rd-X' は「1X位スロット」を表し、Annex C で実チームに解決する。
 const KNOCKOUT_CONFIGS: KnockoutConfig[] = [
-  // ===== Round of 32 (16試合: Match 73〜88) =====
+  // ===== Round of 32 (Match 73〜88) =====
   {
-    id: 'R32-1', round: 'R32', matchNumber: 73, label: 'Match 73', date: '2026-06-29 04:00',
+    id: 'R32-1', round: 'R32', matchNumber: 73, label: 'Match 73', date: '2026-06-28 12:00',
     team1Source: '2A', team2Source: '2B',
-    winnerGoesTo: 'R16-1', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
-  },
-  {
-    id: 'R32-2', round: 'R32', matchNumber: 74, label: 'Match 74', date: '2026-06-30 02:00',
-    team1Source: '1C', team2Source: '2F',
     winnerGoesTo: 'R16-2', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-3', round: 'R32', matchNumber: 75, label: 'Match 75', date: '2026-06-30 05:30',
+    id: 'R32-2', round: 'R32', matchNumber: 74, label: 'Match 74', date: '2026-06-29 16:30',
     team1Source: '1E', team2Source: '3rd-E', // 3rd A/B/C/D/F
-    winnerGoesTo: 'R16-1', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
+    winnerGoesTo: 'R16-1', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-4', round: 'R32', matchNumber: 76, label: 'Match 76', date: '2026-06-30 10:00',
+    id: 'R32-3', round: 'R32', matchNumber: 75, label: 'Match 75', date: '2026-06-29 19:00',
     team1Source: '1F', team2Source: '2C',
-    winnerGoesTo: 'R16-3', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
-  },
-  {
-    id: 'R32-5', round: 'R32', matchNumber: 77, label: 'Match 77', date: '2026-07-01 02:00',
-    team1Source: '2E', team2Source: '2I',
     winnerGoesTo: 'R16-2', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-6', round: 'R32', matchNumber: 78, label: 'Match 78', date: '2026-07-01 06:00',
+    id: 'R32-4', round: 'R32', matchNumber: 76, label: 'Match 76', date: '2026-06-29 12:00',
+    team1Source: '1C', team2Source: '2F',
+    winnerGoesTo: 'R16-3', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
+  },
+  {
+    id: 'R32-5', round: 'R32', matchNumber: 77, label: 'Match 77', date: '2026-06-30 17:00',
     team1Source: '1I', team2Source: '3rd-I', // 3rd C/D/F/G/H
+    winnerGoesTo: 'R16-1', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
+  },
+  {
+    id: 'R32-6', round: 'R32', matchNumber: 78, label: 'Match 78', date: '2026-06-30 12:00',
+    team1Source: '2E', team2Source: '2I',
     winnerGoesTo: 'R16-3', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-7', round: 'R32', matchNumber: 79, label: 'Match 79', date: '2026-07-01 10:00',
+    id: 'R32-7', round: 'R32', matchNumber: 79, label: 'Match 79', date: '2026-06-30 19:00',
     team1Source: '1A', team2Source: '3rd-A', // 3rd C/E/F/H/I
     winnerGoesTo: 'R16-4', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-8', round: 'R32', matchNumber: 80, label: 'Match 80', date: '2026-07-02 01:00',
+    id: 'R32-8', round: 'R32', matchNumber: 80, label: 'Match 80', date: '2026-07-01 12:00',
     team1Source: '1L', team2Source: '3rd-L', // 3rd E/H/I/J/K
     winnerGoesTo: 'R16-4', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-9', round: 'R32', matchNumber: 81, label: 'Match 81', date: '2026-07-02 05:00',
-    team1Source: '1G', team2Source: '3rd-G', // 3rd A/E/H/I/J
+    id: 'R32-9', round: 'R32', matchNumber: 81, label: 'Match 81', date: '2026-07-01 17:00',
+    team1Source: '1D', team2Source: '3rd-D', // 3rd B/E/F/I/J
     winnerGoesTo: 'R16-6', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-10', round: 'R32', matchNumber: 82, label: 'Match 82', date: '2026-07-02 09:00',
-    team1Source: '1D', team2Source: '3rd-D', // 3rd B/E/F/I/J
+    id: 'R32-10', round: 'R32', matchNumber: 82, label: 'Match 82', date: '2026-07-01 13:00',
+    team1Source: '1G', team2Source: '3rd-G', // 3rd A/E/H/I/J
     winnerGoesTo: 'R16-6', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-11', round: 'R32', matchNumber: 83, label: 'Match 83', date: '2026-07-03 04:00',
-    team1Source: '1H', team2Source: '2J',
+    id: 'R32-11', round: 'R32', matchNumber: 83, label: 'Match 83', date: '2026-07-02 19:00',
+    team1Source: '2K', team2Source: '2L',
     winnerGoesTo: 'R16-5', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-12', round: 'R32', matchNumber: 84, label: 'Match 84', date: '2026-07-03 08:00',
-    team1Source: '2K', team2Source: '2L',
+    id: 'R32-12', round: 'R32', matchNumber: 84, label: 'Match 84', date: '2026-07-02 12:00',
+    team1Source: '1H', team2Source: '2J',
     winnerGoesTo: 'R16-5', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-13', round: 'R32', matchNumber: 85, label: 'Match 85', date: '2026-07-03 12:00',
+    id: 'R32-13', round: 'R32', matchNumber: 85, label: 'Match 85', date: '2026-07-02 20:00',
     team1Source: '1B', team2Source: '3rd-B', // 3rd E/F/G/I/J
     winnerGoesTo: 'R16-8', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-14', round: 'R32', matchNumber: 86, label: 'Match 86', date: '2026-07-04 03:00',
-    team1Source: '2D', team2Source: '2G',
+    id: 'R32-14', round: 'R32', matchNumber: 86, label: 'Match 86', date: '2026-07-03 18:00',
+    team1Source: '1J', team2Source: '2H',
     winnerGoesTo: 'R16-7', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-15', round: 'R32', matchNumber: 87, label: 'Match 87', date: '2026-07-04 07:00',
-    team1Source: '1J', team2Source: '2H',
+    id: 'R32-15', round: 'R32', matchNumber: 87, label: 'Match 87', date: '2026-07-03 20:30',
+    team1Source: '1K', team2Source: '3rd-K', // 3rd D/E/I/J/L
     winnerGoesTo: 'R16-8', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R32-16', round: 'R32', matchNumber: 88, label: 'Match 88', date: '2026-07-04 10:30',
-    team1Source: '1K', team2Source: '3rd-K', // 3rd D/E/I/J/L
+    id: 'R32-16', round: 'R32', matchNumber: 88, label: 'Match 88', date: '2026-07-03 13:00',
+    team1Source: '2D', team2Source: '2G',
     winnerGoesTo: 'R16-7', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
 
-  // ===== Round of 16 (8試合: Match 89〜96) =====
+  // ===== Round of 16 (Match 89〜96) =====
   {
-    id: 'R16-1', round: 'R16', matchNumber: 89, label: 'Match 89', date: '2026-07-05 04:00',
-    team1Source: 'W-R32-1', team2Source: 'W-R32-3',
+    id: 'R16-1', round: 'R16', matchNumber: 89, label: 'Match 89', date: '2026-07-04 17:00',
+    team1Source: 'W-R32-2', team2Source: 'W-R32-5', // W74 vs W77
     winnerGoesTo: 'QF-1', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R16-2', round: 'R16', matchNumber: 90, label: 'Match 90', date: '2026-07-05 08:30',
-    team1Source: 'W-R32-2', team2Source: 'W-R32-5',
+    id: 'R16-2', round: 'R16', matchNumber: 90, label: 'Match 90', date: '2026-07-04 12:00',
+    team1Source: 'W-R32-1', team2Source: 'W-R32-3', // W73 vs W75
     winnerGoesTo: 'QF-1', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R16-3', round: 'R16', matchNumber: 91, label: 'Match 91', date: '2026-07-06 04:00',
-    team1Source: 'W-R32-4', team2Source: 'W-R32-6',
-    winnerGoesTo: 'QF-2', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
-  },
-  {
-    id: 'R16-4', round: 'R16', matchNumber: 92, label: 'Match 92', date: '2026-07-06 08:30',
-    team1Source: 'W-R32-7', team2Source: 'W-R32-8',
-    winnerGoesTo: 'QF-2', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
-  },
-  {
-    id: 'R16-5', round: 'R16', matchNumber: 93, label: 'Match 93', date: '2026-07-07 04:00',
-    team1Source: 'W-R32-11', team2Source: 'W-R32-12',
+    id: 'R16-3', round: 'R16', matchNumber: 91, label: 'Match 91', date: '2026-07-05 16:00',
+    team1Source: 'W-R32-4', team2Source: 'W-R32-6', // W76 vs W78
     winnerGoesTo: 'QF-3', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R16-6', round: 'R16', matchNumber: 94, label: 'Match 94', date: '2026-07-07 08:30',
-    team1Source: 'W-R32-9', team2Source: 'W-R32-10',
+    id: 'R16-4', round: 'R16', matchNumber: 92, label: 'Match 92', date: '2026-07-05 18:00',
+    team1Source: 'W-R32-7', team2Source: 'W-R32-8', // W79 vs W80
     winnerGoesTo: 'QF-3', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R16-7', round: 'R16', matchNumber: 95, label: 'Match 95', date: '2026-07-08 04:00',
-    team1Source: 'W-R32-14', team2Source: 'W-R32-16',
+    id: 'R16-5', round: 'R16', matchNumber: 93, label: 'Match 93', date: '2026-07-06 14:00',
+    team1Source: 'W-R32-11', team2Source: 'W-R32-12', // W83 vs W84
+    winnerGoesTo: 'QF-2', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
+  },
+  {
+    id: 'R16-6', round: 'R16', matchNumber: 94, label: 'Match 94', date: '2026-07-06 17:00',
+    team1Source: 'W-R32-9', team2Source: 'W-R32-10', // W81 vs W82
+    winnerGoesTo: 'QF-2', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
+  },
+  {
+    id: 'R16-7', round: 'R16', matchNumber: 95, label: 'Match 95', date: '2026-07-07 12:00',
+    team1Source: 'W-R32-14', team2Source: 'W-R32-16', // W86 vs W88
     winnerGoesTo: 'QF-4', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'R16-8', round: 'R16', matchNumber: 96, label: 'Match 96', date: '2026-07-08 08:30',
-    team1Source: 'W-R32-13', team2Source: 'W-R32-15',
+    id: 'R16-8', round: 'R16', matchNumber: 96, label: 'Match 96', date: '2026-07-07 13:00',
+    team1Source: 'W-R32-13', team2Source: 'W-R32-15', // W85 vs W87
     winnerGoesTo: 'QF-4', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
 
-  // ===== Quarterfinals (4試合: Match 97〜100) =====
+  // ===== Quarterfinals (Match 97〜100) =====
   {
-    id: 'QF-1', round: 'QF', matchNumber: 97, label: 'Match 97', date: '2026-07-10 04:00',
-    team1Source: 'W-R16-1', team2Source: 'W-R16-2',
+    id: 'QF-1', round: 'QF', matchNumber: 97, label: 'Match 97', date: '2026-07-09 16:00',
+    team1Source: 'W-R16-1', team2Source: 'W-R16-2', // W89 vs W90
     winnerGoesTo: 'SF-1', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'QF-2', round: 'QF', matchNumber: 98, label: 'Match 98', date: '2026-07-10 08:30',
-    team1Source: 'W-R16-3', team2Source: 'W-R16-4',
+    id: 'QF-2', round: 'QF', matchNumber: 98, label: 'Match 98', date: '2026-07-10 12:00',
+    team1Source: 'W-R16-5', team2Source: 'W-R16-6', // W93 vs W94
     winnerGoesTo: 'SF-1', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'QF-3', round: 'QF', matchNumber: 99, label: 'Match 99', date: '2026-07-11 04:00',
-    team1Source: 'W-R16-5', team2Source: 'W-R16-6',
+    id: 'QF-3', round: 'QF', matchNumber: 99, label: 'Match 99', date: '2026-07-11 17:00',
+    team1Source: 'W-R16-3', team2Source: 'W-R16-4', // W91 vs W92
     winnerGoesTo: 'SF-2', winnerSlot: 'team1', loserGoesTo: null, loserSlot: null
   },
   {
-    id: 'QF-4', round: 'QF', matchNumber: 100, label: 'Match 100', date: '2026-07-11 08:30',
-    team1Source: 'W-R16-7', team2Source: 'W-R16-8',
+    id: 'QF-4', round: 'QF', matchNumber: 100, label: 'Match 100', date: '2026-07-11 20:00',
+    team1Source: 'W-R16-7', team2Source: 'W-R16-8', // W95 vs W96
     winnerGoesTo: 'SF-2', winnerSlot: 'team2', loserGoesTo: null, loserSlot: null
   },
 
-  // ===== Semifinals (2試合: Match 101〜102) =====
+  // ===== Semifinals (Match 101〜102) =====
   {
-    id: 'SF-1', round: 'SF', matchNumber: 101, label: 'Match 101', date: '2026-07-15 04:00',
-    team1Source: 'W-QF-1', team2Source: 'W-QF-2',
+    id: 'SF-1', round: 'SF', matchNumber: 101, label: 'Match 101', date: '2026-07-14 14:00',
+    team1Source: 'W-QF-1', team2Source: 'W-QF-2', // W97 vs W98
     winnerGoesTo: 'FINAL', winnerSlot: 'team1', loserGoesTo: 'THIRD', loserSlot: 'team1'
   },
   {
-    id: 'SF-2', round: 'SF', matchNumber: 102, label: 'Match 102', date: '2026-07-16 04:00',
-    team1Source: 'W-QF-3', team2Source: 'W-QF-4',
+    id: 'SF-2', round: 'SF', matchNumber: 102, label: 'Match 102', date: '2026-07-15 15:00',
+    team1Source: 'W-QF-3', team2Source: 'W-QF-4', // W99 vs W100
     winnerGoesTo: 'FINAL', winnerSlot: 'team2', loserGoesTo: 'THIRD', loserSlot: 'team2'
   },
 
-  // ===== Third Place Play-off (1試合: Match 103) =====
+  // ===== Third Place Play-off (Match 103) =====
   {
-    id: 'THIRD', round: 'THIRD', matchNumber: 103, label: 'Match 103', date: '2026-07-19 04:00',
+    id: 'THIRD', round: 'THIRD', matchNumber: 103, label: 'Match 103', date: '2026-07-18 17:00',
     team1Source: 'L-SF-1', team2Source: 'L-SF-2',
     winnerGoesTo: null, winnerSlot: null, loserGoesTo: null, loserSlot: null
   },
 
-  // ===== Final (1試合: Match 104) =====
+  // ===== Final (Match 104) =====
   {
-    id: 'FINAL', round: 'FINAL', matchNumber: 104, label: 'Match 104', date: '2026-07-20 04:00',
+    id: 'FINAL', round: 'FINAL', matchNumber: 104, label: 'Match 104', date: '2026-07-19 15:00',
     team1Source: 'W-SF-1', team2Source: 'W-SF-2',
     winnerGoesTo: null, winnerSlot: null, loserGoesTo: null, loserSlot: null
   }
 ];
 
 /**
- * 3位通過した8チームを、同一グループ再戦を回避しつつ、8つの1位スロットに自動割り当てする（バックトラッキング探索）
- */
-export function assignThirdPlaceTeams(
-  bestThirds: (TeamStanding & { group: string })[]
-): Record<string, string> {
-  const slots = [
-    { id: 'R32-3', winnerGroup: 'E', pool: ['A', 'B', 'C', 'D', 'F'] },
-    { id: 'R32-6', winnerGroup: 'I', pool: ['C', 'D', 'F', 'G', 'H'] },
-    { id: 'R32-7', winnerGroup: 'A', pool: ['C', 'E', 'F', 'H', 'I'] },
-    { id: 'R32-8', winnerGroup: 'L', pool: ['E', 'H', 'I', 'J', 'K'] },
-    { id: 'R32-9', winnerGroup: 'G', pool: ['A', 'E', 'H', 'I', 'J'] },
-    { id: 'R32-10', winnerGroup: 'D', pool: ['B', 'E', 'F', 'I', 'J'] },
-    { id: 'R32-13', winnerGroup: 'B', pool: ['E', 'F', 'G', 'I', 'J'] },
-    { id: 'R32-16', winnerGroup: 'K', pool: ['D', 'E', 'I', 'J', 'L'] },
-  ];
-
-  const result: Record<string, string> = {};
-  const used = new Set<string>();
-
-  function backtrack(slotIdx: number): boolean {
-    if (slotIdx === slots.length) return true;
-
-    const slot = slots[slotIdx];
-    for (const third of bestThirds) {
-      if (used.has(third.teamCode)) continue;
-
-      // 1. 同一グループの再戦禁止
-      if (third.group === slot.winnerGroup) continue;
-
-      // 2. 公式プール（Annex Cの制限）に適合するか
-      const inPool = slot.pool.includes(third.group);
-      if (!inPool) continue;
-      
-      // 仮配置
-      result[slot.id] = third.teamCode;
-      used.add(third.teamCode);
-
-      if (backtrack(slotIdx + 1)) return true;
-
-      // バックトラック
-      used.delete(third.teamCode);
-      delete result[slot.id];
-    }
-    return false;
-  }
-
-  // まずプール条件を完全に考慮して探索
-  if (backtrack(0)) {
-    return result;
-  }
-
-  // もし厳密なプール一致で解がない場合は、再戦禁止のみを強制して再試行
-  used.clear();
-  function backtrackRelaxed(slotIdx: number): boolean {
-    if (slotIdx === slots.length) return true;
-    const slot = slots[slotIdx];
-    for (const third of bestThirds) {
-      if (used.has(third.teamCode)) continue;
-      if (third.group === slot.winnerGroup) continue; // 再戦禁止は絶対死守
-
-      result[slot.id] = third.teamCode;
-      used.add(third.teamCode);
-
-      if (backtrackRelaxed(slotIdx + 1)) return true;
-
-      used.delete(third.teamCode);
-      delete result[slot.id];
-    }
-    return false;
-  }
-
-  backtrackRelaxed(0);
-  return result;
-}
-
-/**
- * グループ順位表からノックアウトステージ（Round of 32）の全枠を初期化する
+ * グループ順位表からノックアウトステージ（Round of 32）の全枠を初期化する。
+ * 3位8チームの割り当ては FIFA 公式 付属書C の495通り対応表に厳密準拠する。
  */
 export function initializeKnockoutMatches(
   allStandings: Record<string, TeamStanding[]>
@@ -284,10 +214,13 @@ export function initializeKnockoutMatches(
     if (r) groupRunnersUp[group] = r.teamCode;
   }
 
-  // 2. ベスト3位の8チームを抽出
+  // 2. ベスト3位の8チームを抽出し、Annex C で各1位スロットへ割り当て
   const bestThirds = getBestThirdPlaceTeams(allStandings);
-  // 3位の割り当て先マップ（"R32-3" -> "NOR" など）
-  const thirdAssignments = assignThirdPlaceTeams(bestThirds);
+  // 通過3位の「所属グループ → そのグループ3位のチームコード」マップ
+  const thirdTeamByGroup: Record<string, string> = {};
+  for (const t of bestThirds) thirdTeamByGroup[t.group] = t.teamCode;
+  // 付属書Cによる割り当て（1位スロット文字 → 入る3位の所属グループ）。8チーム未確定なら null。
+  const slotToGroup = allocateThirdPlaceByAnnexC(bestThirds.map((t) => t.group));
 
   // 3. 静的構成から試合リストを生成
   return KNOCKOUT_CONFIGS.map((config) => {
@@ -307,8 +240,11 @@ export function initializeKnockoutMatches(
         team2 = groupWinners[config.team2Source[1]] ?? null;
       } else if (config.team2Source.startsWith('2')) {
         team2 = groupRunnersUp[config.team2Source[1]] ?? null;
-      } else if (config.team2Source.startsWith('3rd')) {
-        team2 = thirdAssignments[config.id] ?? null;
+      } else if (config.team2Source.startsWith('3rd-')) {
+        // '3rd-E' → 1E位スロット。Annex C が指定する所属グループの3位チームを入れる
+        const winnerGroup = config.team2Source.slice(4);
+        const assignedGroup = slotToGroup ? slotToGroup[winnerGroup] : null;
+        team2 = assignedGroup ? thirdTeamByGroup[assignedGroup] ?? null : null;
       }
     }
 
