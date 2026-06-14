@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import type { TeamStanding } from '../types';
 import { teams, getFlagUrl } from '../data';
 
@@ -6,6 +7,14 @@ interface StandingsTableProps {
 }
 
 const GROUP_IDS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const;
+
+const TABS = [
+  { id: 'A-C', groups: ['A', 'B', 'C'] },
+  { id: 'D-F', groups: ['D', 'E', 'F'] },
+  { id: 'G-I', groups: ['G', 'H', 'I'] },
+  { id: 'J-L', groups: ['J', 'K', 'L'] },
+  { id: 'ALL', groups: [...GROUP_IDS] },
+];
 
 const COLUMN_HEADERS = ['#', 'Team', 'P', 'W', 'D', 'L', 'GF', 'GA', 'GD', 'Pts'] as const;
 
@@ -90,14 +99,33 @@ const GroupTable: React.FC<{ groupId: string; standings: TeamStanding[] }> = ({
   </div>
 );
 
-const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings }) => (
-  <div className="standings-grid">
-    {GROUP_IDS.map((groupId) => {
-      const standings = allStandings[groupId];
-      if (!standings || standings.length === 0) return null;
-      return <GroupTable key={groupId} groupId={groupId} standings={standings} />;
-    })}
-  </div>
-);
+const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings }) => {
+  const [activeTab, setActiveTab] = useState<string>('A-C');
+  
+  const currentTab = TABS.find(t => t.id === activeTab) || TABS[0];
+
+  return (
+    <div>
+      <div className="group-tabs" style={{ marginBottom: '16px' }}>
+        {TABS.map(tab => (
+          <button
+            key={tab.id}
+            className={`group-tab ${activeTab === tab.id ? 'group-tab--active' : ''}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            {tab.id === 'ALL' ? 'すべて表示' : tab.id}
+          </button>
+        ))}
+      </div>
+      <div className="standings-grid">
+        {currentTab.groups.map((groupId) => {
+          const standings = allStandings[groupId];
+          if (!standings || standings.length === 0) return null;
+          return <GroupTable key={groupId} groupId={groupId} standings={standings} />;
+        })}
+      </div>
+    </div>
+  );
+};
 
 export default StandingsTable;
