@@ -5,7 +5,7 @@
 // 試合を分単位のイベント（得点・勢いの振れ・疲労蓄積・退場）で生成する。
 // =============================================================================
 
-import type { TeamAgent, MatchEvent, MatchLog } from '../types';
+import type { TeamAgent, MatchEvent, MatchLog, PlayerMatchRating } from '../types';
 import { teams } from '../data';
 import type { RatingMap } from './ratingModel';
 import { initRatings } from './ratingModel';
@@ -549,6 +549,8 @@ export function simulateMatchRich(
     redCards: awayAgent.redCards,
   };
 
+  const playerRatings = generatePlayerRatings(homeAgent.code, awayAgent.code, winner || 'DRAW', events, rng);
+
   return {
     homeTeam: homeAgent.code,
     awayTeam: awayAgent.code,
@@ -562,9 +564,50 @@ export function simulateMatchRich(
     isPenaltyShootout,
     homeEndStamina: homeAgent.stamina,
     awayEndStamina: awayAgent.stamina,
+    playerRatings,
     homeStats,
     awayStats,
   };
+}
+
+export function generatePlayerRatings(
+  homeCode: string,
+  awayCode: string,
+  winner: string | 'DRAW',
+  events: MatchEvent[],
+  rng: () => number = Math.random
+): PlayerMatchRating[] {
+  const ratings: PlayerMatchRating[] = [];
+  
+  const processTeam = (code: string, isWinner: boolean, isDraw: boolean) => {
+    const roster = playersData[code];
+    if (!roster) return;
+    
+    roster.forEach(player => {
+      let r = 6.0 + (rng() * 1.0 - 0.5); // 5.5 to 6.5
+      if (isWinner) r += 0.5 + rng() * 0.5;
+      else if (isDraw) r += rng() * 0.5;
+      else r -= 0.5;
+      
+      const goals = events.filter(e => e.type === 'GOAL' && e.playerId === player.id).length;
+      const assists = events.filter(e => e.type === 'GOAL' && e.assistId === player.id).length;
+      r += goals * (1.0 + rng() * 0.5);
+      r += assists * (0.5 + rng() * 0.5);
+      
+      const yellows = events.filter(e => e.type === 'YELLOW_CARD' && e.playerId === player.id).length;
+      const reds = events.filter(e => e.type === 'RED_CARD' && e.playerId === player.id).length;
+      r -= yellows * 0.5;
+      r -= reds * 1.5;
+      
+      r = Math.min(10.0, Math.max(3.0, r));
+      ratings.push({ playerId: player.id, rating: +(r.toFixed(1)) });
+    });
+  };
+
+  processTeam(homeCode, winner === homeCode, winner === 'DRAW');
+  processTeam(awayCode, winner === awayCode, winner === 'DRAW');
+  
+  return ratings;
 }
 
 // ===== Tournament Fatigue =====

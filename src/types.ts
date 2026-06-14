@@ -134,6 +134,11 @@ export interface MatchStats {
   redCards: number;
 }
 
+export interface PlayerMatchRating {
+  playerId: string;
+  rating: number; // 0.0 - 10.0
+}
+
 export interface MatchLog {
   homeTeam: string;
   awayTeam: string;
@@ -147,7 +152,7 @@ export interface MatchLog {
   isPenaltyShootout: boolean;
   homeEndStamina: number;
   awayEndStamina: number;
+  playerRatings?: PlayerMatchRating[];
   homeStats?: MatchStats;
   awayStats?: MatchStats;
 }
-

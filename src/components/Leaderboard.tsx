@@ -18,6 +18,8 @@ interface PlayerStats {
   assists: number;
   yellowCards: number;
   redCards: number;
+  ratingsSum: number;
+  ratingsCount: number;
 }
 
 export const Leaderboard: React.FC<Props> = ({ logs, onClose }) => {
@@ -35,7 +37,9 @@ export const Leaderboard: React.FC<Props> = ({ logs, onClose }) => {
           goals: 0,
           assists: 0,
           yellowCards: 0,
-          redCards: 0
+          redCards: 0,
+          ratingsSum: 0,
+          ratingsCount: 0
         });
       }
       return playerStats.get(id)!;
@@ -59,6 +63,16 @@ export const Leaderboard: React.FC<Props> = ({ logs, onClose }) => {
           a.assists += 1;
         }
       });
+
+      if (log.playerRatings) {
+        log.playerRatings.forEach(pr => {
+          const isHome = playersData[log.homeTeam]?.some(p => p.id === pr.playerId);
+          const teamCode = isHome ? log.homeTeam : log.awayTeam;
+          const p = getPlayer(pr.playerId, teamCode);
+          p.ratingsSum += pr.rating;
+          p.ratingsCount += 1;
+        });
+      }
     });
 
     return Array.from(playerStats.values());
@@ -67,62 +81,78 @@ export const Leaderboard: React.FC<Props> = ({ logs, onClose }) => {
   const topScorers = [...stats].sort((a, b) => b.goals - a.goals).slice(0, 10);
   const topAssists = [...stats].sort((a, b) => b.assists - a.assists).slice(0, 10);
   
-  // MVP estimation: Goals * 2 + Assists
-  const mvpList = [...stats].sort((a, b) => (b.goals * 2 + b.assists) - (a.goals * 2 + a.assists)).slice(0, 10);
+  // MVP estimation: Average Rating
+  const mvpList = [...stats]
+    .filter(p => p.ratingsCount > 0)
+    .sort((a, b) => (b.ratingsSum / b.ratingsCount) - (a.ratingsSum / a.ratingsCount))
+    .slice(0, 10);
 
   const getFlagUrl = (iso?: string) => iso ? `https://flagcdn.com/w40/${iso.toLowerCase()}.png` : '';
 
+  const renderRank = (index: number) => {
+    if (index === 0) return <span className="rank-badge rank-1">1</span>;
+    if (index === 1) return <span className="rank-badge rank-2">2</span>;
+    if (index === 2) return <span className="rank-badge rank-3">3</span>;
+    return <span className="rank-badge">{index + 1}</span>;
+  };
+
   return (
     <div className="match-log-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
-      <div className="match-log-modal glass-panel" style={{ width: '900px' }}>
+      <div className="match-log-modal glass-panel leaderboard-modal">
         <button className="match-log-close" onClick={onClose}>×</button>
-        <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--cyan-300)' }}>🏆 Tournament Leaderboard</h2>
+        <h2 className="leaderboard-title">🏆 Tournament Leaderboard</h2>
         
-        <div style={{ display: 'flex', gap: '2rem', justifyContent: 'space-between' }}>
+        <div className="leaderboard-grid">
           
-          <div style={{ flex: 1 }}>
-            <h3 className="text-xl mb-4 text-center">⚽ Top Scorers</h3>
-            <div className="flex flex-col gap-2">
+          <div className="leaderboard-column">
+            <h3 className="leaderboard-col-title">⚽ Top Scorers</h3>
+            <div className="leaderboard-list">
               {topScorers.filter(p => p.goals > 0).map((p, i) => (
-                <div key={p.id} className="flex items-center justify-between p-2" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                  <div className="flex items-center gap-2">
-                    <span style={{ opacity: 0.5, width: '20px' }}>{i + 1}</span>
-                    <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} style={{ width: '20px' }} />
-                    <span>{p.name}</span>
+                <div key={p.id} className="leaderboard-row">
+                  <div className="leaderboard-player-info">
+                    {renderRank(i)}
+                    <div className="avatar-wrapper">
+                      <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} className="player-flag-main" />
+                    </div>
+                    <span className="player-name">{p.name}</span>
                   </div>
-                  <span className="font-bold text-lg">{p.goals}</span>
+                  <span className="player-stat stat-goals">{p.goals}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ flex: 1 }}>
-            <h3 className="text-xl mb-4 text-center">👟 Top Assists</h3>
-            <div className="flex flex-col gap-2">
+          <div className="leaderboard-column">
+            <h3 className="leaderboard-col-title">👟 Top Assists</h3>
+            <div className="leaderboard-list">
               {topAssists.filter(p => p.assists > 0).map((p, i) => (
-                <div key={p.id} className="flex items-center justify-between p-2" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                  <div className="flex items-center gap-2">
-                    <span style={{ opacity: 0.5, width: '20px' }}>{i + 1}</span>
-                    <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} style={{ width: '20px' }} />
-                    <span>{p.name}</span>
+                <div key={p.id} className="leaderboard-row">
+                  <div className="leaderboard-player-info">
+                    {renderRank(i)}
+                    <div className="avatar-wrapper">
+                      <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} className="player-flag-main" />
+                    </div>
+                    <span className="player-name">{p.name}</span>
                   </div>
-                  <span className="font-bold text-lg">{p.assists}</span>
+                  <span className="player-stat stat-assists">{p.assists}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ flex: 1 }}>
-            <h3 className="text-xl mb-4 text-center">⭐ MVP Race</h3>
-            <div className="flex flex-col gap-2">
-              {mvpList.filter(p => p.goals > 0 || p.assists > 0).map((p, i) => (
-                <div key={p.id} className="flex items-center justify-between p-2" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                  <div className="flex items-center gap-2">
-                    <span style={{ opacity: 0.5, width: '20px' }}>{i + 1}</span>
-                    <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} style={{ width: '20px' }} />
-                    <span>{p.name}</span>
+          <div className="leaderboard-column">
+            <h3 className="leaderboard-col-title">⭐ MVP Race</h3>
+            <div className="leaderboard-list">
+              {mvpList.map((p, i) => (
+                <div key={p.id} className="leaderboard-row">
+                  <div className="leaderboard-player-info">
+                    {renderRank(i)}
+                    <div className="avatar-wrapper">
+                      <img src={getFlagUrl(teams[p.teamCode]?.iso)} alt={p.teamCode} className="player-flag-main" />
+                    </div>
+                    <span className="player-name">{p.name}</span>
                   </div>
-                  <span className="font-bold text-lg" style={{ color: 'var(--yellow-400)' }}>{(p.goals * 2 + p.assists)} pts</span>
+                  <span className="player-stat stat-mvp">{(p.ratingsSum / p.ratingsCount).toFixed(2)}</span>
                 </div>
               ))}
             </div>
