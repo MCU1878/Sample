@@ -1,8 +1,10 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { Match, KnockoutMatch } from './types';
-import { createInitialMatches, groupTeams, simulateMatchScore } from './data';
+import { createInitialMatches, groupTeams } from './data';
 import { getAllGroupStandings } from './utils/calculateStandings';
 import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutMatches } from './utils/knockoutLogic';
+import { simulateMatchFromCodes } from './utils/matchEngine';
+import { fetchLiveMatches } from './utils/apiSync';
 import type { ForecastResult } from './utils/forecast';
 import { MatchForm } from './components/MatchForm';
 import StandingsTable from './components/StandingsTable';
@@ -157,11 +159,12 @@ function App() {
   const handleRandomFill = useCallback(() => {
     setMatches((prev) =>
       prev.map((match) => {
-        const { homeScore, awayScore } = simulateMatchScore(match.homeTeam, match.awayTeam);
+        if (match.syncStatus) return match; // 実際の試合結果は上書きしない
+        const log = simulateMatchFromCodes(match.homeTeam, match.awayTeam, undefined, { climate: match.climate });
         return {
           ...match,
-          homeScore,
-          awayScore,
+          homeScore: log.homeScore,
+          awayScore: log.awayScore,
         };
       })
     );
@@ -174,11 +177,12 @@ function App() {
     const isGroupComplete = matches.every((m) => m.homeScore !== null && m.awayScore !== null);
     if (!isGroupComplete) {
       currentMatches = matches.map((match) => {
-        const { homeScore, awayScore } = simulateMatchScore(match.homeTeam, match.awayTeam);
+        if (match.syncStatus) return match; // 実際の試合結果は上書きしない
+        const log = simulateMatchFromCodes(match.homeTeam, match.awayTeam, undefined, { climate: match.climate });
         return {
           ...match,
-          homeScore,
-          awayScore,
+          homeScore: log.homeScore,
+          awayScore: log.awayScore,
         };
       });
       setMatches(currentMatches);
@@ -204,15 +208,58 @@ function App() {
     setKnockoutUserScores(nextScores);
   }, [matches]);
 
+  // リアルタイムAPI同期
+  const [syncing, setSyncing] = useState(true); // 初回ロード中はtrue
+  const handleApiSync = useCallback(async (isBackground = false) => {
+    if (!isBackground) setSyncing(true);
+    try {
+      const updater = await fetchLiveMatches();
+      setMatches(updater);
+    } catch (e) {
+      console.error('API sync failed:', e);
+    } finally {
+      if (!isBackground) setSyncing(false);
+    }
+  }, []);
+
+  // 初回＆定期同期 (60秒ごと)
+  useEffect(() => {
+    handleApiSync(); // 初回同期 (UIブロックあり)
+    const interval = setInterval(() => {
+      handleApiSync(true); // バックグラウンド同期
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [handleApiSync]);
+
   // 全リセット
-  const handleReset = useCallback(() => {
-    setMatches(createInitialMatches());
+  const handleReset = useCallback(async () => {
     setKnockoutUserScores({});
     setForecast(null);
+    setSyncing(true);
+    try {
+      const initialMatches = createInitialMatches();
+      const updater = await fetchLiveMatches();
+      setMatches(updater(initialMatches));
+    } catch (e) {
+      console.error('API sync failed during reset:', e);
+      setMatches(createInitialMatches());
+    } finally {
+      setSyncing(false);
+    }
   }, []);
 
   return (
     <div className="app">
+      {/* フルスクリーンローディング */}
+      {syncing && (
+        <div className="sync-overlay">
+          <div className="sync-overlay__content">
+            <div className="css-spinner"></div>
+            <p>Syncing Live Match Data...</p>
+          </div>
+        </div>
+      )}
+
       {/* ヘッダー */}
       <header className="header">
         <div className="header-container">
@@ -305,6 +352,7 @@ function App() {
                     matches={matches}
                     activeGroup={activeGroup}
                     onScoreChange={handleScoreChange}
+                    isSyncing={syncing}
                   />
                 </div>
               </div>
@@ -353,9 +401,8 @@ function App() {
           <button className="btn btn--cyan btn--glass" onClick={handleForecast} disabled={forecasting}>
             {forecasting ? '⏳ 計算中…' : '📊 確率予測'}
           </button>
-          <div className="floating-dock__divider"></div>
           <button className="btn btn--danger btn--glass" onClick={handleReset}>
-            🔄 リセット
+            🗑 リセット
           </button>
         </div>
       </div>

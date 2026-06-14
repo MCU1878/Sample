@@ -6,11 +6,13 @@ export interface Team {
   flag: string; // emoji flag
   iso: string;  // ISO 2-letter code for flag images (flagcdn.com)
   fifaRank: number; // FIFA Men's World Ranking (1〜100+)
+  eloRating?: number;
+  climateAdaptation?: 'temperate' | 'tropical' | 'desert' | 'high_altitude';
 }
 
 export interface Match {
   id: string;
-  group: string;
+  group?: string; // 'A' - 'L'
   homeTeam: string;
   awayTeam: string;
   homeScore: number | null;
@@ -18,6 +20,8 @@ export interface Match {
   date: string;     // "2026-06-11"
   time: string;     // "16:00"
   matchDay: number; // 1, 2, or 3
+  syncStatus?: 'live' | 'finished';
+  climate?: 'temperate' | 'hot_humid' | 'hot_dry' | 'high_altitude';
 }
 
 export interface TeamStanding {
@@ -67,4 +71,58 @@ export interface KnockoutMatch {
   winnerSlot: 'team1' | 'team2' | null;
   loserGoesTo: string | null;    // for SF losers → 3rd place
   loserSlot: 'team1' | 'team2' | null;
+  // Agent engine match log (optional, populated by rich simulation)
+  matchLog?: MatchLog;
+  climate?: 'temperate' | 'hot_humid' | 'hot_dry' | 'high_altitude';
 }
+
+// ===== Agent-Based Match Engine Types =====
+
+export interface TeamAgent {
+  code: string;
+  // Base parameters (derived from Bayesian ratings)
+  attackPower: number;     // [0.5 ~ 2.0]
+  defensePower: number;    // [0.5 ~ 2.0]
+  // Dynamic parameters (change during match)
+  stamina: number;         // [0.0 ~ 1.0] — starts at 1.0, depletes over time
+  momentum: number;        // [-1.0 ~ 1.0] — surges on goals/cards
+  redCards: number;        // number of red cards received
+  yellowCards: number;     // number of yellow cards received
+  // Tournament-wide fatigue (knockout stage)
+  tournamentFatigue: number; // [0.0 ~ 0.5] — accumulated from previous matches
+  staminaMultiplier: number; // 1.0 = normal, 1.2 = faster depletion due to climate
+}
+
+export type MatchEventType =
+  | 'GOAL'
+  | 'RED_CARD'
+  | 'YELLOW_CARD'
+  | 'MOMENTUM_SHIFT'
+  | 'INJURY'
+  | 'HALF_TIME'
+  | 'FULL_TIME'
+  | 'EXTRA_TIME'
+  | 'PENALTY_KICK';
+
+export interface MatchEvent {
+  minute: number;
+  type: MatchEventType;
+  team: string;            // team code
+  description: string;     // narrative text
+}
+
+export interface MatchLog {
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+  homePenScore: number | null;
+  awayPenScore: number | null;
+  events: MatchEvent[];
+  winner: string | null;          // null = draw (group stage)
+  isExtraTime: boolean;
+  isPenaltyShootout: boolean;
+  homeEndStamina: number;
+  awayEndStamina: number;
+}
+
