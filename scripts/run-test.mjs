@@ -6,9 +6,10 @@ import { writeFileSync, rmSync } from 'node:fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const out = resolve(__dirname, '_test-bundle.mjs');
+const entry = process.argv[2] ?? '_test-logic.ts';
 
 const res = await build({
-  entryPoints: [resolve(__dirname, '_test-logic.ts')],
+  entryPoints: [resolve(__dirname, entry)],
   bundle: true,
   platform: 'node',
   format: 'esm',
