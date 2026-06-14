@@ -14,7 +14,7 @@ import type { Player } from '../types';
 
 const playersData = playersDataRaw as Record<string, Player[]>;
 
-function pickPlayerByPosition(roster: Player[], pos: string, rng: Rng) {
+function pickPlayerByPosition(roster: Player[] | undefined, pos: string, rng: Rng) {
   if (!roster || roster.length === 0) return null;
   const players = roster.filter(p => p.position === pos);
   if (players.length > 0) return players[Math.floor(rng() * players.length)];
@@ -606,41 +606,4 @@ function getTeamName(code: string): string {
   return teams[code]?.name ?? code;
 }
 
-function generateGoalDescription(teamCode: string, minute: number, momentum: number): string {
-  const name = getTeamName(teamCode);
 
-  // 異なるバリエーションの実況テキスト
-  const earlyGoals = [
-    `${name}が電光石火の先制ゴール！`,
-    `${name}が開始早々にネットを揺らす！`,
-    `${name}が素早い展開から先制！`,
-  ];
-  const lateGoals = [
-    `${name}が土壇場でゴール！劇的な展開！`,
-    `${name}がアディショナルタイムに意地の一撃！`,
-    `${name}が終了間際に値千金のゴール！`,
-  ];
-  const momentumGoals = [
-    `${name}が怒涛の攻撃から追加点！勢いが止まらない！`,
-    `${name}が流れに乗ってさらにゴール！`,
-    `${name}が猛攻！ゴール！`,
-  ];
-  const normalGoals = [
-    `${name}がゴール！`,
-    `${name}が見事なシュートでゴール！`,
-    `${name}がチャンスを確実に決めた！`,
-    `${name}が得点！巧みな崩しから`,
-    `${name}の美しいゴール！`,
-  ];
-
-  if (minute <= 10) {
-    return earlyGoals[Math.floor(Math.random() * earlyGoals.length)];
-  }
-  if (minute >= 85) {
-    return lateGoals[Math.floor(Math.random() * lateGoals.length)];
-  }
-  if (momentum > 0.5) {
-    return momentumGoals[Math.floor(Math.random() * momentumGoals.length)];
-  }
-  return normalGoals[Math.floor(Math.random() * normalGoals.length)];
-}

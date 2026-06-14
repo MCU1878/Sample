@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import type { Match, KnockoutMatch } from './types';
+import type { Match, KnockoutMatch, MatchLog } from './types';
 import { createInitialMatches, groupTeams } from './data';
 import { getAllGroupStandings } from './utils/calculateStandings';
 import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutMatches } from './utils/knockoutLogic';
@@ -367,7 +367,6 @@ function App() {
                     activeGroup={activeGroup}
                     onScoreChange={handleScoreChange}
                     isSyncing={syncing}
-                    onMatchLogClick={setSelectedMatchLog}
                   />
                 </div>
               </div>
@@ -425,6 +424,20 @@ function App() {
       <footer className="footer">
         <p>FIFA World Cup 2026™ Simulator — Tournament Control Center</p>
       </footer>
+
+      {selectedMatchLog && (
+        <MatchLogModal 
+          log={selectedMatchLog} 
+          onClose={() => setSelectedMatchLog(null)} 
+        />
+      )}
+
+      {showLeaderboard && (
+        <Leaderboard 
+          logs={allMatchLogs}
+          onClose={() => setShowLeaderboard(false)}
+        />
+      )}
     </div>
   );
 }

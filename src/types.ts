@@ -101,6 +101,7 @@ export interface TeamAgent {
   // Tournament-wide fatigue (knockout stage)
   tournamentFatigue: number; // [0.0 ~ 0.5] — accumulated from previous matches
   staminaMultiplier: number; // 1.0 = normal, 1.2 = faster depletion due to climate
+  roster?: Player[];
 }
 
 export type MatchEventType =
