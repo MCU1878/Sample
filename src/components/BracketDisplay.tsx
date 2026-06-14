@@ -1,6 +1,7 @@
-import React from 'react';
-import type { KnockoutMatch } from '../types';
+import React, { useState } from 'react';
+import type { KnockoutMatch, MatchLog } from '../types';
 import { teams, getFlagUrl } from '../data';
+import { MatchLogModal } from './MatchLogModal';
 
 interface BracketDisplayProps {
   knockoutMatches: KnockoutMatch[];
@@ -39,7 +40,9 @@ const SF_ORDER = [
   'SF-1', 'SF-2'      // Match 101 & 102 -> FINAL
 ];
 
-const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScoreChange }) => {
+export const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScoreChange }) => {
+  const [selectedLog, setSelectedLog] = useState<MatchLog | null>(null);
+
   // 各ラウンドごとに試合をツリー順にソート
   const r32 = knockoutMatches
     .filter((m) => m.round === 'R32')
@@ -126,8 +129,19 @@ const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScor
         className={`knockout-card ${isActive ? 'knockout-card--active' : ''}`}
       >
         <div className="knockout-card__header">
-          <span>{match.label}</span>
-          <span>{match.date.slice(5)}</span>
+          <span className="knockout-card__match-num">{match.label}</span>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <span className="knockout-card__date">{match.date.slice(5)}</span>
+            {match.matchLog && (
+              <button 
+                className="knockout-card__log-btn"
+                onClick={() => setSelectedLog(match.matchLog!)}
+                title="View Match Details"
+              >
+                📊
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Team 1 */}
@@ -309,6 +323,10 @@ const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches, onScor
           </div>
         </div>
       </div>
+
+      {selectedLog && (
+        <MatchLogModal log={selectedLog} onClose={() => setSelectedLog(null)} />
+      )}
 
       {/* 優勝国の祝福表示 */}
       {championTeam && (

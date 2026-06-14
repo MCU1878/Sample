@@ -7,7 +7,16 @@ export interface Team {
   iso: string;  // ISO 2-letter code for flag images (flagcdn.com)
   fifaRank: number; // FIFA Men's World Ranking (1〜100+)
   eloRating?: number;
-  climateAdaptation?: 'temperate' | 'tropical' | 'desert' | 'high_altitude';
+  climateAdaptation?: 'temperate' | 'tropical' | 'desert' | 'high_altitude' | 'hot_humid' | 'hot_dry';
+}
+
+export interface Player {
+  id: string;        // e.g. "JPN-1"
+  name: string;      // e.g. "Takefusa Kubo"
+  position: 'GK' | 'DF' | 'MF' | 'FW';
+  // Below properties can be simulated/derived in matchEngine
+  overall?: number;  
+  stamina?: number;
 }
 
 export interface Match {
@@ -22,6 +31,7 @@ export interface Match {
   matchDay: number; // 1, 2, or 3
   syncStatus?: 'live' | 'finished';
   climate?: 'temperate' | 'hot_humid' | 'hot_dry' | 'high_altitude';
+  matchLog?: MatchLog;
 }
 
 export interface TeamStanding {
@@ -108,7 +118,19 @@ export interface MatchEvent {
   minute: number;
   type: MatchEventType;
   team: string;            // team code
+  playerId?: string;       // main player involved (goalscorer, booked player)
+  assistId?: string;       // player who assisted (for GOAL)
   description: string;     // narrative text
+}
+
+export interface MatchStats {
+  possession: number;
+  shots: number;
+  shotsOnTarget: number;
+  expectedGoals: number;
+  fouls: number;
+  yellowCards: number;
+  redCards: number;
 }
 
 export interface MatchLog {
@@ -124,5 +146,7 @@ export interface MatchLog {
   isPenaltyShootout: boolean;
   homeEndStamina: number;
   awayEndStamina: number;
+  homeStats?: MatchStats;
+  awayStats?: MatchStats;
 }
 
