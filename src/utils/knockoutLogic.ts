@@ -4,6 +4,19 @@ import { getBestThirdPlaceTeams } from './calculateStandings';
 import { allocateThirdPlaceByAnnexC } from '../data/thirdPlaceAllocation';
 import { createTeamAgent, simulateMatchRich, calculateTournamentFatigue } from './matchEngine';
 import { initRatings } from './ratingModel';
+import { rngFromKey } from './rng';
+
+const KNOCKOUT_CLIMATES: Record<string, 'temperate' | 'hot_humid' | 'hot_dry' | 'high_altitude'> = {
+  'R32-1': 'hot_dry', 'R32-2': 'hot_humid', 'R32-3': 'hot_dry', 'R32-4': 'hot_humid',
+  'R32-5': 'temperate', 'R32-6': 'hot_dry', 'R32-7': 'high_altitude', 'R32-8': 'temperate',
+  'R32-9': 'hot_dry', 'R32-10': 'temperate', 'R32-11': 'high_altitude', 'R32-12': 'hot_humid',
+  'R32-13': 'temperate', 'R32-14': 'hot_dry', 'R32-15': 'hot_humid', 'R32-16': 'temperate',
+  'R16-1': 'hot_dry', 'R16-2': 'temperate', 'R16-3': 'hot_humid', 'R16-4': 'high_altitude',
+  'R16-5': 'hot_dry', 'R16-6': 'temperate', 'R16-7': 'hot_humid', 'R16-8': 'temperate',
+  'QF-1': 'hot_dry', 'QF-2': 'temperate', 'QF-3': 'hot_humid', 'QF-4': 'temperate',
+  'SF-1': 'hot_dry', 'SF-2': 'temperate',
+  'THIRD': 'hot_dry', 'FINAL': 'temperate'
+};
 
 // ノックアウトステージの各試合の静的構造定義
 interface KnockoutConfig {
@@ -268,7 +281,7 @@ export function initializeKnockoutMatches(
       winnerSlot: config.winnerSlot,
       loserGoesTo: config.loserGoesTo,
       loserSlot: config.loserSlot,
-      climate: 'temperate', // ノックアウトステージは一旦すべて温暖気候として扱う
+      climate: KNOCKOUT_CLIMATES[config.id] || 'temperate',
     };
   });
 }
@@ -396,7 +409,12 @@ export function simulateKnockoutMatches(matches: KnockoutMatch[]): KnockoutMatch
     const awayAgent = createTeamAgent(activeMatch.team2, ratings, aFatigue);
 
     // Run rich simulation (with extra time & penalties)
-    const log = simulateMatchRich(homeAgent, awayAgent, { isKnockout: true, climate: activeMatch.climate });
+    // 試合ID由来の固定シードで決定論的に。→ 同じ盤面なら毎回同じトーナメント結果になる。
+    const log = simulateMatchRich(homeAgent, awayAgent, {
+      isKnockout: true,
+      climate: activeMatch.climate,
+      rng: rngFromKey('ko|' + activeMatch.id + '|' + activeMatch.team1 + '-' + activeMatch.team2),
+    });
 
     // Update match with scores
     currentMatches = updateKnockoutProgression(currentMatches, activeMatch.id, {

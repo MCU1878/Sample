@@ -18,6 +18,7 @@
 // =============================================================================
 
 import { teams } from '../data';
+import { powerQuality } from './powerRankings';
 
 export interface LatentVar {
   mean: number;
@@ -33,34 +34,39 @@ export type RatingMap = Record<string, TeamRating>;
 
 // 同格対戦で λ≈1.35 になる基準（現行ポアソンモデルの基本期待値に合わせる）
 export const MU0 = Math.log(1.35);
-// FIFAランク差をレーティング差へ変換するスケール（強豪vs弱小で λ が現実的な範囲に収まるよう調整）
-const STRENGTH_SCALE = 1.0;
-// 事前分布の分散（大会前の不確かさ。1試合での学習率（更新幅）を抑えるため小さめに設定）
-const PRIOR_VAR = 0.04;
-// 各試合ごとに加えるプロセスノイズ（強さは時間で多少変動しうる、という仮定。学習が硬直しない程度）
-const PROCESS_NOISE = 0.002;
 
-// FIFAランク(1〜100+) → 0〜1 の質スコア（1=最強）
-function qualityFromRank(rank: number): number {
-  const r = Math.max(1, Math.min(100, rank));
-  return (100 - r) / 100;
-}
+// FIFAランク差をレーティング差へ変換するスケール
+// 20試合データで再チューニングし、勝敗と引き分けのバランスを最適化した 0.65 に設定
+const STRENGTH_SCALE = 0.65;
+
+// 事前分布の分散（大会前の不確かさ。1試合での学習率（更新幅）を抑えるため小さめに設定）
+const PRIOR_VAR = 0.08;
+// 各試合ごとに加えるプロセスノイズ（強さは時間で多少変動しうる、という仮定。学習が硬直しない程度）
+const PROCESS_NOISE = 0.005;
+
+import { teamStyleRatios } from '../data/teamStyles';
 
 /**
- * 全チームの事前レーティングを FIFA ランキングから生成する。
- * 攻撃・守備とも、全チーム平均からの相対質に STRENGTH_SCALE を掛けた値を平均とする。
+ * 全チームの事前レーティングを「マルチソース・パワーランキング」から生成する。
+ * powerQuality は FIFAランキング・Elo・その他のランキングを正規化して加重平均した
+ * 合成指数 [0,1]（高い=強い）。攻撃・守備とも、全チーム平均からの相対質を平均とする。
+ * さらに teamStyleRatios を用いて、攻撃的/守備的なスタイルを初期値に反映する。
  */
 export function initRatings(teamCodes?: string[]): RatingMap {
   const codes = teamCodes ?? Object.keys(teams);
-  const qualities = codes.map((c) => qualityFromRank(teams[c]?.fifaRank ?? 80));
+  const qualities = codes.map((c) => powerQuality(c));
   const meanQ = qualities.reduce((s, q) => s + q, 0) / (qualities.length || 1);
 
   const ratings: RatingMap = {};
   codes.forEach((c, i) => {
     const base = STRENGTH_SCALE * (qualities[i] - meanQ);
+    const ratio = teamStyleRatios[c] ?? 1.0;
+    // ratio > 1.0 (攻撃的) なら attack を上げ、defense を下げる
+    const shift = (ratio - 1.0) * STRENGTH_SCALE;
+    
     ratings[c] = {
-      attack: { mean: base, var: PRIOR_VAR },
-      defense: { mean: base, var: PRIOR_VAR },
+      attack: { mean: base + shift, var: PRIOR_VAR },
+      defense: { mean: base - shift, var: PRIOR_VAR },
     };
   });
   return ratings;
@@ -79,10 +85,16 @@ export function expectedLambdas(
   const atkA = a?.attack.mean ?? 0;
   const defA = a?.defense.mean ?? 0;
 
+  // 動的MU0スケーリング: 実力が拮抗している試合ほどMU0を下げてリアルなドロー率を引き出す
+  const hQ = (atkH + defH) / (2 * STRENGTH_SCALE);
+  const aQ = (atkA + defA) / (2 * STRENGTH_SCALE);
+  const diff = Math.abs(hQ - aQ);
+  const dynamicMU0 = Math.log(1.10 + 0.40 * diff);
+
   const clamp = (x: number) => Math.max(0.1, Math.min(5.5, x));
   return {
-    lambdaHome: clamp(Math.exp(MU0 + atkH - defA)),
-    lambdaAway: clamp(Math.exp(MU0 + atkA - defH)),
+    lambdaHome: clamp(Math.exp(dynamicMU0 + atkH - defA)),
+    lambdaAway: clamp(Math.exp(dynamicMU0 + atkA - defH)),
   };
 }
 

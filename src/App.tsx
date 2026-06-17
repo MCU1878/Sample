@@ -4,6 +4,8 @@ import { createInitialMatches, groupTeams } from './data';
 import { getAllGroupStandings } from './utils/calculateStandings';
 import { initializeKnockoutMatches, updateKnockoutProgression, simulateKnockoutMatches } from './utils/knockoutLogic';
 import { simulateMatchFromCodes } from './utils/matchEngine';
+import { computeGroupTable, situationalIntent } from './utils/situationalPlay';
+import { rngFromKey } from './utils/rng';
 import { fetchLiveMatches } from './utils/apiSync';
 import type { ForecastResult } from './utils/forecast';
 import { MatchForm } from './components/MatchForm';
@@ -11,6 +13,7 @@ import StandingsTable from './components/StandingsTable';
 import BracketDisplay from './components/BracketDisplay';
 import ThirdPlaceStandings from './components/ThirdPlaceStandings';
 import ForecastPanel from './components/ForecastPanel';
+import AccuracyPanel from './components/AccuracyPanel';
 import { MatchLogModal } from './components/MatchLogModal';
 import { Leaderboard } from './components/Leaderboard';
 
@@ -18,10 +21,44 @@ const FORECAST_ITERATIONS = 10000;
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const;
 
+/**
+ * グループステージを「第1節→2節→3節」の順に埋める。
+ * 第2/3節は、その節までの勝ち点表から各チームの戦い方（前掛かり/温存/堅守）を判定して反映する。
+ * 実際の試合結果（syncStatus）は上書きしない。決定論的（試合IDシード）。
+ */
+function fillGroupStageSituational(matches: Match[]): Match[] {
+  const filled = matches.map((m) => ({ ...m }));
+  for (const md of [1, 2, 3]) {
+    // 第2/3節は直前までの勝ち点表を用意
+    const tables: Record<string, ReturnType<typeof computeGroupTable>> = {};
+    if (md >= 2) {
+      for (const g of GROUPS) tables[g] = computeGroupTable(filled, g, groupTeams[g]);
+    }
+    for (const match of filled) {
+      if ((match.matchDay ?? 1) !== md) continue;
+      if (match.syncStatus) continue; // 実際の結果は保持
+      const intentHome =
+        md >= 2 && match.group ? situationalIntent(match.homeTeam, tables[match.group] ?? [], md) : undefined;
+      const intentAway =
+        md >= 2 && match.group ? situationalIntent(match.awayTeam, tables[match.group] ?? [], md) : undefined;
+      const log = simulateMatchFromCodes(match.homeTeam, match.awayTeam, undefined, {
+        climate: match.climate,
+        rng: rngFromKey('grp|' + match.id + '|' + match.homeTeam + '-' + match.awayTeam),
+        intentHome,
+        intentAway,
+      });
+      match.homeScore = log.homeScore;
+      match.awayScore = log.awayScore;
+      match.matchLog = log;
+    }
+  }
+  return filled;
+}
+
 function App() {
   const [matches, setMatches] = useState<Match[]>(createInitialMatches);
   const [activeGroup, setActiveGroup] = useState<string>('A');
-  const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout'>('groups');
+  const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout' | 'accuracy'>('groups');
   const [selectedMatchLog, setSelectedMatchLog] = useState<MatchLog | null>(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   
@@ -164,38 +201,18 @@ function App() {
     ...knockoutMatches.map(m => m.matchLog).filter((l): l is MatchLog => !!l)
   ], [matches, knockoutMatches]);
 
-  // 強さを加味した結果入力（グループステージ）
+  // 強さ＋勝ち点状況を加味した結果入力（グループステージ・節順）
   const handleRandomFill = useCallback(() => {
-    setMatches((prev) =>
-      prev.map((match) => {
-        if (match.syncStatus) return match; // 実際の試合結果は上書きしない
-        const log = simulateMatchFromCodes(match.homeTeam, match.awayTeam, undefined, { climate: match.climate });
-        return {
-          ...match,
-          homeScore: log.homeScore,
-          awayScore: log.awayScore,
-          matchLog: log,
-        };
-      })
-    );
+    setMatches((prev) => fillGroupStageSituational(prev));
   }, []);
 
   // ノックアウト全自動シミュレート
   const handleKnockoutSimulate = useCallback(() => {
-    // 1. グループステージが完了していなければ、先にグループステージを強さベースで埋める
+    // 1. グループステージが完了していなければ、先に節順＋勝ち点状況で埋める
     let currentMatches = matches;
     const isGroupComplete = matches.every((m) => m.homeScore !== null && m.awayScore !== null);
     if (!isGroupComplete) {
-      currentMatches = matches.map((match) => {
-        if (match.syncStatus) return match; // 実際の試合結果は上書きしない
-        const log = simulateMatchFromCodes(match.homeTeam, match.awayTeam, undefined, { climate: match.climate });
-        return {
-          ...match,
-          homeScore: log.homeScore,
-          awayScore: log.awayScore,
-          matchLog: log,
-        };
-      });
+      currentMatches = fillGroupStageSituational(matches);
       setMatches(currentMatches);
     }
 
@@ -316,11 +333,17 @@ function App() {
         >
           <span className="phase-tab__icon">🏅</span> 3位サバイバル
         </button>
-        <button 
+        <button
           className={`phase-tab ${activePhase === 'knockout' ? 'phase-tab--active' : ''}`}
           onClick={() => setActivePhase('knockout')}
         >
           <span className="phase-tab__icon">🏆</span> 決勝トーナメント
+        </button>
+        <button
+          className={`phase-tab ${activePhase === 'accuracy' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('accuracy')}
+        >
+          <span className="phase-tab__icon">🎯</span> 答え合わせ
         </button>
       </div>
 
@@ -399,6 +422,16 @@ function App() {
                 onScoreChange={handleKnockoutScoreChange}
               />
             </div>
+          </div>
+        )}
+
+        {activePhase === 'accuracy' && (
+          <div className="accuracy-view animate-fade-in">
+            <AccuracyPanel
+              matches={matches}
+              standings={allStandings}
+              knockoutMatches={knockoutMatches}
+            />
           </div>
         )}
       </div>
