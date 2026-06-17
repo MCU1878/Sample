@@ -22,7 +22,7 @@ export { mulberry32, seedFromString, rngFromKey, type Rng } from './rng';
 import type { Rng } from './rng';
 
 // ポアソン乱数（Knuth）。rng 注入で再現可能。
-function poissonSample(lambda: number, rng: Rng): number {
+export function poissonSample(lambda: number, rng: Rng): number {
   const L = Math.exp(-lambda);
   let k = 0;
   let p = 1;
@@ -86,29 +86,51 @@ function strength(code: string, ratings: RatingMap): number {
   return r ? r.attack.mean + r.defense.mean : 0;
 }
 
-/** ノックアウト1試合: 勝者を返す（同点はレーティング重みのPKで決着） */
 function playKnockout(
   home: string,
   away: string,
   ratings: RatingMap,
   rng: Rng
 ): string {
-  // 決勝トーナメントは「引き分け狙い」がないため、Dixon-Coles補正を使わず純粋なポアソンで判定。
-  // また、延長戦の可能性を含めるため、期待得点（ラムダ）を 120分換算（約1.33倍）にする。
-  const { lambdaHome, lambdaAway } = expectedLambdas(home, away, ratings);
-  const lh = lambdaHome * 1.33;
-  const la = lambdaAway * 1.33;
+  // 基礎エンジン（動的MU0スケーリング）を使ってベースの期待得点を計算
+  let { lambdaHome, lambdaAway } = expectedLambdas(home, away, ratings);
   
-  const gh = poissonSample(lh, rng);
-  const ga = poissonSample(la, rng);
+  // --- Knockout Pedigree Buff (強豪国の勝負強さ再現・適正化版) ---
+  const sH = strength(home, ratings);
+  const sA = strength(away, ratings);
+  const diff = sH - sA;
+
+  // 1. 実力差の拡張（経験値の差）
+  // 係数をマイルドに（0.5 → 0.3）下げ、優勝確率を30%超から現実的な20%台へ調整
+  if (diff > 0) {
+    lambdaHome *= 1.0 + diff * 0.3;
+    lambdaAway *= Math.max(0.5, 1.0 - diff * 0.5);
+  } else if (diff < 0) {
+    lambdaAway *= 1.0 + Math.abs(diff) * 0.3;
+    lambdaHome *= Math.max(0.5, 1.0 - Math.abs(diff) * 0.5);
+  }
+  // ※エリート専用の強制デバフ（0.6倍）はやりすぎ（トップヘビー過剰）だったため廃止
+  // -------------------------------------------------------------
+
+  // 1. 90分間のシミュレーション
+  let gh = poissonSample(lambdaHome, rng);
+  let ga = poissonSample(lambdaAway, rng);
 
   if (gh > ga) return home;
   if (ga > gh) return away;
 
-  // PK戦または延長戦での競り合い：選手層（ベンチワーク）や個人の質がモロに出るため、
-  // 強豪国が圧倒的に有利になるよう係数（Sensitivity）を 0.3 -> 0.8 に引き上げ。
+  // 2. 延長戦（30分）のシミュレーション
+  const lh_et = lambdaHome * 0.33;
+  const la_et = lambdaAway * 0.33;
+  gh += poissonSample(lh_et, rng);
+  ga += poissonSample(la_et, rng);
+
+  if (gh > ga) return home;
+  if (ga > gh) return away;
+
+  // 3. PK戦のシミュレーション
   const d = strength(home, ratings) - strength(away, ratings);
-  const pHome = 1 / (1 + Math.exp(-0.8 * d)); 
+  const pHome = 1 / (1 + Math.exp(-0.5 * d)); 
   return rng() < pHome ? home : away;
 }
 
