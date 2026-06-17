@@ -9,6 +9,7 @@ import type { TeamAgent, MatchEvent, MatchLog, PlayerMatchRating } from '../type
 import { teams } from '../data';
 import type { RatingMap } from './ratingModel';
 import { initRatings } from './ratingModel';
+import type { Intent } from './situationalPlay';
 import playersDataRaw from '../data/players.json';
 import type { Player } from '../types';
 
@@ -79,6 +80,13 @@ export function createTeamAgent(
     
     attackPower = clamp(0.7 + blendedQuality * 1.0, 0.5, 2.0);
     defensePower = clamp(0.7 + blendedQuality * 1.0, 0.5, 2.0);
+  }
+
+  // ホームアドバンテージ（開催国ブースト）
+  const isHostNation = ['USA', 'MEX', 'CAN'].includes(code);
+  if (isHostNation) {
+    attackPower *= 1.08;
+    defensePower *= 1.05;
   }
 
   // 気候によるスタミナ減少ペナルティ計算
@@ -387,6 +395,9 @@ export interface SimulationOptions {
   isKnockout?: boolean;    // true = 延長・PK あり
   rng?: Rng;
   climate?: 'temperate' | 'hot_humid' | 'hot_dry' | 'high_altitude';
+  // 勝ち点状況による戦い方（攻撃意図・被失点のしやすさ）。グループステージで反映。
+  intentHome?: Intent;
+  intentAway?: Intent;
 }
 
 /**
@@ -640,6 +651,18 @@ export function simulateMatchFromCodes(
   const climate = options.climate || 'temperate';
   const home = createTeamAgent(homeCode, r, 0, climate);
   const away = createTeamAgent(awayCode, r, 0, climate);
+
+  // 勝ち点状況による戦い方を攻撃力・守備力へ反映
+  //   attackMul>1 → 前掛かり（攻撃力↑） / concedeMul>1 → 隙が増える（守備力↓）
+  if (options.intentHome) {
+    home.attackPower = clamp(home.attackPower * options.intentHome.attackMul, 0.3, 2.5);
+    home.defensePower = clamp(home.defensePower / options.intentHome.concedeMul, 0.3, 2.5);
+  }
+  if (options.intentAway) {
+    away.attackPower = clamp(away.attackPower * options.intentAway.attackMul, 0.3, 2.5);
+    away.defensePower = clamp(away.defensePower / options.intentAway.concedeMul, 0.3, 2.5);
+  }
+
   return simulateMatchRich(home, away, options);
 }
 

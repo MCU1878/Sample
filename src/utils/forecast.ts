@@ -15,19 +15,11 @@ import { groupTeams } from '../data';
 import { getAllGroupStandings } from './calculateStandings';
 import { initializeKnockoutMatches } from './knockoutLogic';
 import { fitRatings, expectedLambdas, type RatingMap } from './ratingModel';
+import { computeGroupTable, situationalIntent, applyIntent, type Intent } from './situationalPlay';
 
-export type Rng = () => number;
-
-// 決定的テスト用の seed 可能 RNG（mulberry32）
-export function mulberry32(seed: number): Rng {
-  let a = seed >>> 0;
-  return function () {
-    a |= 0; a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+// 決定論的 RNG は rng.ts に集約（再エクスポートで既存の import を維持）
+export { mulberry32, seedFromString, rngFromKey, type Rng } from './rng';
+import type { Rng } from './rng';
 
 // ポアソン乱数（Knuth）。rng 注入で再現可能。
 function poissonSample(lambda: number, rng: Rng): number {
@@ -38,15 +30,54 @@ function poissonSample(lambda: number, rng: Rng): number {
   return k - 1;
 }
 
-/** 1試合のスコアを λ から標本化 */
+/** Dixon-Coles 補正パラメータ（低スコア引き分けの確率を上方修正） */
+const DIXON_COLES_RHO = 0.13;
+
+/** Dixon-Coles モデルに基づくスコアサンプリング（勝ち点状況の意図を反映可能） */
 function sampleScore(
   home: string,
   away: string,
   ratings: RatingMap,
-  rng: Rng
+  rng: Rng,
+  intentHome?: Intent,
+  intentAway?: Intent
 ): { gh: number; ga: number } {
-  const { lambdaHome, lambdaAway } = expectedLambdas(home, away, ratings);
-  return { gh: poissonSample(lambdaHome, rng), ga: poissonSample(lambdaAway, rng) };
+  let { lambdaHome, lambdaAway } = expectedLambdas(home, away, ratings);
+  // 勝ち点状況による戦い方（攻守の意図）を λ に反映
+  if (intentHome && intentAway) {
+    [lambdaHome, lambdaAway] = applyIntent(lambdaHome, lambdaAway, intentHome, intentAway);
+    lambdaHome = Math.max(0.1, Math.min(5.5, lambdaHome));
+    lambdaAway = Math.max(0.1, Math.min(5.5, lambdaAway));
+  }
+
+  // まず独立ポアソンでサンプリング
+  let gh = poissonSample(lambdaHome, rng);
+  let ga = poissonSample(lambdaAway, rng);
+  
+  // Dixon-Coles 補正: 低スコア (0-0, 1-1, 0-1, 1-0) の確率を調整
+  // ρ > 0 のとき 0-0 と 1-1 (ドロー) を増やし、1-0 と 0-1 を減らす
+  const rho = DIXON_COLES_RHO;
+  if (gh === 0 && ga === 0) {
+    // P(0,0) *= (1 + rho * lambdaHome * lambdaAway)
+    // 既にサンプル済みなので、棄却法で補正
+    // 0-0が出た → 受理率を高める（常に受理）
+  } else if (gh === 1 && ga === 1) {
+    // P(1,1) *= (1 + rho) → 常に受理
+  } else if (gh === 1 && ga === 0) {
+    // P(1,0) *= (1 - rho * lambdaAway) → 棄却して再サンプル
+    if (rng() < rho * lambdaAway) {
+      // 棄却 → 0-0 のドローに変更
+      gh = 0;
+    }
+  } else if (gh === 0 && ga === 1) {
+    // P(0,1) *= (1 - rho * lambdaHome) → 棄却して再サンプル  
+    if (rng() < rho * lambdaHome) {
+      // 棄却 → 0-0 のドローに変更
+      ga = 0;
+    }
+  }
+  
+  return { gh, ga };
 }
 
 // チーム総合力（攻撃平均＋守備平均、ともに高い=強い）。PK決着の重み付けに使う。
@@ -62,12 +93,22 @@ function playKnockout(
   ratings: RatingMap,
   rng: Rng
 ): string {
-  const { gh, ga } = sampleScore(home, away, ratings, rng);
+  // 決勝トーナメントは「引き分け狙い」がないため、Dixon-Coles補正を使わず純粋なポアソンで判定。
+  // また、延長戦の可能性を含めるため、期待得点（ラムダ）を 120分換算（約1.33倍）にする。
+  const { lambdaHome, lambdaAway } = expectedLambdas(home, away, ratings);
+  const lh = lambdaHome * 1.33;
+  const la = lambdaAway * 1.33;
+  
+  const gh = poissonSample(lh, rng);
+  const ga = poissonSample(la, rng);
+
   if (gh > ga) return home;
   if (ga > gh) return away;
-  // PK: 強いほど勝ちやすいが、ほぼ五分
+
+  // PK戦または延長戦での競り合い：選手層（ベンチワーク）や個人の質がモロに出るため、
+  // 強豪国が圧倒的に有利になるよう係数（Sensitivity）を 0.3 -> 0.8 に引き上げ。
   const d = strength(home, ratings) - strength(away, ratings);
-  const pHome = 1 / (1 + Math.exp(-0.5 * d));
+  const pHome = 1 / (1 + Math.exp(-0.8 * d)); 
   return rng() < pHome ? home : away;
 }
 
@@ -119,16 +160,33 @@ export function runForecast(
   const roundOf16 = emptyTally();
   const roundOf32 = emptyTally();
 
-  // 未消化のグループ試合
+  // 未消化のグループ試合（節順に処理して、勝ち点状況→戦い方を反映する）
   const unplayed = matches.filter((m) => m.homeScore === null || m.awayScore === null);
   const playedMatches = matches.filter((m) => m.homeScore !== null && m.awayScore !== null);
+  const GROUP_CODES = Object.keys(groupTeams);
 
   for (let n = 0; n < N; n++) {
-    // 2. グループステージを完成
+    // 2. グループステージを節(1→2→3)順に完成させる
     const completed: Match[] = playedMatches.slice();
-    for (const m of unplayed) {
-      const { gh, ga } = sampleScore(m.homeTeam, m.awayTeam, ratings, rng);
-      completed.push({ ...m, homeScore: gh, awayScore: ga });
+    for (const md of [1, 2, 3]) {
+      const mdMatches = unplayed.filter((m) => (m.matchDay ?? 1) === md);
+      // 第2/3節は、直前までの勝ち点表から各チームの戦い方を決める
+      let tables: Record<string, ReturnType<typeof computeGroupTable>> | null = null;
+      if (md >= 2) {
+        tables = {};
+        for (const g of GROUP_CODES) tables[g] = computeGroupTable(completed, g, groupTeams[g]);
+      }
+      for (const m of mdMatches) {
+        let iH: Intent | undefined;
+        let iA: Intent | undefined;
+        if (tables && m.group) {
+          const t = tables[m.group] ?? [];
+          iH = situationalIntent(m.homeTeam, t, md);
+          iA = situationalIntent(m.awayTeam, t, md);
+        }
+        const { gh, ga } = sampleScore(m.homeTeam, m.awayTeam, ratings, rng, iH, iA);
+        completed.push({ ...m, homeScore: gh, awayScore: ga });
+      }
     }
 
     // 3. 公式順位 → R32（Annex C）

@@ -34,7 +34,7 @@ export const ForecastPanel: React.FC<ForecastPanelProps> = ({ result, loading })
         <h2 className="card__title">優勝確率シミュレーション</h2>
         {result && (
           <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#94a3b8' }}>
-            {result.iterations.toLocaleString()} 回試行 / ベイズ学習レーティング
+            {result.iterations.toLocaleString()} 回試行・固定シード / 6指標統合レーティング
           </span>
         )}
       </div>
