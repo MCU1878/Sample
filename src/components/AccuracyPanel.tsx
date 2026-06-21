@@ -171,16 +171,16 @@ export const AccuracyPanel: React.FC<AccuracyPanelProps> = ({ matches, standings
                 <tbody>
                   {report.details.map((d) => (
                     <tr key={d.matchId} className={d.hit ? 'acc-row--hit' : 'acc-row--miss'}>
-                      <td className="acc-fixture">
+                      <td data-label="対戦カード" className="acc-fixture">
                         <TeamSide code={d.homeTeam} side="home" />
                         <span className="acc-vs">{d.homeScore} - {d.awayScore}</span>
                         <TeamSide code={d.awayTeam} side="away" />
                       </td>
-                      <td className="acc-actual">
+                      <td data-label="結果" className="acc-actual">
                         {outcomeLabel(d.actual, d.homeTeam, d.awayTeam)}
                         <span className="acc-actual-score">{d.homeScore}-{d.awayScore}</span>
                       </td>
-                      <td className="acc-pred">
+                      <td data-label="事前予測" className="acc-pred">
                         <span>
                           {outcomeLabel(d.predicted, d.homeTeam, d.awayTeam)}
                           <span className="acc-conf">（{pct(d.confidence)}）</span>
@@ -189,7 +189,7 @@ export const AccuracyPanel: React.FC<AccuracyPanelProps> = ({ matches, standings
                           最有力スコア {d.predictedScore[0]}-{d.predictedScore[1]}
                         </span>
                       </td>
-                      <td className="acc-judge">
+                      <td data-label="判定" className="acc-judge">
                         {d.hit ? (
                           <span className="acc-mark acc-mark--hit">◯</span>
                         ) : (

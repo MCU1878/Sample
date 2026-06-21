@@ -451,7 +451,7 @@ function App() {
 
         {activePhase === 'challenge' && (
           <div className="accuracy-view animate-fade-in">
-            <PredictionChallenge standings={allStandings} />
+            <PredictionChallenge matches={matches} standings={allStandings} />
           </div>
         )}
 
