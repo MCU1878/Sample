@@ -2616,3 +2616,12 @@ body::before {
 .acc-frac--full { color: #4ade80; }
 .acc-frac--half { color: #fad278; }
 .acc-frac--zero { color: #f87171; }
+
+/* キックオフ時刻のタイムゾーン表記（日本時間） */
+.match-row__tz {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-left: 2px;
+  letter-spacing: 0.04em;
+}
