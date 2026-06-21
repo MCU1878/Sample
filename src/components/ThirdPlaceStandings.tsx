@@ -59,11 +59,11 @@ export const ThirdPlaceStandings: React.FC<ThirdPlaceStandingsProps> = ({ allSta
             const team = teams[standing.teamCode];
             return (
               <tr key={standing.teamCode} className={getRowClass(overallRank)}>
-                <td className={getRankClass(overallRank)}>{overallRank}</td>
-                <td style={{ fontWeight: 'bold', color: '#f5a623', textAlign: 'center' }}>
+                <td data-label="#" className={getRankClass(overallRank)}>{overallRank}</td>
+                <td data-label="Grp" style={{ fontWeight: 'bold', color: '#f5a623', textAlign: 'center' }}>
                   {standing.group}
                 </td>
-                <td className="standings-row__team">
+                <td data-label="Team" className="standings-row__team">
                   {team?.iso ? (
                     <img
                       src={getFlagUrl(team.iso)}
@@ -79,16 +79,16 @@ export const ThirdPlaceStandings: React.FC<ThirdPlaceStandingsProps> = ({ allSta
                     <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{team?.fifaRank})</span>
                   </span>
                 </td>
-                <td>{standing.played}</td>
-                <td>{standing.won}</td>
-                <td>{standing.drawn}</td>
-                <td>{standing.lost}</td>
-                <td>{standing.goalsFor}</td>
-                <td>{standing.goalsAgainst}</td>
-                <td className={getGdClass(standing.goalDifference)}>
+                <td data-label="P">{standing.played}</td>
+                <td data-label="W">{standing.won}</td>
+                <td data-label="D">{standing.drawn}</td>
+                <td data-label="L">{standing.lost}</td>
+                <td data-label="GF">{standing.goalsFor}</td>
+                <td data-label="GA">{standing.goalsAgainst}</td>
+                <td data-label="GD" className={getGdClass(standing.goalDifference)}>
                   {formatGd(standing.goalDifference)}
                 </td>
-                <td className="standings-row__points" style={{ color: overallRank <= 8 ? '#4ade80' : '#f87171' }}>
+                <td data-label="Pts" className="standings-row__points" style={{ color: overallRank <= 8 ? '#4ade80' : '#f87171' }}>
                   {standing.points}
                 </td>
               </tr>

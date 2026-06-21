@@ -2832,3 +2832,114 @@ body::before {
 .ai-output__head { font-weight: 800; color: #fad278; margin-bottom: 10px; }
 .ai-output__body { color: #e8eef7; line-height: 2; white-space: pre-wrap; font-size: 0.95rem; }
 .ai-output__foot { margin-top: 12px; font-size: 0.76rem; color: #64748b; }
+
+/* ===== Mobile Responsive Additions (Phase 2 & 3: Card UI) ===== */
+@media (max-width: 768px) {
+  /* 全体レイアウト */
+  .container { padding: var(--space-xs) var(--space-sm); }
+  .app-content { padding: 0 var(--space-xs); }
+  .card { padding: var(--space-sm); margin-bottom: var(--space-sm); }
+
+  /* 予想チャレンジ (Prediction Challenge) */
+  .chal-score { flex-direction: column; gap: var(--space-xs); padding: var(--space-sm); }
+  .chal-score__vs { margin: var(--space-xs) 0; }
+  .chal-score__rate { font-size: 1.5rem; }
+  .chal-toolbar { flex-direction: column; align-items: stretch; gap: var(--space-xs); }
+  .chal-chips { grid-template-columns: 1fr; }
+  .mp-row { grid-template-columns: 1fr; gap: 8px; padding: var(--space-md) var(--space-sm); }
+  .mp-team { justify-content: center; }
+  .mp-seg { justify-content: center; margin: 4px 0; }
+  .mp-result { justify-content: center; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 8px; }
+
+  /* トーナメント表 (Knockout Bracket) */
+  .knockout-bracket-scroll {
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) 0;
+  }
+  .knockout-bracket-tree {
+    gap: 40px;
+    padding: var(--space-md);
+  }
+  .knockout-round-col { width: 200px; }
+  .knockout-card { padding: var(--space-xs); }
+  .knockout-card__team-name { font-size: 0.75rem; }
+  .knockout-card__score-input, .knockout-card__pk-input { width: 32px; height: 26px; font-size: 0.85rem; }
+
+  /* ========================================================= */
+  /* テーブルのカードUI化 (Phase 3)                            */
+  /* ========================================================= */
+  
+  .forecast-table-wrap, .acc-table-wrap, .standings-group-card {
+    overflow: visible !important; /* 横スクロール解除 */
+    -webkit-overflow-scrolling: auto;
+  }
+  
+  .standings-table thead { display: none; }
+  .standings-table, .standings-table tbody, .standings-table tr, .standings-table td {
+    display: block; width: 100%;
+  }
+  .standings-table tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .standings-table td {
+    display: flex;
+    align-items: center;
+    padding: 4px 0 !important;
+    border: none !important;
+    font-size: 0.85rem;
+  }
+  .standings-table td::before {
+    content: attr(data-label);
+    color: #94a3b8;
+    font-size: 0.7rem;
+    width: 65px; /* 固定幅で整列 */
+    flex-shrink: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* 順位表の特例レイアウト (#, Team を上部に大きく結合) */
+  .standings-table td:nth-child(1), .standings-table td:nth-child(2) {
+    grid-column: 1 / -1; 
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    margin-bottom: 4px;
+  }
+  .standings-table td:nth-child(1)::before, .standings-table td:nth-child(2)::before {
+    display: none; /* 上段の Rank, Team にはラベル不要 */
+  }
+  .standings-row__team { font-size: 1.15rem; font-weight: 700; }
+  .standings-row__points { font-weight: 800; font-size: 1rem; color: #fff; }
+
+  /* 予測・答え合わせテーブルの特例レイアウト (1列縦積み) */
+  .acc-table tr, .forecast-table tr {
+    grid-template-columns: 1fr; 
+  }
+  .acc-table td, .forecast-table td {
+    border-bottom: 1px dotted rgba(255,255,255,0.1) !important;
+    padding: 8px 0 !important;
+  }
+  .acc-table td:last-child, .forecast-table td:last-child {
+    border-bottom: none !important;
+  }
+  /* 答え合わせテーブルの上部結合特例（対戦カードを大きく） */
+  .acc-table td:nth-child(1) {
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 4px;
+    justify-content: center;
+  }
+  .acc-table td:nth-child(1)::before { display: none; }
+  
+  .acc-hero { flex-direction: column; text-align: center; }
+  .acc-hero__main, .acc-hero__sub { border-right: none; border-bottom: 1px solid rgba(148, 163, 184, 0.2); padding: var(--space-sm) 0; }
+  .acc-hero__sub:last-child { border-bottom: none; }
+}

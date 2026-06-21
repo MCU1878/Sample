@@ -64,8 +64,8 @@ export const ForecastPanel: React.FC<ForecastPanelProps> = ({ result, loading })
                   const team = teams[r.code];
                   return (
                     <tr key={r.code}>
-                      <td className="standings-row__rank">{i + 1}</td>
-                      <td className="standings-row__team">
+                      <td data-label="#" className="standings-row__rank">{i + 1}</td>
+                      <td data-label="チーム" className="standings-row__team">
                         {team?.iso ? (
                           <img src={getFlagUrl(team.iso)} alt={team.name} className="standings-row__team-flag-img" loading="lazy" />
                         ) : (
@@ -73,16 +73,16 @@ export const ForecastPanel: React.FC<ForecastPanelProps> = ({ result, loading })
                         )}
                         <span className="standings-row__team-name">{team?.name ?? r.code}</span>
                       </td>
-                      <td className="forecast-champ-cell">
+                      <td data-label="優勝" className="forecast-champ-cell">
                         <div className="prob-bar">
                           <div className="prob-bar__fill" style={{ width: `${Math.min(100, r.champion * 100)}%` }} />
                           <span className="prob-bar__label">{pct(r.champion)}</span>
                         </div>
                       </td>
-                      <td>{pct(r.final)}</td>
-                      <td>{pct(r.semifinal)}</td>
-                      <td>{pct(r.quarterfinal)}</td>
-                      <td style={{ color: r.roundOf32 >= 0.5 ? '#4ade80' : '#94a3b8' }}>{pct(r.roundOf32)}</td>
+                      <td data-label="決勝">{pct(r.final)}</td>
+                      <td data-label="ベスト4">{pct(r.semifinal)}</td>
+                      <td data-label="ベスト8">{pct(r.quarterfinal)}</td>
+                      <td data-label="突破" style={{ color: r.roundOf32 >= 0.5 ? '#4ade80' : '#94a3b8' }}>{pct(r.roundOf32)}</td>
                     </tr>
                   );
                 })}

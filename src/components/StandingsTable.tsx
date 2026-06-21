@@ -54,8 +54,8 @@ const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings, activeGro
             const team = teams[standing.teamCode];
             return (
               <tr key={standing.teamCode} className={getRowClass(standing.rank)}>
-                <td className={getRankClass(standing.rank)}>{standing.rank}</td>
-                <td className="standings-row__team">
+                <td data-label="#" className={getRankClass(standing.rank)}>{standing.rank}</td>
+                <td data-label="Team" className="standings-row__team">
                   {team?.iso ? (
                     <img
                       src={getFlagUrl(team.iso)}
@@ -71,16 +71,16 @@ const StandingsTable: React.FC<StandingsTableProps> = ({ allStandings, activeGro
                     <span style={{ fontSize: '0.75rem', opacity: 0.6, marginLeft: '4px' }}>(#{team?.fifaRank})</span>
                   </span>
                 </td>
-                <td>{standing.played}</td>
-                <td>{standing.won}</td>
-                <td>{standing.drawn}</td>
-                <td>{standing.lost}</td>
-                <td>{standing.goalsFor}</td>
-                <td>{standing.goalsAgainst}</td>
-                <td className={getGdClass(standing.goalDifference)}>
+                <td data-label="P">{standing.played}</td>
+                <td data-label="W">{standing.won}</td>
+                <td data-label="D">{standing.drawn}</td>
+                <td data-label="L">{standing.lost}</td>
+                <td data-label="GF">{standing.goalsFor}</td>
+                <td data-label="GA">{standing.goalsAgainst}</td>
+                <td data-label="GD" className={getGdClass(standing.goalDifference)}>
                   {formatGd(standing.goalDifference)}
                 </td>
-                <td className="standings-row__points">{standing.points}</td>
+                <td data-label="Pts" className="standings-row__points">{standing.points}</td>
               </tr>
             );
           })}
