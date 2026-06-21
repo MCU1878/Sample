@@ -46,10 +46,10 @@ export const MatchForm: React.FC<MatchFormProps> = ({ matches, activeGroup, onSc
             key={match.id}
             className={`match-row${complete ? ' match-row--played' : ''}`}
           >
-            {/* 試合日時 */}
+            {/* 試合日時（日本時間 / JST） */}
             <div className="match-row__meta">
               <span className="match-row__date">{match.date.slice(5)}</span>
-              <span className="match-row__time">{match.time}</span>
+              <span className="match-row__time">{match.time}<span className="match-row__tz"> JST</span></span>
             </div>
 
             {/* ホームチーム */}

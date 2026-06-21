@@ -131,7 +131,7 @@ export const BracketDisplay: React.FC<BracketDisplayProps> = ({ knockoutMatches,
         <div className="knockout-card__header">
           <span className="knockout-card__match-num">{match.label}</span>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <span className="knockout-card__date">{match.date.slice(5)}</span>
+            <span className="knockout-card__date">{match.date.slice(5)} JST</span>
             {match.matchLog && (
               <button 
                 className="knockout-card__log-btn"
