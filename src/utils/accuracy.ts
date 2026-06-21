@@ -187,6 +187,10 @@ export interface MatchAccuracy {
   predictedScore: [number, number]; // 予測スコア（予測勝敗での最頻スコア）
   exactHit: boolean; // 完全スコア的中
   confidence: number; // 予測した結果に与えた確率（0〜1）
+  // モデルが与えた勝/分/負の確率（較正・Brier評価に使う）
+  pHome: number;
+  pDraw: number;
+  pAway: number;
 }
 
 export interface AccuracyReport {
@@ -260,6 +264,9 @@ export function evaluateAccuracy(matches: Match[]): AccuracyReport {
       predictedScore,
       exactHit: predictedScore[0] === m.homeScore && predictedScore[1] === m.awayScore,
       confidence,
+      pHome: prob.pHome,
+      pDraw: prob.pDraw,
+      pAway: prob.pAway,
     });
 
     // 予測後にこの試合の結果で学習を更新（次の試合の予測に反映）
