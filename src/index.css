@@ -1761,6 +1761,20 @@ body::before {
 
 /* ===== Responsive Styling for Mobile (max-width: 768px) ===== */
 @media (max-width: 768px) {
+  /* スマホの画面幅を最大限活かすために余白を極限まで削る */
+  .app {
+    padding: var(--space-xs) !important;
+  }
+  .card {
+    padding: var(--space-sm) !important;
+  }
+  .cockpit-grid {
+    gap: var(--space-md) !important;
+  }
+  .cockpit-main, .cockpit-sidebar {
+    min-width: 0 !important;
+  }
+  
   /* ヘッダーの縦並び化 */
   .header-container {
     flex-direction: column;
@@ -1779,52 +1793,70 @@ body::before {
     padding: 0 var(--space-sm) !important;
   }
   
-  /* アクションボタンの全幅縦並び化 */
+  /* ナビゲーションメニュー */
+  .phase-tab {
+    padding: var(--space-xs) var(--space-sm) !important;
+    font-size: 0.8rem !important;
+  }
+  .phase-tab__icon {
+    font-size: 0.9rem !important;
+    margin-right: 4px !important;
+  }
+  
+  /* アクションボタンを2x2グリッドにして高さを抑える */
   .action-bar {
-    flex-direction: column !important;
-    gap: var(--space-sm) !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px !important;
     width: 100% !important;
-    padding: 0 var(--space-sm) !important;
+    padding: 8px !important;
   }
   .btn {
     width: 100% !important;
     justify-content: center !important;
-    padding: var(--space-sm) var(--space-md) !important;
-    font-size: 0.85rem !important;
+    padding: 8px 4px !important;
+    font-size: 0.75rem !important;
   }
 
-  /* 対戦表の文字はみ出し防止 */
+  /* 対戦表のモバイル最適化 (横スクロール対応で文字切れ防止) */
+  .match-form {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+  }
   .match-row {
-    padding: var(--space-sm) !important;
-    gap: var(--space-xs) !important;
+    min-width: 450px !important; /* 省略されずに表示できる最小幅 */
+    padding: 8px 4px !important;
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
   }
   .match-row__meta {
-    min-width: 42px !important;
-    padding-right: var(--space-xs) !important;
+    min-width: 36px !important;
+    padding-right: 2px !important;
     font-size: 0.65rem !important;
   }
   .match-row__team {
-    font-size: 0.8rem !important;
-    gap: var(--space-xs) !important;
+    gap: 4px !important;
+    flex: 1 0 auto !important; /* 縮小させない */
   }
   .match-row__team-name {
-    font-size: 0.75rem !important;
+    font-size: 0.85rem !important;
     white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    overflow: visible !important;
   }
   .match-row__flag-img {
     width: 20px !important;
     height: 13px !important;
   }
   .match-row__score-input {
-    width: 38px !important;
+    width: 36px !important;
     height: 32px !important;
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
+    padding: 0 !important;
   }
   .match-row__vs {
-    font-size: 0.7rem !important;
-    padding: 0 !important;
+    font-size: 0.75rem !important;
+    padding: 0 4px !important;
   }
 
   /* 順位表・3位成績表の横スクロールと文字サイズ縮小 */
@@ -2075,19 +2107,26 @@ body::before {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 6px;
   }
   
   .cockpit-group-btn {
-    flex: 1 1 calc(25% - var(--space-sm));
-    min-width: 60px;
+    flex: 1 1 calc(33.333% - 6px);
+    min-width: 0;
+    padding: var(--space-xs);
+    font-size: 0.8rem;
   }
   
   .floating-dock {
-    bottom: var(--space-sm);
+    bottom: var(--space-xs);
+    padding: 0 var(--space-xs);
   }
   
   .floating-dock__inner {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 8px;
     border-radius: var(--radius-lg);
   }
   
@@ -2522,10 +2561,10 @@ body::before {
 .acc-row--hit { background: rgba(34, 197, 94, 0.06); }
 .acc-row--miss { background: rgba(239, 68, 68, 0.05); }
 
-/* 対戦カード: チーム名とスコアをグリッドで綺麗に揃える */
+/* 対戦カード: チーム名とスコアを固定幅で完璧に揃える */
 .acc-fixture {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   white-space: nowrap;
@@ -2534,6 +2573,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
+  width: 200px; /* ボスニア等長い国名でも絶対に溢れないよう幅をさらに拡張 */
+  flex-shrink: 0;
 }
 .acc-side--home {
   justify-content: flex-end;
@@ -2835,6 +2876,9 @@ body::before {
 
 /* ===== Mobile Responsive Additions (Phase 2 & 3: Card UI) ===== */
 @media (max-width: 768px) {
+  /* スマホ全体での横揺れ・見切れを強制防止 */
+  html, body { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; position: relative; }
+
   /* 全体レイアウト */
   .container { padding: var(--space-xs) var(--space-sm); }
   .app-content { padding: 0 var(--space-xs); }
@@ -2866,78 +2910,43 @@ body::before {
   .knockout-card__score-input, .knockout-card__pk-input { width: 32px; height: 26px; font-size: 0.85rem; }
 
   /* ========================================================= */
-  /* テーブルのカードUI化 (Phase 3)                            */
+  /* 全テーブルのモバイル最適化 (Horizontal Scroll Strategy)    */
   /* ========================================================= */
   
-  .forecast-table-wrap, .acc-table-wrap, .standings-group-card {
-    overflow: visible !important; /* 横スクロール解除 */
-    -webkit-overflow-scrolling: auto;
+  .standings-group-card, .acc-table-wrap, .forecast-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
   }
   
-  .standings-table thead { display: none; }
-  .standings-table, .standings-table tbody, .standings-table tr, .standings-table td {
-    display: block; width: 100%;
+  .standings-table, .acc-table, .forecast-table {
+    min-width: 600px !important; /* 横スクロールさせるための最小幅 */
+    width: 100% !important;
+    table-layout: auto !important; /* fixedを解除して文字被りを防ぐ */
   }
-  .standings-table tr {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    padding: var(--space-md);
-    margin-bottom: var(--space-md);
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  .standings-table td {
-    display: flex;
-    align-items: center;
-    padding: 4px 0 !important;
-    border: none !important;
-    font-size: 0.85rem;
-  }
-  .standings-table td::before {
-    content: attr(data-label);
-    color: #94a3b8;
-    font-size: 0.7rem;
-    width: 65px; /* 固定幅で整列 */
-    flex-shrink: 0;
-    text-transform: uppercase;
-    font-weight: 700;
+  
+  .acc-table th { width: auto !important; }
+  
+  .standings-table th, .standings-table td,
+  .acc-table th, .acc-table td,
+  .forecast-table th, .forecast-table td {
+    padding: var(--space-sm) var(--space-xs) !important;
+    font-size: 0.85rem !important; /* 文字が見えるサイズに戻す */
+    white-space: nowrap;
   }
 
-  /* 順位表の特例レイアウト (#, Team を上部に大きく結合) */
-  .standings-table td:nth-child(1), .standings-table td:nth-child(2) {
-    grid-column: 1 / -1; 
-    padding-bottom: 8px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-    margin-bottom: 4px;
+  .acc-table td.acc-fixture {
+    min-width: max-content !important;
+    padding-right: 32px !important; /* 一般のpadding指定より後に書き、特異性を高めて隙間を確保 */
   }
-  .standings-table td:nth-child(1)::before, .standings-table td:nth-child(2)::before {
-    display: none; /* 上段の Rank, Team にはラベル不要 */
+  
+  .standings-row__team-name {
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+    overflow: visible; /* スクロールさせるので省略不要 */
   }
-  .standings-row__team { font-size: 1.15rem; font-weight: 700; }
-  .standings-row__points { font-weight: 800; font-size: 1rem; color: #fff; }
 
-  /* 予測・答え合わせテーブルの特例レイアウト (1列縦積み) */
-  .acc-table tr, .forecast-table tr {
-    grid-template-columns: 1fr; 
-  }
-  .acc-table td, .forecast-table td {
-    border-bottom: 1px dotted rgba(255,255,255,0.1) !important;
-    padding: 8px 0 !important;
-  }
-  .acc-table td:last-child, .forecast-table td:last-child {
-    border-bottom: none !important;
-  }
-  /* 答え合わせテーブルの上部結合特例（対戦カードを大きく） */
-  .acc-table td:nth-child(1) {
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    padding-bottom: 12px !important;
-    margin-bottom: 4px;
-    justify-content: center;
-  }
-  .acc-table td:nth-child(1)::before { display: none; }
+
   
   .acc-hero { flex-direction: column; text-align: center; }
   .acc-hero__main, .acc-hero__sub { border-right: none; border-bottom: 1px solid rgba(148, 163, 184, 0.2); padding: var(--space-sm) 0; }
