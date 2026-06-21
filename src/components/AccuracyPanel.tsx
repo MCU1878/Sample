@@ -7,6 +7,7 @@ import {
   type Outcome,
 } from '../utils/accuracy';
 import { activeSources } from '../utils/powerRankings';
+import { SkillDashboard } from './SkillDashboard';
 import { teams, getFlagUrl } from '../data';
 
 const SOURCES = activeSources();
@@ -113,6 +114,10 @@ export const AccuracyPanel: React.FC<AccuracyPanelProps> = ({ matches, standings
                 <strong>何度実行しても同じ数字</strong>です。
               </span>
             </div>
+
+            {/* ===== ⓪ 予測力の証明（較正・Brier・推移） ===== */}
+            <SectionHeader n="★" title="予測力の証明" sub="当てるだけでなく確率まで正確か（較正・Brierスコア・推移）" />
+            <SkillDashboard details={report.details} />
 
             {/* ===== ① グループステージ 試合的中 ===== */}
             <SectionHeader n="①" title="グループステージ 試合的中" sub="勝 / 分 / 負 の3択（引き分け含む）" />

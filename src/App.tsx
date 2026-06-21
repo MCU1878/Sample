@@ -14,6 +14,8 @@ import BracketDisplay from './components/BracketDisplay';
 import ThirdPlaceStandings from './components/ThirdPlaceStandings';
 import ForecastPanel from './components/ForecastPanel';
 import AccuracyPanel from './components/AccuracyPanel';
+import PredictionChallenge from './components/PredictionChallenge';
+import AICommentaryPanel from './components/AICommentaryPanel';
 import { MatchLogModal } from './components/MatchLogModal';
 import { Leaderboard } from './components/Leaderboard';
 
@@ -58,7 +60,7 @@ function fillGroupStageSituational(matches: Match[]): Match[] {
 function App() {
   const [matches, setMatches] = useState<Match[]>(createInitialMatches);
   const [activeGroup, setActiveGroup] = useState<string>('A');
-  const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout' | 'accuracy'>('groups');
+  const [activePhase, setActivePhase] = useState<'groups' | 'third' | 'knockout' | 'accuracy' | 'challenge' | 'ai'>('groups');
   const [selectedMatchLog, setSelectedMatchLog] = useState<MatchLog | null>(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   
@@ -345,6 +347,18 @@ function App() {
         >
           <span className="phase-tab__icon">🎯</span> 答え合わせ
         </button>
+        <button
+          className={`phase-tab ${activePhase === 'challenge' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('challenge')}
+        >
+          <span className="phase-tab__icon">🎲</span> 予想チャレンジ
+        </button>
+        <button
+          className={`phase-tab ${activePhase === 'ai' ? 'phase-tab--active' : ''}`}
+          onClick={() => setActivePhase('ai')}
+        >
+          <span className="phase-tab__icon">🤖</span> AI解説
+        </button>
       </div>
 
       {/* メインフェーズ コンテンツ */}
@@ -432,6 +446,18 @@ function App() {
               standings={allStandings}
               knockoutMatches={knockoutMatches}
             />
+          </div>
+        )}
+
+        {activePhase === 'challenge' && (
+          <div className="accuracy-view animate-fade-in">
+            <PredictionChallenge standings={allStandings} />
+          </div>
+        )}
+
+        {activePhase === 'ai' && (
+          <div className="accuracy-view animate-fade-in">
+            <AICommentaryPanel matches={matches} standings={allStandings} />
           </div>
         )}
       </div>
