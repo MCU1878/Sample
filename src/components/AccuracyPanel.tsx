@@ -162,7 +162,7 @@ export const AccuracyPanel: React.FC<AccuracyPanelProps> = ({ matches, standings
               <table className="standings-table acc-table">
                 <thead>
                   <tr>
-                    <th style={{ textAlign: 'left' }}>対戦カード</th>
+                    <th style={{ textAlign: 'center' }}>対戦カード</th>
                     <th>結果</th>
                     <th>事前予測</th>
                     <th>判定</th>
